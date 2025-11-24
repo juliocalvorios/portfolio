@@ -1,24 +1,31 @@
 import { useState } from 'react'
 import Masthead from './components/Masthead'
 import FrontPage from './components/FrontPage'
+import SelectedWorks from './components/SelectedWorks'
 
 function App() {
   const [activeSection, setActiveSection] = useState('front')
   const [selectedProject, setSelectedProject] = useState(null)
 
-  // Handle project click from FrontPage
   const handleProjectClick = (project) => {
     setSelectedProject(project)
     setActiveSection('works')
+    // Scroll to top when changing sections
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // Render current section
+  const handleSectionChange = (section) => {
+    setActiveSection(section)
+    setSelectedProject(null)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const renderSection = () => {
     switch (activeSection) {
       case 'front':
         return <FrontPage onProjectClick={handleProjectClick} />
       case 'works':
-        return <ComingSoon section="Selected Works" />
+        return <SelectedWorks initialProject={selectedProject} />
       case 'about':
         return <ComingSoon section="The Developer" />
       case 'contact':
@@ -32,7 +39,7 @@ function App() {
     <div className="min-h-screen bg-paper">
       <Masthead 
         activeSection={activeSection} 
-        onSectionChange={setActiveSection} 
+        onSectionChange={handleSectionChange} 
       />
       
       <main className="px-4 md:px-8 py-8 max-w-7xl mx-auto">
@@ -44,9 +51,6 @@ function App() {
   )
 }
 
-/**
- * Placeholder for sections not yet implemented
- */
 function ComingSoon({ section }) {
   return (
     <div className="text-center py-20">
@@ -60,9 +64,6 @@ function ComingSoon({ section }) {
   )
 }
 
-/**
- * Footer component
- */
 function Footer() {
   return (
     <footer className="px-4 md:px-8 py-6 border-t-2 border-neutral-800 mt-12">
