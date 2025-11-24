@@ -3,6 +3,7 @@ import Masthead from './components/Masthead'
 import FrontPage from './components/FrontPage'
 import SelectedWorks from './components/SelectedWorks'
 import About from './components/About'
+import Classifieds from './components/Classifieds'
 
 function App() {
   const [activeSection, setActiveSection] = useState('front')
@@ -29,7 +30,7 @@ function App() {
       case 'about':
         return <About />
       case 'contact':
-        return <ComingSoon section="Classifieds" />
+        return <Classifieds />
       default:
         return <FrontPage onProjectClick={handleProjectClick} />
     }
@@ -47,19 +48,6 @@ function App() {
       </main>
       
       <Footer />
-    </div>
-  )
-}
-
-function ComingSoon({ section }) {
-  return (
-    <div className="text-center py-20">
-      <p className="text-neutral-400 text-sm tracking-widest">
-        {section.toUpperCase()}
-      </p>
-      <p className="text-neutral-300 mt-2 font-serif italic">
-        Coming in next phase...
-      </p>
     </div>
   )
 }
