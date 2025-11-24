@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Masthead from './components/Masthead'
 import FrontPage from './components/FrontPage'
 import SelectedWorks from './components/SelectedWorks'
+import About from './components/About'
 
 function App() {
   const [activeSection, setActiveSection] = useState('front')
@@ -10,7 +11,6 @@ function App() {
   const handleProjectClick = (project) => {
     setSelectedProject(project)
     setActiveSection('works')
-    // Scroll to top when changing sections
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -27,7 +27,7 @@ function App() {
       case 'works':
         return <SelectedWorks initialProject={selectedProject} />
       case 'about':
-        return <ComingSoon section="The Developer" />
+        return <About />
       case 'contact':
         return <ComingSoon section="Classifieds" />
       default:
