@@ -54,7 +54,7 @@ function FrontPage({ onProjectClick }) {
                 {leadStory.tech.map(tech => (
                   <span 
                     key={tech}
-                    className="text-[10px] px-2 py-1 bg-neutral-100 border border-neutral-200 text-neutral-600"
+                    className="text-[10px] px-2 py-1 bg-neutral-100 border border-neutral-200 text-neutral-600 stamp"
                   >
                     {tech}
                   </span>
@@ -111,7 +111,7 @@ function FrontPage({ onProjectClick }) {
             </h3>
             <nav className="space-y-2">
               {projects.map((project, i) => (
-                <a 
+                <a
                   key={project.id}
                   href={`#project-${project.id}`}
                   className="flex gap-3 group"
@@ -123,7 +123,7 @@ function FrontPage({ onProjectClick }) {
                   <span className="text-neutral-400 font-mono text-xs">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="text-sm text-neutral-600 font-serif group-hover:text-neutral-900 transition-colors">
+                  <span className="text-sm text-neutral-600 font-serif typewriter-link">
                     {truncateTitle(project.title, 5)}
                   </span>
                 </a>
@@ -164,8 +164,8 @@ function Stat({ number, label }) {
 
 function ArticleCard({ project, index, isHovered, onMouseEnter, onMouseLeave, onClick }) {
   return (
-    <article 
-      className="cursor-pointer group hover-lift"
+    <article
+      className="cursor-pointer group page-turn"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
@@ -183,7 +183,7 @@ function ArticleCard({ project, index, isHovered, onMouseEnter, onMouseLeave, on
       </p>
       
       {/* Title */}
-      <h3 className="text-base sm:text-lg font-bold leading-tight font-serif group-hover:text-neutral-600 transition-colors">
+      <h3 className="text-base sm:text-lg font-bold leading-tight font-serif ink-bleed inline-block">
         {truncateTitle(project.title, 8)}
       </h3>
       

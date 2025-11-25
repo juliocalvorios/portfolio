@@ -1,55 +1,119 @@
 import { useState } from 'react'
 import projects from '../data/projects'
+import Ornament from './ui/Ornament'
 
 function SelectedWorks({ initialProject = null }) {
   const [expandedId, setExpandedId] = useState(initialProject?.id || null)
 
   return (
     <div className="animate-fadeIn">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold font-serif">Selected Works</h2>
-        <p className="text-neutral-500 italic font-serif mt-1 text-sm sm:text-base">
+      {/* Header with editorial styling */}
+      <div className="text-center mb-8 sm:mb-10">
+        <p className="text-[10px] tracking-[0.3em] text-neutral-400 mb-2">PORTFOLIO</p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif">Selected Works</h2>
+        <p className="text-neutral-500 italic font-serif mt-2 text-sm sm:text-base max-w-md mx-auto">
           A collection of projects built with care and curiosity
         </p>
+        <Ornament className="mt-6" />
       </div>
 
-      {/* Projects List */}
-      <div className="space-y-0">
-        {projects.map((project, index) => (
-          <ProjectArticle
-            key={project.id}
-            project={project}
-            index={index}
-            isExpanded={expandedId === project.id}
-            onToggle={() => setExpandedId(
-              expandedId === project.id ? null : project.id
-            )}
-          />
-        ))}
+      {/* Index sidebar - visible on large screens */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Floating index */}
+        <aside className="hidden lg:block lg:col-span-2">
+          <div className="sticky top-8">
+            <p className="text-[9px] tracking-widest text-neutral-400 mb-3 font-bold">INDEX</p>
+            <nav className="space-y-2">
+              {projects.map((project, index) => (
+                <button
+                  key={project.id}
+                  onClick={() => setExpandedId(expandedId === project.id ? null : project.id)}
+                  className={`block text-left w-full group ${
+                    expandedId === project.id ? 'text-neutral-900' : 'text-neutral-400'
+                  }`}
+                >
+                  <span className="font-mono text-[10px] mr-2">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className={`text-xs font-serif typewriter-link ${
+                    expandedId === project.id ? 'font-bold' : ''
+                  }`}>
+                    {project.name}
+                  </span>
+                </button>
+              ))}
+            </nav>
+
+            <div className="mt-6 pt-4 border-t border-neutral-200">
+              <p className="text-[9px] tracking-widest text-neutral-400 mb-1">TOTAL WORKS</p>
+              <p className="text-2xl font-bold font-mono">{String(projects.length).padStart(2, '0')}</p>
+            </div>
+          </div>
+        </aside>
+
+        {/* Projects List */}
+        <div className="lg:col-span-10 space-y-0">
+          {projects.map((project, index) => (
+            <ProjectArticle
+              key={project.id}
+              project={project}
+              index={index}
+              totalProjects={projects.length}
+              isExpanded={expandedId === project.id}
+              onToggle={() => setExpandedId(
+                expandedId === project.id ? null : project.id
+              )}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
-function ProjectArticle({ project, index, isExpanded, onToggle }) {
+function ProjectArticle({ project, index, totalProjects, isExpanded, onToggle }) {
   return (
-    <article className={`border-b border-neutral-200 ${index === 0 ? 'border-t' : ''}`}>
+    <article className={`border-b border-neutral-200 ${index === 0 ? 'border-t-2 border-t-neutral-800' : ''} ${
+      isExpanded ? 'bg-neutral-50/50' : ''
+    }`}>
       {/* Header - Always visible */}
       <button
         onClick={onToggle}
-        className="w-full py-5 sm:py-6 flex items-center justify-between group text-left"
+        className="w-full py-5 sm:py-6 flex items-center justify-between group text-left press-effect"
       >
         <div className="flex items-center gap-3 sm:gap-4 md:gap-6 flex-1 min-w-0">
-          <span className="text-neutral-300 font-mono text-xs sm:text-sm w-6 sm:w-8 shrink-0">
+          {/* Large decorative number */}
+          <div className="hidden sm:flex flex-col items-center w-12 md:w-16 shrink-0">
+            <span className="text-3xl md:text-4xl font-bold font-serif text-neutral-200 leading-none">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="text-[8px] text-neutral-300 tracking-widest mt-1">
+              /{String(totalProjects).padStart(2, '0')}
+            </span>
+          </div>
+
+          {/* Mobile number */}
+          <span className="sm:hidden text-neutral-300 font-mono text-xs w-6 shrink-0">
             {String(index + 1).padStart(2, '0')}
           </span>
-          <div className="min-w-0">
-            <p className="text-[9px] sm:text-[10px] tracking-widest text-neutral-400 mb-0.5 sm:mb-1">
-              {project.category} · {project.year}
-            </p>
-            <h3 className={`text-lg sm:text-xl md:text-2xl font-bold font-serif transition-colors truncate sm:text-clip ${
-              isExpanded ? 'text-neutral-900' : 'text-neutral-700 group-hover:text-neutral-900'
+
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 mb-0.5 sm:mb-1">
+              <p className="text-[9px] sm:text-[10px] tracking-widest text-neutral-400">
+                {project.category}
+              </p>
+              <span className="text-neutral-300">·</span>
+              <p className="text-[9px] sm:text-[10px] tracking-widest text-neutral-400">
+                {project.year}
+              </p>
+              {index === 0 && (
+                <span className="text-[8px] px-1.5 py-0.5 bg-neutral-900 text-white tracking-wider ml-2">
+                  FEATURED
+                </span>
+              )}
+            </div>
+            <h3 className={`text-lg sm:text-xl md:text-2xl font-bold font-serif transition-colors truncate sm:text-clip ink-bleed inline-block ${
+              isExpanded ? 'text-neutral-900' : 'text-neutral-700'
             }`}>
               {project.name}
             </h3>
@@ -58,16 +122,16 @@ function ProjectArticle({ project, index, isExpanded, onToggle }) {
             </p>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2 sm:gap-4 shrink-0 ml-2">
-          <span className="text-xs sm:text-sm text-neutral-400 hidden md:inline">
+          <span className="text-[10px] sm:text-xs text-neutral-400 hidden md:inline border border-neutral-200 px-2 py-1">
             {project.type}
           </span>
-          <span className={`text-xl sm:text-2xl transition-transform duration-300 w-6 text-center ${
-            isExpanded ? 'rotate-45' : ''
+          <div className={`w-8 h-8 sm:w-10 sm:h-10 border-2 border-neutral-800 flex items-center justify-center transition-all duration-300 ${
+            isExpanded ? 'bg-neutral-900 text-white rotate-45' : 'bg-transparent group-hover:bg-neutral-100'
           }`}>
-            +
-          </span>
+            <span className="text-lg sm:text-xl font-light">+</span>
+          </div>
         </div>
       </button>
 
@@ -121,7 +185,7 @@ function ProjectArticle({ project, index, isExpanded, onToggle }) {
                   {project.tech.map(tech => (
                     <span 
                       key={tech}
-                      className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 bg-white border border-neutral-200"
+                      className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 bg-white border border-neutral-200 stamp"
                     >
                       {tech}
                     </span>
@@ -149,19 +213,19 @@ function ProjectArticle({ project, index, isExpanded, onToggle }) {
 
               {/* Links */}
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                <a 
+                <a
                   href={project.links.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 px-4 py-3 bg-neutral-900 text-white text-[10px] sm:text-xs tracking-wider text-center hover:bg-neutral-700 transition-colors"
+                  className="flex-1 px-4 py-3 bg-neutral-900 text-white text-[10px] sm:text-xs tracking-wider text-center press-effect border-2 border-neutral-900"
                 >
                   VIEW LIVE →
                 </a>
-                <a 
+                <a
                   href={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 px-4 py-3 border border-neutral-900 text-[10px] sm:text-xs tracking-wider text-center hover:bg-neutral-900 hover:text-white transition-colors"
+                  className="flex-1 px-4 py-3 border-2 border-neutral-900 text-[10px] sm:text-xs tracking-wider text-center press-effect hover:bg-neutral-900 hover:text-white transition-colors"
                 >
                   SOURCE CODE
                 </a>

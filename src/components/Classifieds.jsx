@@ -84,9 +84,9 @@ function Classifieds() {
           </div>
           
           {/* CTA */}
-          <a 
+          <a
             href="mailto:julio@veraos.ai?subject=Job Opportunity - Frontend Developer"
-            className="block mt-4 sm:mt-6 px-4 py-2.5 sm:py-3 bg-neutral-900 text-white text-[10px] sm:text-xs tracking-widest text-center hover:bg-neutral-700 transition-colors"
+            className="block mt-4 sm:mt-6 px-4 py-2.5 sm:py-3 bg-neutral-900 text-white text-[10px] sm:text-xs tracking-widest text-center press-effect border-2 border-neutral-900"
           >
             SEND INQUIRY →
           </a>
@@ -180,19 +180,90 @@ function Classifieds() {
           </ul>
         </div>
       </div>
+
+      {/* Vintage Advertisements Section */}
+      <div className="mt-10 sm:mt-14">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-px bg-neutral-300 flex-1" />
+          <span className="text-[9px] tracking-[0.3em] text-neutral-400">ADVERTISEMENTS</span>
+          <div className="h-px bg-neutral-300 flex-1" />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Ad 1 - Coffee */}
+          <VintageAd
+            title="DEVELOPER'S BREW"
+            tagline="Premium Coffee for Late Nights"
+            description="Fuel your debugging sessions with our artisanal dark roast. Now with 40% more caffeine."
+            footer="Est. 3AM"
+            icon="☕"
+          />
+
+          {/* Ad 2 - Mechanical Keyboards */}
+          <VintageAd
+            title="CLICK & CLACK Co."
+            tagline="Fine Mechanical Keyboards"
+            description="Disturb your coworkers with our premium Cherry MX switches. Satisfaction guaranteed.*"
+            footer="*Headphones not included"
+            icon="⌨️"
+            featured
+          />
+
+          {/* Ad 3 - Rubber Duck */}
+          <VintageAd
+            title="QUACK DEBUGGING"
+            tagline="Professional Rubber Ducks"
+            description="Explain your code to our certified listening ducks. 99% bug resolution rate."
+            footer="Inquire within"
+            icon="🦆"
+          />
+
+          {/* Ad 4 - Stack Overflow */}
+          <VintageAd
+            title="COPY & PASTE Ltd."
+            tagline="Solutions for Every Error"
+            description="Why reinvent the wheel? Our archives contain 47 million answers to your exact problem."
+            footer="Since 2008"
+            icon="📋"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function VintageAd({ title, tagline, description, footer, icon, featured = false }) {
+  return (
+    <div className={`border-2 p-4 text-center page-turn ${
+      featured ? 'border-neutral-800 bg-neutral-900 text-white' : 'border-neutral-300 border-dashed'
+    }`}>
+      <div className="text-2xl mb-2">{icon}</div>
+      <h4 className={`font-bold text-xs tracking-wider mb-1 ${featured ? 'text-white' : 'text-neutral-800'}`}>
+        {title}
+      </h4>
+      <p className={`text-[10px] italic mb-3 ${featured ? 'text-neutral-300' : 'text-neutral-500'}`}>
+        {tagline}
+      </p>
+      <Ornament className={`my-3 ${featured ? 'opacity-50' : ''}`} />
+      <p className={`text-[10px] font-serif leading-relaxed mb-3 ${featured ? 'text-neutral-200' : 'text-neutral-600'}`}>
+        {description}
+      </p>
+      <p className={`text-[8px] tracking-widest ${featured ? 'text-neutral-400' : 'text-neutral-400'}`}>
+        {footer}
+      </p>
     </div>
   )
 }
 
 function LinkItem({ label, sublabel, href }) {
   return (
-    <a 
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="block border-b border-neutral-200 pb-2 sm:pb-3 group"
     >
-      <p className="text-xs sm:text-sm font-bold font-serif group-hover:underline">
+      <p className="text-xs sm:text-sm font-bold font-serif typewriter-link inline-block">
         {label} →
       </p>
       <p className="text-[10px] sm:text-xs text-neutral-500">{sublabel}</p>

@@ -155,6 +155,137 @@ a, button {
 }
 
 /* ================================
+   EDITORIAL MICROINTERACTIONS
+   ================================ */
+
+/* Ink bleed effect on hover */
+.ink-bleed {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.ink-bleed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #1a1a1a;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.ink-bleed:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Typewriter underline animation */
+.typewriter-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.typewriter-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s steps(8);
+}
+
+.typewriter-link:hover::after {
+  width: 100%;
+}
+
+/* Page turn effect for cards */
+@keyframes pageTurn {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    transform: perspective(1000px) rotateY(-5deg);
+    box-shadow: 8px 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.page-turn {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.page-turn:hover {
+  transform: perspective(1000px) rotateY(-3deg) translateY(-4px);
+  box-shadow: 6px 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Press effect for buttons (like a printing press stamp) */
+.press-effect {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.press-effect:hover {
+  transform: translateY(-1px);
+}
+
+.press-effect:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Newspaper fold reveal */
+@keyframes unfold {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg);
+    transform-origin: top center;
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg);
+    transform-origin: top center;
+  }
+}
+
+.unfold-reveal {
+  animation: unfold 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Stamp effect for tags */
+.stamp {
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.stamp:hover {
+  transform: rotate(-2deg) scale(1.05);
+}
+
+/* Vintage border pulse */
+@keyframes borderPulse {
+  0%, 100% {
+    border-color: #1a1a1a;
+  }
+  50% {
+    border-color: #525252;
+  }
+}
+
+.border-pulse:hover {
+  animation: borderPulse 1s ease infinite;
+}
+
+/* ================================
    UTILITIES
    ================================ */
 .line-clamp-2 {
