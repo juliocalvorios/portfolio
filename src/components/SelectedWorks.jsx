@@ -2,8 +2,8 @@ import { useState } from 'react'
 import projects from '../data/projects'
 import Ornament from './ui/Ornament'
 
-function SelectedWorks({ initialProject = null }) {
-  const [expandedId, setExpandedId] = useState(initialProject?.id || null)
+function SelectedWorks() {
+  const [expandedId, setExpandedId] = useState(null)
 
   return (
     <div className="animate-fadeIn">

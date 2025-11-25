@@ -4,6 +4,7 @@ import FrontPage from './components/FrontPage'
 import SelectedWorks from './components/SelectedWorks'
 import About from './components/About'
 import Classifieds from './components/Classifieds'
+import ArticleView from './components/ArticleView'
 
 function App() {
   const [activeSection, setActiveSection] = useState('front')
@@ -11,7 +12,13 @@ function App() {
 
   const handleProjectClick = (project) => {
     setSelectedProject(project)
-    setActiveSection('works')
+    setActiveSection('article')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleBackToFront = () => {
+    setSelectedProject(null)
+    setActiveSection('front')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -25,8 +32,10 @@ function App() {
     switch (activeSection) {
       case 'front':
         return <FrontPage onProjectClick={handleProjectClick} />
+      case 'article':
+        return <ArticleView project={selectedProject} onBack={handleBackToFront} />
       case 'works':
-        return <SelectedWorks initialProject={selectedProject} />
+        return <SelectedWorks />
       case 'about':
         return <About />
       case 'contact':
@@ -73,7 +82,7 @@ function Footer({ onSectionChange }) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
           {/* Masthead */}
           <div className="md:col-span-4 text-center md:text-left">
-            <h3 className="font-serif font-bold text-xl sm:text-2xl mb-2">The Calvo Chronicle</h3>
+            <h3 className="font-serif font-bold text-xl sm:text-2xl mb-2">The Julio Calvo Times</h3>
             <p className="text-[10px] tracking-[0.2em] text-neutral-500 mb-3">
               ALL THE CODE THAT'S FIT TO SHIP
             </p>
