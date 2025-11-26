@@ -15,16 +15,16 @@ function LiveIndicator({ type = 'live', pulse = true }) {
   const colors = {
     live: 'text-red-600 bg-red-50 border-red-200',
     breaking: 'text-red-700 bg-red-50 border-red-300',
-    featured: 'text-amber-700 bg-amber-50 border-amber-200',
-    new: 'text-blue-600 bg-blue-50 border-blue-200',
+    featured: 'text-stone-600 bg-stone-100 border-stone-300',
+    new: 'text-stone-600 bg-stone-100 border-stone-300',
     updated: 'text-neutral-600 bg-neutral-100 border-neutral-300',
   }
 
   const dotColors = {
     live: 'bg-red-500',
     breaking: 'bg-red-600',
-    featured: 'bg-amber-500',
-    new: 'bg-blue-500',
+    featured: 'bg-stone-500',
+    new: 'bg-stone-500',
     updated: 'bg-neutral-500',
   }
 

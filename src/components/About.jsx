@@ -1,5 +1,6 @@
 import Ornament from './ui/Ornament'
 import ScrollReveal from './ui/ScrollReveal'
+import { WantedAd, HireAd } from './ui/VintageAds'
 
 function About() {
   return (
@@ -37,6 +38,12 @@ function About() {
             <InfoRow label="Origin" value="Zaragoza, Spain" />
             <InfoRow label="Focus" value="Frontend & UI/UX" />
             <InfoRow label="Status" value="Available for work" highlight />
+          </div>
+
+          {/* Vintage Ads */}
+          <div className="flex justify-center gap-3 mt-6">
+            <WantedAd />
+            <HireAd />
           </div>
         </div>
 
@@ -78,7 +85,7 @@ function About() {
 
             <div>
               {/* Pull Quote */}
-              <blockquote className="border-l-2 sm:border-l-4 border-neutral-800 pl-3 sm:pl-4 mb-3 sm:mb-4 md:mb-6">
+              <blockquote className="border-l-2 sm:border-l-4 border-navy pl-3 sm:pl-4 mb-3 sm:mb-4 md:mb-6">
                 <p className="text-base sm:text-lg md:text-xl italic font-serif">
                   "I believe in building, not waiting. Every widget is a small
                   rebellion against the idea that you need permission to create."
@@ -198,9 +205,19 @@ function InfoRow({ label, value, highlight = false }) {
   return (
     <div className="flex justify-between border-b border-neutral-200 pb-2 text-xs sm:text-sm">
       <span className="text-neutral-500">{label}</span>
-      <span className={highlight ? 'text-green-700 font-medium' : ''}>
-        {value}
-      </span>
+      {highlight ? (
+        <span
+          className="font-medium px-1.5 py-0.5 rounded-sm"
+          style={{
+            color: '#5a6340',
+            backgroundColor: 'rgba(90, 99, 64, 0.1)'
+          }}
+        >
+          {value}
+        </span>
+      ) : (
+        <span>{value}</span>
+      )}
     </div>
   )
 }

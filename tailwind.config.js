@@ -9,6 +9,9 @@ export default {
       colors: {
         paper: '#FDF9F3',
         ink: '#1a1a1a',
+        navy: '#1e3a5f',
+        olive: '#5a6340',
+        slate: '#4a5568',
       },
       fontFamily: {
         serif: ['Georgia', 'Times New Roman', 'serif'],

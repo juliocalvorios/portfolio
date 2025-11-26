@@ -1,10 +1,69 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import Masthead from './components/Masthead'
 import { TopBanner } from './components/ui/AdBanner'
 import LoadingScreen from './components/ui/LoadingScreen'
 import PageTransition from './components/ui/PageTransition'
 import StickyNav from './components/ui/StickyNav'
 import { SoundProvider } from './components/ui/SoundManager'
+import NewspaperCTA from './components/ui/NewspaperCTA'
+
+/**
+ * Fixed Reading Progress Bar
+ * Always visible at the very top of the page
+ * Uses requestAnimationFrame for buttery smooth animation
+ */
+function ReadingProgressBar() {
+  const [progress, setProgress] = useState(0)
+  const targetProgress = useRef(0)
+  const currentProgress = useRef(0)
+  const rafId = useRef(null)
+
+  useEffect(() => {
+    const lerp = (start, end, factor) => start + (end - start) * factor
+
+    const animate = () => {
+      // Smooth interpolation towards target
+      currentProgress.current = lerp(currentProgress.current, targetProgress.current, 0.08)
+
+      // Only update state when there's meaningful change
+      if (Math.abs(currentProgress.current - progress) > 0.1) {
+        setProgress(currentProgress.current)
+      }
+
+      rafId.current = requestAnimationFrame(animate)
+    }
+
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight - windowHeight
+      const scrolled = window.scrollY
+      const percentage = documentHeight > 0 ? (scrolled / documentHeight) * 100 : 0
+      targetProgress.current = Math.min(percentage, 100)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    rafId.current = requestAnimationFrame(animate)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId.current) cancelAnimationFrame(rafId.current)
+    }
+  }, [progress])
+
+  return (
+    <div className="fixed top-0 left-0 right-0 z-[200] h-[2px] bg-transparent">
+      <div
+        className="h-full bg-navy"
+        style={{
+          width: `${progress}%`,
+          boxShadow: progress > 0 ? '0 0 8px rgba(30,58,95,0.4)' : 'none'
+        }}
+      />
+    </div>
+  )
+}
+
 
 // Lazy load sections for better initial load performance
 const FrontPage = lazy(() => import('./components/FrontPage'))
@@ -85,6 +144,9 @@ function App() {
   return (
     <SoundProvider>
       <div className="min-h-screen bg-paper flex flex-col animate-fadeIn">
+        {/* Reading progress bar - always visible at top */}
+        <ReadingProgressBar />
+
         {/* Sticky navigation bar - appears on scroll */}
         <StickyNav
           activeSection={activeSection}
@@ -109,6 +171,13 @@ function App() {
             </Suspense>
           </PageTransition>
         </main>
+
+        {/* Newspaper CTA - Only on Front Page */}
+        {activeSection === 'front' && (
+          <div className="border-t border-neutral-200">
+            <NewspaperCTA onContactClick={() => handleSectionChange('contact')} />
+          </div>
+        )}
 
         <Footer onSectionChange={handleSectionChange} />
       </div>

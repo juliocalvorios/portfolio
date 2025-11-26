@@ -78,7 +78,7 @@ function FrontPage({ onProjectClick }) {
 
             <div>
               {/* Pull Quote */}
-              <blockquote className="border-l-2 sm:border-l-4 border-neutral-800 pl-3 sm:pl-4 my-3 sm:my-4">
+              <blockquote className="border-l-2 sm:border-l-4 border-navy pl-3 sm:pl-4 my-3 sm:my-4">
                 <p className="text-base sm:text-lg md:text-xl italic font-serif">
                   {leadStory.pullQuote}
                 </p>
@@ -116,7 +116,7 @@ function FrontPage({ onProjectClick }) {
             <Stat number="12" label="MONTHS DEV" />
             <Stat number="0→1" label="SELF-TAUGHT" />
           </div>
-          
+
           <Ornament className="my-6 hidden lg:flex" />
 
           {/* Article Index - Hidden on mobile */}
@@ -147,6 +147,7 @@ function FrontPage({ onProjectClick }) {
               ))}
             </nav>
           </div>
+
         </aside>
         </div>
       </ScrollReveal>
@@ -168,6 +169,7 @@ function FrontPage({ onProjectClick }) {
           </ScrollReveal>
         ))}
       </div>
+
     </div>
   )
 }

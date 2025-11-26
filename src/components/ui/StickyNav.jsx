@@ -95,41 +95,9 @@ function StickyNav({ activeSection, onSectionChange, relatedArticles = [] }) {
         </div>
       </div>
 
-      {/* Progress bar */}
-      <ScrollProgressBar />
     </div>
   )
 }
 
-/**
- * Reading Progress Bar
- * Shows how far through the page user has scrolled
- */
-function ScrollProgressBar() {
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight - windowHeight
-      const scrolled = window.scrollY
-      const percentage = (scrolled / documentHeight) * 100
-      setProgress(Math.min(percentage, 100))
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  return (
-    <div className="h-[2px] bg-neutral-100">
-      <div
-        className="h-full bg-neutral-900 transition-all duration-100"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  )
-}
-
-export { StickyNav, ScrollProgressBar }
+export { StickyNav }
 export default StickyNav
