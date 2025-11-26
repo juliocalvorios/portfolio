@@ -8,8 +8,8 @@ function Classifieds() {
       {/* Header */}
       <ScrollReveal>
         <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif">Classifieds & Notices</h2>
-          <p className="text-neutral-500 italic font-serif mt-1 text-sm sm:text-base">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">Classifieds & Notices</h2>
+          <p className="text-neutral-500 italic font-serif mt-1 text-xs sm:text-sm md:text-base">
             Professional inquiries and opportunities welcome
           </p>
         </div>
@@ -22,7 +22,7 @@ function Classifieds() {
         <ScrollReveal delay={0}>
           <div className="border-2 border-neutral-800 p-4 sm:p-6">
           <h3 className="text-center text-[10px] sm:text-xs tracking-widest font-bold border-b border-neutral-300 pb-2 sm:pb-3 mb-3 sm:mb-4">
-            SEEKING EMPLOYMENT
+            POSITION WANTED
           </h3>
           
           <div className="text-center mb-3 sm:mb-4 font-serif">
@@ -61,11 +61,11 @@ function Classifieds() {
               <p className="text-[9px] sm:text-[10px] tracking-widest text-neutral-500 mb-1">
                 ELECTRONIC MAIL
               </p>
-              <a 
-                href="mailto:julio@veraos.ai"
+              <a
+                href="mailto:juliocalvorios@gmail.com"
                 className="text-base sm:text-lg font-serif hover:underline break-all"
               >
-                julio@veraos.ai
+                juliocalvorios@gmail.com
               </a>
             </div>
             
@@ -93,8 +93,8 @@ function Classifieds() {
           
           {/* CTA */}
           <a
-            href="mailto:julio@veraos.ai?subject=Job Opportunity - Frontend Developer"
-            className="block mt-4 sm:mt-6 px-4 py-2.5 sm:py-3 bg-neutral-900 text-white text-[10px] sm:text-xs tracking-widest text-center hover:bg-neutral-700 transition-colors"
+            href="mailto:juliocalvorios@gmail.com?subject=Job Opportunity - Frontend Developer"
+            className="block mt-4 sm:mt-6 px-4 py-3 min-h-[44px] flex items-center justify-center bg-neutral-900 text-white text-[9px] sm:text-[10px] md:text-xs tracking-wider sm:tracking-widest text-center hover:bg-neutral-700 transition-colors"
           >
             SEND INQUIRY →
           </a>
@@ -115,10 +115,10 @@ function Classifieds() {
               sublabel="Source code & contributions"
               href="https://github.com/juliocalvor811-svg"
             />
-            <LinkItem 
+            <LinkItem
               label="LinkedIn Profile"
               sublabel="Professional history"
-              href="https://linkedin.com/in/juliocalvo"
+              href="https://linkedin.com/in/juliocalvorios"
             />
             <LinkItem 
               label="Resume / CV"
@@ -204,16 +204,16 @@ function Classifieds() {
 
 function LinkItem({ label, sublabel, href }) {
   return (
-    <a 
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="block border-b border-neutral-200 pb-2 sm:pb-3 group"
+      className="block border-b border-neutral-200 pb-2 sm:pb-3 py-2 min-h-[44px] group"
     >
-      <p className="text-xs sm:text-sm font-bold font-serif group-hover:underline">
+      <p className="text-[11px] sm:text-xs md:text-sm font-bold font-serif group-hover:underline">
         {label} →
       </p>
-      <p className="text-[10px] sm:text-xs text-neutral-500">{sublabel}</p>
+      <p className="text-[9px] sm:text-[10px] md:text-xs text-neutral-500">{sublabel}</p>
     </a>
   )
 }

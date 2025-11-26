@@ -2,8 +2,8 @@ const projects = [
   {
     id: 1,
     // Card Preview Data
-    title: 'Self-Taught Developer Ships 137 Widgets in Ambitious "Life OS" Project',
-    subtitle: 'veraOS challenges conventional wisdom about learning to code',
+    title: 'veraOS: Designing a Scalable React Platform for Personal Productivity',
+    subtitle: 'A case study in modern frontend architecture and AI-assisted development',
     name: 'veraOS',
     category: 'TECHNOLOGY',
     type: 'Product Design',

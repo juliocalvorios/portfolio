@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#1a1a1a"/>
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="#FDF9F3" font-family="Georgia, serif" font-size="20" font-weight="bold">J</text>
+  <!-- Folded Paper design - documento con esquina doblada -->
+
+  <!-- Main paper shape with cut corner -->
+  <path d="M2 2 L24 2 L30 8 L30 30 L2 30 Z" fill="#FDF9F3" stroke="#1a1a1a" stroke-width="1.5"/>
+
+  <!-- Folded corner effect -->
+  <path d="M24 2 L24 8 L30 8" fill="#E8E4DC" stroke="#1a1a1a" stroke-width="1"/>
+
+  <!-- JC monogram - elegant serif italic -->
+  <text x="16" y="22" text-anchor="middle" fill="#1a1a1a" font-family="Georgia, 'Times New Roman', serif" font-size="14" font-weight="bold" font-style="italic">JC</text>
 </svg>

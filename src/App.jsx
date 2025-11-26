@@ -1,10 +1,10 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import Masthead from './components/Masthead'
 import { TopBanner } from './components/ui/AdBanner'
-import CustomCursor from './components/ui/CustomCursor'
 import LoadingScreen from './components/ui/LoadingScreen'
 import PageTransition from './components/ui/PageTransition'
-import { SoundProvider, SoundToggle } from './components/ui/SoundManager'
+import StickyNav from './components/ui/StickyNav'
+import { SoundProvider } from './components/ui/SoundManager'
 
 // Lazy load sections for better initial load performance
 const FrontPage = lazy(() => import('./components/FrontPage'))
@@ -84,9 +84,12 @@ function App() {
 
   return (
     <SoundProvider>
-      <div className="min-h-screen bg-paper flex flex-col cursor-none animate-fadeIn">
-        {/* Custom cursor */}
-        <CustomCursor />
+      <div className="min-h-screen bg-paper flex flex-col animate-fadeIn">
+        {/* Sticky navigation bar - appears on scroll */}
+        <StickyNav
+          activeSection={activeSection}
+          onSectionChange={handleSectionChange}
+        />
 
         {/* Grain texture overlay - vintage paper effect */}
         <div className="grain-overlay" aria-hidden="true" />
@@ -108,9 +111,6 @@ function App() {
         </main>
 
         <Footer onSectionChange={handleSectionChange} />
-
-        {/* Sound toggle button */}
-        <SoundToggle />
       </div>
     </SoundProvider>
   )
@@ -123,35 +123,37 @@ function Footer({ onSectionChange }) {
         {/* Main footer content */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
           <div className="text-center sm:text-left">
-            <p className="font-serif font-bold text-sm sm:text-base">The Calvo Chronicle</p>
-            <p className="text-[10px] sm:text-xs text-neutral-500 mt-0.5">
-              Frontend Developer Portfolio
+            <p
+              className="font-bold text-sm sm:text-base"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              The Julio Calvo Times
             </p>
           </div>
 
           {/* Quick links */}
-          <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm">
+          <div className="flex gap-3 sm:gap-4 md:gap-6 text-[11px] sm:text-xs md:text-sm">
             <button
               onClick={() => onSectionChange('front')}
-              className="text-neutral-500 hover:text-neutral-900 transition-colors"
+              className="text-neutral-500 hover:text-neutral-900 transition-colors py-2 min-h-[44px] flex items-center"
             >
               Home
             </button>
             <button
               onClick={() => onSectionChange('works')}
-              className="text-neutral-500 hover:text-neutral-900 transition-colors"
+              className="text-neutral-500 hover:text-neutral-900 transition-colors py-2 min-h-[44px] flex items-center"
             >
               Works
             </button>
             <button
               onClick={() => onSectionChange('about')}
-              className="text-neutral-500 hover:text-neutral-900 transition-colors"
+              className="text-neutral-500 hover:text-neutral-900 transition-colors py-2 min-h-[44px] flex items-center"
             >
               About
             </button>
             <button
               onClick={() => onSectionChange('contact')}
-              className="text-neutral-500 hover:text-neutral-900 transition-colors"
+              className="text-neutral-500 hover:text-neutral-900 transition-colors py-2 min-h-[44px] flex items-center"
             >
               Contact
             </button>
@@ -162,7 +164,7 @@ function Footer({ onSectionChange }) {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-4 border-t border-neutral-200 text-[9px] sm:text-[10px] tracking-widest text-neutral-500">
           <span>© 2025 JULIO CALVO</span>
           <span className="hidden sm:inline">PRINTED IN TORONTO, CANADA</span>
-          <span>BUILT WITH REACT + TAILWIND</span>
+          <span>EST. 2024</span>
         </div>
       </div>
     </footer>

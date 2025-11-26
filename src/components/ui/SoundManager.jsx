@@ -1,206 +1,216 @@
-import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback, createContext, useContext } from 'react'
+import { Howl, Howler } from 'howler'
 
-/**
- * Sound Manager Context & Provider
- * Handles subtle audio effects for the newspaper portfolio
- * Muted by default - user can enable via toggle
- */
+// Sound URLs from stepanosada.com
+const SOUNDS = {
+  click: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/Click.mp3',
+  hover: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/hover-cut.mp3',
+  background: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/background.mp3'
+}
 
+// Context for sound state
 const SoundContext = createContext(null)
 
-// Sound effect URLs (using Web Audio API for generated sounds)
-const SOUNDS = {
-  click: { frequency: 800, duration: 0.05, type: 'square' },
-  hover: { frequency: 1200, duration: 0.02, type: 'sine' },
-  pageFlip: { frequency: 400, duration: 0.15, type: 'sawtooth' },
-  typewriter: { frequency: 600, duration: 0.03, type: 'square' },
+export function useSounds() {
+  const context = useContext(SoundContext)
+  if (!context) {
+    throw new Error('useSounds must be used within a SoundProvider')
+  }
+  return context
 }
 
 export function SoundProvider({ children }) {
-  const [isMuted, setIsMuted] = useState(true) // Muted by default
-  const audioContextRef = useRef(null)
+  const [isMuted, setIsMuted] = useState(false) // Start with sound ON by default
+  const [isInitialized, setIsInitialized] = useState(false)
+  const [musicPlaying, setMusicPlaying] = useState(false)
 
-  // Initialize AudioContext on first user interaction
-  const getAudioContext = useCallback(() => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)()
+  const clickSoundRef = useRef(null)
+  const hoverSoundRef = useRef(null)
+  const backgroundMusicRef = useRef(null)
+
+  // Initialize sounds - optimized for memory
+  useEffect(() => {
+    // Short sounds - use sprite-like approach with pool limiting
+    clickSoundRef.current = new Howl({
+      src: [SOUNDS.click],
+      volume: 0.5,
+      preload: true,
+      pool: 3 // Limit concurrent instances
+    })
+
+    hoverSoundRef.current = new Howl({
+      src: [SOUNDS.hover],
+      volume: 0.3,
+      preload: true,
+      pool: 2 // Limit concurrent instances - hover shouldn't stack much
+    })
+
+    // Background music - use HTML5 audio for streaming (much lower memory)
+    backgroundMusicRef.current = new Howl({
+      src: [SOUNDS.background],
+      volume: 0.15,
+      loop: true,
+      html5: true, // Stream instead of loading entire file into memory
+      preload: false, // Don't preload - load on first play
+      onplay: () => {
+        setMusicPlaying(true)
+      },
+      onpause: () => {
+        setMusicPlaying(false)
+      },
+      onstop: () => {
+        setMusicPlaying(false)
+      }
+    })
+
+    setIsInitialized(true)
+
+    return () => {
+      clickSoundRef.current?.unload()
+      hoverSoundRef.current?.unload()
+      backgroundMusicRef.current?.unload()
     }
-    return audioContextRef.current
   }, [])
 
-  // Play a generated sound effect
-  const playSound = useCallback((soundName) => {
-    if (isMuted) return
+  // Handle mute state
+  useEffect(() => {
+    Howler.mute(isMuted)
 
-    const sound = SOUNDS[soundName]
-    if (!sound) return
-
-    try {
-      const ctx = getAudioContext()
-
-      // Create oscillator for the tone
-      const oscillator = ctx.createOscillator()
-      const gainNode = ctx.createGain()
-
-      oscillator.type = sound.type
-      oscillator.frequency.setValueAtTime(sound.frequency, ctx.currentTime)
-
-      // Very subtle volume
-      gainNode.gain.setValueAtTime(0.03, ctx.currentTime)
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + sound.duration)
-
-      oscillator.connect(gainNode)
-      gainNode.connect(ctx.destination)
-
-      oscillator.start(ctx.currentTime)
-      oscillator.stop(ctx.currentTime + sound.duration)
-    } catch (e) {
-      // Silently fail - audio is optional enhancement
-      console.debug('Sound playback failed:', e)
-    }
-  }, [isMuted, getAudioContext])
-
-  // Play paper rustle effect (white noise)
-  const playPaperRustle = useCallback(() => {
-    if (isMuted) return
-
-    try {
-      const ctx = getAudioContext()
-      const bufferSize = ctx.sampleRate * 0.1 // 100ms of noise
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
-      const data = buffer.getChannelData(0)
-
-      // Generate white noise
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = (Math.random() * 2 - 1) * 0.5
+    if (isMuted) {
+      // Pause music when muted
+      if (backgroundMusicRef.current?.playing()) {
+        backgroundMusicRef.current.pause()
       }
-
-      const source = ctx.createBufferSource()
-      const gainNode = ctx.createGain()
-      const filter = ctx.createBiquadFilter()
-
-      source.buffer = buffer
-
-      // Low-pass filter for softer paper sound
-      filter.type = 'lowpass'
-      filter.frequency.setValueAtTime(800, ctx.currentTime)
-
-      // Very quiet
-      gainNode.gain.setValueAtTime(0.015, ctx.currentTime)
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1)
-
-      source.connect(filter)
-      filter.connect(gainNode)
-      gainNode.connect(ctx.destination)
-
-      source.start(ctx.currentTime)
-    } catch (e) {
-      console.debug('Paper rustle failed:', e)
+    } else {
+      // Resume/start music when unmuted (will load on first play since preload: false)
+      if (backgroundMusicRef.current && !backgroundMusicRef.current.playing()) {
+        backgroundMusicRef.current.play()
+      }
     }
-  }, [isMuted, getAudioContext])
+  }, [isMuted])
+
+  const playClick = useCallback(() => {
+    if (!isMuted && clickSoundRef.current) {
+      clickSoundRef.current.play()
+    }
+  }, [isMuted])
+
+  const playHover = useCallback(() => {
+    if (!isMuted && hoverSoundRef.current) {
+      hoverSoundRef.current.play()
+    }
+  }, [isMuted])
+
+  const toggleMusic = useCallback(() => {
+    if (!backgroundMusicRef.current) return
+
+    if (musicPlaying) {
+      backgroundMusicRef.current.pause()
+      setMusicPlaying(false)
+    } else {
+      backgroundMusicRef.current.play()
+      setMusicPlaying(true)
+    }
+  }, [musicPlaying])
+
+  const startMusic = useCallback(() => {
+    if (!isMuted && backgroundMusicRef.current && !musicPlaying) {
+      backgroundMusicRef.current.play()
+      setMusicPlaying(true)
+    }
+  }, [isMuted, musicPlaying])
 
   const toggleMute = useCallback(() => {
     setIsMuted(prev => !prev)
   }, [])
 
-  // Store preference in localStorage
-  useEffect(() => {
-    const stored = localStorage.getItem('portfolio-sound-enabled')
-    if (stored !== null) {
-      setIsMuted(stored !== 'true')
+  // Enable sounds (for first user interaction)
+  const enableSounds = useCallback(() => {
+    if (isMuted) {
+      setIsMuted(false)
+      // Start background music after enabling
+      setTimeout(() => {
+        if (backgroundMusicRef.current && !musicPlaying) {
+          backgroundMusicRef.current.play()
+          setMusicPlaying(true)
+        }
+      }, 100)
     }
-  }, [])
+  }, [isMuted, musicPlaying])
 
-  useEffect(() => {
-    localStorage.setItem('portfolio-sound-enabled', (!isMuted).toString())
-  }, [isMuted])
+  const value = {
+    isMuted,
+    isInitialized,
+    musicPlaying,
+    playClick,
+    playHover,
+    toggleMusic,
+    startMusic,
+    toggleMute,
+    enableSounds
+  }
 
   return (
-    <SoundContext.Provider value={{ isMuted, toggleMute, playSound, playPaperRustle }}>
+    <SoundContext.Provider value={value}>
       {children}
     </SoundContext.Provider>
   )
 }
 
-export function useSound() {
-  const context = useContext(SoundContext)
-  if (!context) {
-    throw new Error('useSound must be used within a SoundProvider')
-  }
-  return context
-}
-
-/**
- * Sound Toggle Button Component
- * Floating button to enable/disable sound effects
- */
-export function SoundToggle() {
-  const { isMuted, toggleMute, getAudioContext } = useSound()
-
-  const handleClick = () => {
-    // If enabling sound, play a confirmation beep
-    if (isMuted) {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)()
-        const oscillator = ctx.createOscillator()
-        const gainNode = ctx.createGain()
-
-        oscillator.type = 'sine'
-        oscillator.frequency.setValueAtTime(880, ctx.currentTime) // A5 note
-
-        gainNode.gain.setValueAtTime(0.1, ctx.currentTime)
-        gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15)
-
-        oscillator.connect(gainNode)
-        gainNode.connect(ctx.destination)
-
-        oscillator.start(ctx.currentTime)
-        oscillator.stop(ctx.currentTime + 0.15)
-      } catch (e) {
-        // Ignore audio errors
-      }
-    }
-    toggleMute()
-  }
+// Sound Toggle Button Component - Typewriter Key Design
+export function SoundToggle({ className = '' }) {
+  const { isMuted, toggleMute } = useSounds()
 
   return (
     <button
-      onClick={handleClick}
-      className="fixed bottom-4 right-4 z-50 p-2 bg-paper border border-neutral-300 hover:border-neutral-400 transition-colors group"
-      aria-label={isMuted ? 'Enable sound effects' : 'Disable sound effects'}
-      title={isMuted ? 'Enable sound' : 'Mute sound'}
+      onClick={toggleMute}
+      className={`relative ${className}`}
+      aria-label={isMuted ? 'Enable sound' : 'Mute sound'}
+      aria-pressed={!isMuted}
+      title={isMuted ? 'Turn sound on' : 'Turn sound off'}
     >
-      {isMuted ? (
-        // Muted icon
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className="text-neutral-400 group-hover:text-neutral-600"
+      {/* Brazo de la tecla - se extiende hasta el divider */}
+      <span
+        className="absolute -bottom-[19px] left-1/2 -translate-x-1/2 h-[22px] bg-neutral-400"
+        style={{
+          width: '2px'
+        }}
+      />
+      {/* Tecla */}
+      <span
+        className={`
+          block relative w-7 h-7 rounded-full border-2 transition-all duration-100
+          ${isMuted
+            ? 'bg-neutral-200 border-neutral-300 translate-y-0'
+            : 'bg-neutral-100 border-neutral-400 translate-y-0.5'
+          }
+        `}
+        style={{
+          boxShadow: isMuted
+            ? '0 3px 0 #a3a3a3, 0 4px 6px rgba(0,0,0,0.2), inset 0 -2px 4px rgba(0,0,0,0.1)'
+            : '0 1px 0 #a3a3a3, 0 2px 3px rgba(0,0,0,0.15), inset 0 2px 4px rgba(0,0,0,0.1)'
+        }}
+      >
+        {/* Círculo interior con símbolo */}
+        <span
+          className={`
+            absolute inset-1 rounded-full flex items-center justify-center
+            transition-colors duration-100
+            ${isMuted ? 'bg-neutral-300' : 'bg-neutral-800'}
+          `}
         >
-          <path d="M11 5L6 9H2v6h4l5 4V5z" />
-          <line x1="23" y1="9" x2="17" y2="15" />
-          <line x1="17" y1="9" x2="23" y2="15" />
-        </svg>
-      ) : (
-        // Sound on icon
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className="text-neutral-600"
-        >
-          <path d="M11 5L6 9H2v6h4l5 4V5z" />
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-        </svg>
-      )}
+          <span
+            className={`
+              text-xs font-serif transition-colors duration-100
+              ${isMuted ? 'text-neutral-500' : 'text-paper'}
+            `}
+          >
+            ♪
+          </span>
+        </span>
+        {/* Reflejo de la tecla */}
+        <span className="absolute top-0.5 left-1.5 w-2 h-0.5 bg-white/30 rounded-full" />
+      </span>
     </button>
   )
 }

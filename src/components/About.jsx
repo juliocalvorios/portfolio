@@ -7,32 +7,32 @@ function About() {
       {/* Header */}
       <ScrollReveal>
         <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif">The Developer</h2>
-          <p className="text-neutral-500 italic font-serif mt-1 text-sm sm:text-base">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
+          <p className="text-neutral-500 italic font-serif mt-1 text-xs sm:text-sm md:text-base">
             A profile in determination and self-directed learning
           </p>
         </div>
       </ScrollReveal>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
         {/* Portrait Column */}
         <div className="lg:col-span-4">
-          <div className="bg-neutral-100 border border-neutral-200 aspect-square sm:aspect-[3/4] flex items-center justify-center mb-3">
+          <div className="bg-neutral-100 border border-neutral-200 aspect-square sm:aspect-[3/4] flex items-center justify-center mb-2 sm:mb-3">
             <div className="text-center">
-              <div className="text-5xl sm:text-6xl text-neutral-300 mb-2">👤</div>
-              <p className="text-[9px] sm:text-[10px] tracking-widest text-neutral-400">
+              <div className="text-4xl sm:text-5xl md:text-6xl text-neutral-300 mb-1.5 sm:mb-2">👤</div>
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] tracking-wider sm:tracking-widest text-neutral-400">
                 PORTRAIT
               </p>
             </div>
           </div>
-          <p className="text-[10px] text-neutral-500 italic text-center">
+          <p className="text-[9px] sm:text-[10px] text-neutral-500 italic text-center">
             Julio Calvo in his Toronto workspace, 2025.
           </p>
 
           <Ornament className="my-4 sm:my-6" />
 
           {/* Quick Info */}
-          <div className="space-y-2 sm:space-y-3 text-sm">
+          <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
             <InfoRow label="Location" value="Toronto, Ontario" />
             <InfoRow label="Origin" value="Zaragoza, Spain" />
             <InfoRow label="Focus" value="Frontend & UI/UX" />
@@ -43,57 +43,57 @@ function About() {
         {/* Main Content */}
         <div className="lg:col-span-8">
           {/* Article Title */}
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif mb-2 text-balance">
+          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-serif mb-1.5 sm:mb-2 text-balance">
             The Developer Behind the Code
           </h3>
-          <p className="text-base sm:text-lg text-neutral-600 italic font-serif mb-4 sm:mb-6">
+          <p className="text-sm sm:text-base lg:text-lg text-neutral-600 italic font-serif mb-3 sm:mb-4 lg:mb-6">
             From a small village in Spain to the tech scene of Toronto
           </p>
 
           {/* Article Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="font-serif text-sm leading-relaxed space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+            <div className="font-serif text-xs sm:text-sm leading-relaxed space-y-2.5 sm:space-y-3 md:space-y-4">
               <p>
-                <span className="text-3xl sm:text-4xl font-bold float-left mr-2 leading-none mt-1">
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold float-left mr-1.5 sm:mr-2 leading-none mt-0.5 sm:mt-1">
                   J
                 </span>
-                ulio Calvo's journey into software development defies conventional 
-                wisdom. Without a computer science degree or bootcamp certificate, 
-                he built veraOS—a comprehensive productivity platform with 137 
-                functional widgets—through pure determination and strategic use 
+                ulio Calvo's journey into software development defies conventional
+                wisdom. Without a computer science degree or bootcamp certificate,
+                he built veraOS—a comprehensive productivity platform with 137
+                functional widgets—through pure determination and strategic use
                 of modern tools.
               </p>
               <p>
-                Originally from a small village of 100 inhabitants near Zaragoza, 
-                Spain, Calvo made the leap to Toronto to pursue his ambitions in 
-                tech. After completing his Multimedia Design program at Humber 
+                Originally from a small village of 100 inhabitants near Zaragoza,
+                Spain, Calvo made the leap to Toronto to pursue his ambitions in
+                tech. After completing his Multimedia Design program at Humber
                 College, he dove headfirst into frontend development.
               </p>
               <p className="hidden md:block">
-                "I realized that waiting for the perfect moment or the perfect 
-                credentials was just another form of procrastination," he explains. 
+                "I realized that waiting for the perfect moment or the perfect
+                credentials was just another form of procrastination," he explains.
                 "So I started building. Every day. No excuses."
               </p>
             </div>
 
             <div>
               {/* Pull Quote */}
-              <blockquote className="border-l-4 border-neutral-800 pl-4 mb-4 sm:mb-6">
-                <p className="text-lg sm:text-xl italic font-serif">
-                  "I believe in building, not waiting. Every widget is a small 
+              <blockquote className="border-l-2 sm:border-l-4 border-neutral-800 pl-3 sm:pl-4 mb-3 sm:mb-4 md:mb-6">
+                <p className="text-base sm:text-lg md:text-xl italic font-serif">
+                  "I believe in building, not waiting. Every widget is a small
                   rebellion against the idea that you need permission to create."
                 </p>
               </blockquote>
 
-              <div className="font-serif text-sm leading-relaxed space-y-3 sm:space-y-4">
+              <div className="font-serif text-xs sm:text-sm leading-relaxed space-y-2.5 sm:space-y-3 md:space-y-4">
                 <p>
-                  His approach combines obsessive attention to detail with a bias 
-                  toward shipping working software. While others debate frameworks 
+                  His approach combines obsessive attention to detail with a bias
+                  toward shipping working software. While others debate frameworks
                   and best practices, Calvo pushes code.
                 </p>
                 <p className="hidden sm:block">
-                  The result speaks for itself: 137 widgets, a complete academic 
-                  mode with spaced repetition, an AI-powered chat interface, and 
+                  The result speaks for itself: 137 widgets, a complete academic
+                  mode with spaced repetition, an AI-powered chat interface, and
                   a modular design system—all built in 12 months.
                 </p>
               </div>

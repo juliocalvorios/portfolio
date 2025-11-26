@@ -21,9 +21,9 @@ function SelectedWorks({ initialProject = null }) {
     <div className="animate-fadeIn">
       {/* Header */}
       <ScrollReveal>
-        <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif">Selected Works</h2>
-          <p className="text-neutral-500 italic font-serif mt-1 text-sm sm:text-base">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">Selected Works</h2>
+          <p className="text-neutral-500 italic font-serif mt-1 text-xs sm:text-sm md:text-base">
             A collection of projects built with care and curiosity
           </p>
         </div>
@@ -89,62 +89,62 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
 
       {/* Expanded Preview */}
       {isExpanded && (
-        <div className="px-2 sm:px-4 pb-6 sm:pb-8 animate-fadeIn">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 max-w-6xl">
+        <div className="px-2 sm:px-4 pb-4 sm:pb-6 lg:pb-8 animate-fadeIn">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 max-w-6xl">
             {/* Preview Content - Left Column */}
             <div className="lg:col-span-8">
               {/* Lede Preview */}
-              <div className="mb-6">
-                <p className="text-base sm:text-lg leading-relaxed font-serif text-neutral-700">
+              <div className="mb-4 sm:mb-6">
+                <p className="text-sm sm:text-base lg:text-lg leading-relaxed font-serif text-neutral-700">
                   {project.lede.slice(0, 300)}...
                 </p>
               </div>
 
               {/* First Body Paragraph */}
               {project.bodyParagraphs[0] && (
-                <p className="text-sm sm:text-base leading-relaxed font-serif text-neutral-600 mb-4">
+                <p className="text-xs sm:text-sm lg:text-base leading-relaxed font-serif text-neutral-600 mb-3 sm:mb-4">
                   {project.bodyParagraphs[0].content?.slice(0, 200)}...
                 </p>
               )}
 
               {/* Pull Quote Preview */}
               {project.pullQuote && (
-                <blockquote className="border-l-4 border-neutral-900 pl-4 sm:pl-6 my-4 sm:my-6">
-                  <p className="text-lg sm:text-xl italic font-serif text-neutral-800">
+                <blockquote className="border-l-2 sm:border-l-4 border-neutral-900 pl-3 sm:pl-4 lg:pl-6 my-3 sm:my-4 lg:my-6">
+                  <p className="text-base sm:text-lg lg:text-xl italic font-serif text-neutral-800">
                     {project.pullQuote}
                   </p>
                 </blockquote>
               )}
 
               {/* Read Full Article Button */}
-              <div className="mt-6 flex items-center gap-4">
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <button
                   onClick={(e) => {
                     e.stopPropagation()
                     onReadFull()
                   }}
-                  className="px-6 py-3 bg-neutral-900 text-white text-xs tracking-wider hover:bg-neutral-700 transition-colors flex items-center gap-2"
+                  className="px-4 sm:px-6 py-3 min-h-[44px] bg-neutral-900 text-white text-[10px] sm:text-xs tracking-wider hover:bg-neutral-700 transition-colors flex items-center justify-center gap-2"
                 >
                   READ FULL ARTICLE
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-4 sm:h-4">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </button>
-                <span className="text-xs text-neutral-400 tracking-wider">
+                <span className="text-[10px] sm:text-xs text-neutral-400 tracking-wider text-center sm:text-left">
                   {project.readTime} MINUTE READ
                 </span>
               </div>
             </div>
 
             {/* Preview Sidebar - Right Column */}
-            <div className="lg:col-span-4 space-y-4">
+            <div className="lg:col-span-4 space-y-3 sm:space-y-4">
               {/* Quick Info */}
-              <div className="bg-white border border-neutral-200 p-4">
-                <h4 className="text-[10px] tracking-widest font-bold mb-3 text-neutral-900">
+              <div className="bg-white border border-neutral-200 p-3 sm:p-4">
+                <h4 className="text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest font-bold mb-2 sm:mb-3 text-neutral-900">
                   AT A GLANCE
                 </h4>
-                <dl className="space-y-2 text-xs">
+                <dl className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-xs">
                   <div className="flex justify-between">
                     <dt className="text-neutral-500">Type:</dt>
                     <dd className="font-serif font-semibold">{project.type}</dd>
@@ -161,21 +161,21 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
               </div>
 
               {/* Technologies Preview */}
-              <div className="bg-white border border-neutral-200 p-4">
-                <h4 className="text-[10px] tracking-widest font-bold mb-3 text-neutral-900">
+              <div className="bg-white border border-neutral-200 p-3 sm:p-4">
+                <h4 className="text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest font-bold mb-2 sm:mb-3 text-neutral-900">
                   TECHNOLOGIES
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {project.tech.slice(0, 4).map(tech => (
-                    <span 
+                    <span
                       key={tech}
-                      className="text-[10px] tracking-wider px-2 py-1 bg-neutral-50 border border-neutral-200"
+                      className="text-[9px] sm:text-[10px] tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-neutral-50 border border-neutral-200"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.tech.length > 4 && (
-                    <span className="text-[10px] tracking-wider px-2 py-1 text-neutral-400">
+                    <span className="text-[9px] sm:text-[10px] tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 text-neutral-400">
                       +{project.tech.length - 4} more
                     </span>
                   )}
@@ -183,22 +183,22 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
               </div>
 
               {/* Key Features Preview */}
-              <div className="bg-white border border-neutral-200 p-4">
-                <h4 className="text-[10px] tracking-widest font-bold mb-3 text-neutral-900">
+              <div className="bg-white border border-neutral-200 p-3 sm:p-4">
+                <h4 className="text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest font-bold mb-2 sm:mb-3 text-neutral-900">
                   KEY FEATURES
                 </h4>
-                <ul className="space-y-1.5">
+                <ul className="space-y-1 sm:space-y-1.5">
                   {project.features.slice(0, 3).map(feature => (
-                    <li 
+                    <li
                       key={feature}
-                      className="text-xs font-serif flex items-center gap-2 text-neutral-700"
+                      className="text-[10px] sm:text-xs font-serif flex items-center gap-1.5 sm:gap-2 text-neutral-700"
                     >
                       <span className="w-1 h-1 bg-neutral-400 rotate-45 shrink-0" />
                       {feature}
                     </li>
                   ))}
                   {project.features.length > 3 && (
-                    <li className="text-xs text-neutral-400 ml-3">
+                    <li className="text-[10px] sm:text-xs text-neutral-400 ml-2.5 sm:ml-3">
                       +{project.features.length - 3} more features
                     </li>
                   )}
@@ -207,21 +207,21 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
 
               {/* Quick Links */}
               <div className="flex flex-col gap-2">
-                <a 
+                <a
                   href={project.links.live}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="px-4 py-2 border border-neutral-900 text-[10px] tracking-wider text-center hover:bg-neutral-900 hover:text-white transition-colors"
+                  className="px-3 sm:px-4 py-2.5 sm:py-2 min-h-[44px] flex items-center justify-center border border-neutral-900 text-[9px] sm:text-[10px] tracking-wider text-center hover:bg-neutral-900 hover:text-white transition-colors"
                 >
                   VIEW LIVE →
                 </a>
-                <a 
+                <a
                   href={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="px-4 py-2 border border-neutral-300 text-[10px] tracking-wider text-center hover:border-neutral-900 transition-colors"
+                  className="px-3 sm:px-4 py-2.5 sm:py-2 min-h-[44px] flex items-center justify-center border border-neutral-300 text-[9px] sm:text-[10px] tracking-wider text-center hover:border-neutral-900 transition-colors"
                 >
                   SOURCE CODE
                 </a>
