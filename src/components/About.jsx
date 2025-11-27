@@ -1,17 +1,37 @@
+import { useState } from 'react'
 import Ornament from './ui/Ornament'
 import ScrollReveal from './ui/ScrollReveal'
-import { WantedAd, HireAd } from './ui/VintageAds'
+import { Gamepad2 } from 'lucide-react'
+import MiniGames from './About/MiniGames'
 
 function About() {
+  const [showMiniGames, setShowMiniGames] = useState(false)
+
+  // Show Mini Games instead of About content
+  if (showMiniGames) {
+    return <MiniGames onClose={() => setShowMiniGames(false)} />
+  }
+
   return (
     <div className="animate-fadeIn">
       {/* Header */}
       <ScrollReveal>
-        <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
-          <p className="text-neutral-500 italic font-serif mt-1 text-xs sm:text-sm md:text-base">
-            A profile in determination and self-directed learning
-          </p>
+        <div className="relative mb-6 sm:mb-8">
+          {/* Mini Games Button - top right */}
+          <button
+            onClick={() => setShowMiniGames(true)}
+            className="absolute top-0 right-0 group flex items-center gap-1.5 px-2 py-1 border border-neutral-300 hover:border-ink hover:bg-neutral-50 transition-all text-[10px] tracking-widest text-neutral-500 hover:text-ink"
+          >
+            <Gamepad2 className="w-3 h-3" />
+            <span className="hidden sm:inline">MINI GAMES</span>
+          </button>
+
+          <div className="text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
+            <p className="text-neutral-500 italic font-serif mt-1 text-xs sm:text-sm md:text-base">
+              A profile in determination and self-directed learning
+            </p>
+          </div>
         </div>
       </ScrollReveal>
 
@@ -38,12 +58,6 @@ function About() {
             <InfoRow label="Origin" value="Zaragoza, Spain" />
             <InfoRow label="Focus" value="Frontend & UI/UX" />
             <InfoRow label="Status" value="Available for work" highlight />
-          </div>
-
-          {/* Vintage Ads */}
-          <div className="flex justify-center gap-3 mt-6">
-            <WantedAd />
-            <HireAd />
           </div>
         </div>
 
@@ -195,7 +209,8 @@ function About() {
               </div>
             </div>
           </ScrollReveal>
-        </div>
+
+          </div>
       </div>
     </div>
   )

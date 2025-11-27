@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState, useCallback, createContext, useContext } from 'react'
 import { Howl, Howler } from 'howler'
 
-// Sound URLs from stepanosada.com
+// The Julio Calvo Times - Sound Assets
 const SOUNDS = {
-  click: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/Click.mp3',
-  hover: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/hover-cut.mp3',
-  background: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/background.mp3'
+  typewriterKey: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/Click.mp3',
+  paperRustle: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/hover-cut.mp3',
+  newsroomAmbience: 'https://cdn.jsdelivr.net/gh/stepanosada/audio/background.mp3'
 }
 
 // Context for sound state
@@ -30,24 +30,25 @@ export function SoundProvider({ children }) {
 
   // Initialize sounds - optimized for memory
   useEffect(() => {
-    // Short sounds - use sprite-like approach with pool limiting
+    // Typewriter key click for button presses
     clickSoundRef.current = new Howl({
-      src: [SOUNDS.click],
+      src: [SOUNDS.typewriterKey],
       volume: 0.5,
       preload: true,
-      pool: 3 // Limit concurrent instances
+      pool: 3
     })
 
+    // Paper rustle for hover interactions
     hoverSoundRef.current = new Howl({
-      src: [SOUNDS.hover],
+      src: [SOUNDS.paperRustle],
       volume: 0.3,
       preload: true,
-      pool: 2 // Limit concurrent instances - hover shouldn't stack much
+      pool: 2
     })
 
-    // Background music - use HTML5 audio for streaming (much lower memory)
+    // Newsroom ambience - background music
     backgroundMusicRef.current = new Howl({
-      src: [SOUNDS.background],
+      src: [SOUNDS.newsroomAmbience],
       volume: 0.15,
       loop: true,
       html5: true, // Stream instead of loading entire file into memory
@@ -169,14 +170,7 @@ export function SoundToggle({ className = '' }) {
       aria-pressed={!isMuted}
       title={isMuted ? 'Turn sound on' : 'Turn sound off'}
     >
-      {/* Brazo de la tecla - se extiende hasta el divider */}
-      <span
-        className="absolute -bottom-[19px] left-1/2 -translate-x-1/2 h-[22px] bg-neutral-400"
-        style={{
-          width: '2px'
-        }}
-      />
-      {/* Tecla */}
+            {/* Tecla */}
       <span
         className={`
           block relative w-7 h-7 rounded-full border-2 transition-all duration-100

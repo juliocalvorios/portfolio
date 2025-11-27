@@ -6,6 +6,7 @@ import PageTransition from './components/ui/PageTransition'
 import StickyNav from './components/ui/StickyNav'
 import { SoundProvider } from './components/ui/SoundManager'
 import NewspaperCTA from './components/ui/NewspaperCTA'
+import PrintEdition from './components/PrintEdition'
 
 /**
  * Fixed Reading Progress Bar
@@ -87,6 +88,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [activeSection, setActiveSection] = useState('front')
   const [selectedProject, setSelectedProject] = useState(null)
+  const [showPrintEdition, setShowPrintEdition] = useState(false)
 
   // Subtle parallax effect
   useEffect(() => {
@@ -144,42 +146,52 @@ function App() {
   return (
     <SoundProvider>
       <div className="min-h-screen bg-paper flex flex-col animate-fadeIn">
-        {/* Reading progress bar - always visible at top */}
-        <ReadingProgressBar />
+          {/* Reading progress bar - always visible at top (hidden during print edition) */}
+          {!showPrintEdition && <ReadingProgressBar />}
 
-        {/* Sticky navigation bar - appears on scroll */}
-        <StickyNav
-          activeSection={activeSection}
+          {/* Sticky navigation bar - appears on scroll */}
+          <StickyNav
+            activeSection={activeSection}
+            onSectionChange={handleSectionChange}
+          />
+
+          {/* Grain texture overlay - vintage paper effect */}
+          <div className="grain-overlay" aria-hidden="true" />
+
+          {/* Top Advertisement Banner - Only on The Developer section */}
+          {activeSection === 'about' && <TopBanner />}
+
+          <Masthead
+            activeSection={activeSection}
+            onSectionChange={handleSectionChange}
+            onPrintEdition={() => setShowPrintEdition(true)}
+          />
+
+          <main className="flex-1 px-4 sm:px-6 md:px-8 py-6 sm:py-8 max-w-7xl mx-auto w-full">
+            <PageTransition sectionKey={activeSection}>
+              <Suspense fallback={<SectionLoader />}>
+                {renderSection()}
+              </Suspense>
+            </PageTransition>
+          </main>
+
+          {/* Newspaper CTA - Only on Front Page */}
+          {activeSection === 'front' && (
+            <div className="border-t border-neutral-200">
+              <NewspaperCTA onContactClick={() => handleSectionChange('contact')} />
+            </div>
+          )}
+
+        <Footer
           onSectionChange={handleSectionChange}
+          onPrintEdition={() => setShowPrintEdition(true)}
         />
 
-        {/* Grain texture overlay - vintage paper effect */}
-        <div className="grain-overlay" aria-hidden="true" />
-
-        {/* Top Advertisement Banner - Only on The Developer section */}
-        {activeSection === 'about' && <TopBanner />}
-
-        <Masthead
-          activeSection={activeSection}
-          onSectionChange={handleSectionChange}
+        {/* Print Edition Overlay */}
+        <PrintEdition
+          isOpen={showPrintEdition}
+          onClose={() => setShowPrintEdition(false)}
         />
-
-        <main className="flex-1 px-4 sm:px-6 md:px-8 py-6 sm:py-8 max-w-7xl mx-auto w-full">
-          <PageTransition sectionKey={activeSection}>
-            <Suspense fallback={<SectionLoader />}>
-              {renderSection()}
-            </Suspense>
-          </PageTransition>
-        </main>
-
-        {/* Newspaper CTA - Only on Front Page */}
-        {activeSection === 'front' && (
-          <div className="border-t border-neutral-200">
-            <NewspaperCTA onContactClick={() => handleSectionChange('contact')} />
-          </div>
-        )}
-
-        <Footer onSectionChange={handleSectionChange} />
       </div>
     </SoundProvider>
   )
@@ -216,7 +228,7 @@ const SocialIcon = ({ type, className = "w-4 h-4" }) => {
   return icons[type] || null
 }
 
-function Footer({ onSectionChange }) {
+function Footer({ onSectionChange, onPrintEdition }) {
   const socialLinks = [
     { href: 'https://github.com/juliocalvor811-svg', label: 'GitHub', icon: 'github', isExternal: true },
     { href: 'https://linkedin.com/in/juliocalvorios', label: 'LinkedIn', icon: 'linkedin', isExternal: true },
@@ -257,6 +269,14 @@ function Footer({ onSectionChange }) {
                     <span className="absolute -bottom-1 left-0 w-0 h-px bg-ink group-hover:w-full transition-all duration-300" />
                   </button>
                 ))}
+                <button
+                  type="button"
+                  onClick={onPrintEdition}
+                  className="text-[11px] tracking-[0.15em] text-neutral-600 hover:text-ink transition-colors focus:outline-none relative group"
+                >
+                  PRINT EDITION
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-ink group-hover:w-full transition-all duration-300" />
+                </button>
               </nav>
 
               {/* Social y copyright */}
