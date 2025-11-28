@@ -27,6 +27,7 @@ const projects = [
     // Full Article Data
     date: 'January 15, 2025',
     readTime: '8',
+    image: '/images/veraOS-project/vera-interface.png',
     imageCaption: 'The veraOS dashboard featuring customizable widgets and AI integration. Credit: Julio Calvo',
     author: {
       name: 'Julio Calvo',

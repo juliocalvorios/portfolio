@@ -67,17 +67,26 @@ function ProjectArticleFull({ projectId, onClose }) {
 
       {/* Hero Image */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-6 sm:mb-8 md:mb-12">
-        <div className="relative aspect-[16/9] bg-neutral-100 border border-neutral-200">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-4xl sm:text-6xl md:text-8xl text-neutral-300 mb-2 sm:mb-4 font-serif">
-                {project.name[0]}
+        <div className="relative border border-neutral-200 overflow-hidden">
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.name}
+              className="w-full h-auto"
+              loading="lazy"
+            />
+          ) : (
+            <div className="aspect-[16/9] bg-neutral-100 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-4xl sm:text-6xl md:text-8xl text-neutral-300 mb-2 sm:mb-4 font-serif">
+                  {project.name[0]}
+                </div>
+                <p className="text-[9px] sm:text-[10px] md:text-xs tracking-wider sm:tracking-widest text-neutral-400">
+                  {project.name.toUpperCase()}
+                </p>
               </div>
-              <p className="text-[9px] sm:text-[10px] md:text-xs tracking-wider sm:tracking-widest text-neutral-400">
-                {project.name.toUpperCase()}
-              </p>
             </div>
-          </div>
+          )}
         </div>
         <p className="text-[10px] sm:text-xs text-neutral-500 mt-1.5 sm:mt-2 text-center sm:text-left">
           {project.imageCaption}

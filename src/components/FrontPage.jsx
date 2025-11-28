@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import projects from '../data/projects'
 import Ornament from './ui/Ornament'
 import SectionRule from './ui/SectionRule'
@@ -7,6 +7,9 @@ import InkRipple from './ui/InkRipple'
 import ScrollReveal from './ui/ScrollReveal'
 import { LiveIndicator } from './ui/LiveIndicator'
 import { useSounds } from './ui/SoundManager'
+
+// Lazy load VeraCircle (Three.js is heavy)
+const VeraCircle = lazy(() => import('./ui/VeraCircle'))
 
 function FrontPage({ onProjectClick }) {
   const [hoveredArticle, setHoveredArticle] = useState(null)
@@ -84,21 +87,22 @@ function FrontPage({ onProjectClick }) {
                 </p>
               </blockquote>
               
-              {/* Project Image Placeholder */}
+              {/* Vera Circle */}
               <div
-                className="bg-neutral-100 border border-neutral-200 aspect-video flex items-center justify-center mt-3 sm:mt-4 cursor-pointer hover:bg-neutral-200 transition-colors group min-h-[120px]"
+                className="mt-3 sm:mt-4 cursor-pointer flex justify-center"
                 onClick={() => { playClick(); onProjectClick && onProjectClick(leadStory) }}
                 onMouseEnter={playHover}
               >
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl text-neutral-300 mb-1 sm:mb-2 group-hover:scale-110 transition-transform">⬚</div>
-                  <p className="text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest text-neutral-400">
-                    VIEW PROJECT
-                  </p>
-                </div>
+                <Suspense fallback={
+                  <div className="w-[280px] h-[280px] flex items-center justify-center">
+                    <div className="w-8 h-8 border-2 border-neutral-300 border-t-neutral-600 rounded-full animate-spin" />
+                  </div>
+                }>
+                  <VeraCircle width={280} height={280} />
+                </Suspense>
               </div>
               <p className="text-[9px] sm:text-[10px] text-neutral-500 mt-1.5 sm:mt-2 italic text-center">
-                The veraOS dashboard interface.
+                The veraOS interactive circle.
               </p>
             </div>
           </div>
