@@ -1,6 +1,105 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Maximize2, Pause, Play } from 'lucide-react'
 import projects from '../data/projects'
-import { RelatedBox } from './ui/RelatedInline'
+import VeraHighlightShowcase from './ui/VeraHighlightShowcase'
+import VeraTechStackDiagram from './ui/VeraTechStackDiagram'
+import VeraAcademicModeFlow from './ui/VeraAcademicModeFlow'
+
+// Video Player Component with lazy loading
+function VideoPlayer({ src }) {
+  const videoRef = useRef(null)
+  const containerRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  // Lazy load when in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isLoaded) {
+          setIsLoaded(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isLoaded])
+
+  // Auto-play when loaded
+  useEffect(() => {
+    if (isLoaded && videoRef.current) {
+      videoRef.current.play()
+      setIsPlaying(true)
+    }
+  }, [isLoaded])
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const handleFullscreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen()
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen()
+      }
+    }
+  }
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative group overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100"
+    >
+      {isLoaded ? (
+        <video
+          ref={videoRef}
+          src={src}
+          className="w-full h-auto bg-neutral-100 -mt-[0.5%]"
+          style={{ marginBottom: '-0.5%' }}
+          loop
+          muted
+          playsInline
+        />
+      ) : (
+        <div className="aspect-video flex items-center justify-center">
+          <div className="w-6 h-6 border-2 border-neutral-300 border-t-neutral-600 rounded-full animate-spin" />
+        </div>
+      )}
+      {isLoaded && (
+        <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            onClick={togglePlay}
+            className="w-8 h-8 bg-black/60 hover:bg-black/80 text-white rounded-lg flex items-center justify-center cursor-pointer"
+            aria-label={isPlaying ? 'Pause' : 'Play'}
+          >
+            {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+          </button>
+          <button
+            onClick={handleFullscreen}
+            className="w-8 h-8 bg-black/60 hover:bg-black/80 text-white rounded-lg flex items-center justify-center cursor-pointer"
+            aria-label="Fullscreen"
+          >
+            <Maximize2 className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function ProjectArticleFull({ projectId, onClose }) {
   const project = projects.find(p => p.id === projectId)
@@ -116,7 +215,9 @@ function ProjectArticleFull({ projectId, onClose }) {
 
                 {paragraph.type === 'subheading' && (
                   <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-serif mt-6 sm:mt-8 mb-3 sm:mb-4">
-                    {paragraph.content}
+                    {paragraph.content === 'The Interactive Highlight System' ? (
+                      <>The Interactive <span style={{ backgroundColor: '#E8F0F4', padding: '2px 6px', borderRadius: '4px' }}>Highlight System</span></>
+                    ) : paragraph.content}
                   </h2>
                 )}
 
@@ -135,11 +236,40 @@ function ProjectArticleFull({ projectId, onClose }) {
 
                 {paragraph.type === 'image' && (
                   <figure className="my-6 sm:my-8 md:my-10">
-                    <div className="aspect-video bg-neutral-100 border border-neutral-200 flex items-center justify-center">
-                      <span className="text-3xl sm:text-4xl text-neutral-300 font-serif">
-                        {paragraph.placeholder}
-                      </span>
-                    </div>
+                    {paragraph.src ? (
+                      <img
+                        src={paragraph.src}
+                        alt={paragraph.caption || ''}
+                        className="w-full h-auto border border-neutral-200"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="aspect-video bg-neutral-100 border border-neutral-200 flex items-center justify-center">
+                        <span className="text-3xl sm:text-4xl text-neutral-300 font-serif">
+                          {paragraph.placeholder || 'IMAGE'}
+                        </span>
+                      </div>
+                    )}
+                    <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-1.5 sm:mt-2">
+                      {paragraph.caption}
+                    </figcaption>
+                  </figure>
+                )}
+
+                {paragraph.type === 'video' && (
+                  <figure className="my-6 sm:my-8 md:my-10">
+                    {paragraph.src ? (
+                      <VideoPlayer src={paragraph.src} />
+                    ) : (
+                      <div className="aspect-video bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
+                        <div className="text-center">
+                          <svg className="w-12 h-12 mx-auto text-neutral-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                          </svg>
+                          <span className="text-xs text-neutral-400">VIDEO PLACEHOLDER</span>
+                        </div>
+                      </div>
+                    )}
                     <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-1.5 sm:mt-2">
                       {paragraph.caption}
                     </figcaption>
@@ -157,17 +287,45 @@ function ProjectArticleFull({ projectId, onClose }) {
                   </ul>
                 )}
 
-                {/* Insert Related Article inline after 3rd paragraph */}
-                {index === 2 && (
-                  <RelatedBox
-                    title={projects.find(p => p.id !== projectId)?.name || 'Related Project'}
-                    category={projects.find(p => p.id !== projectId)?.category}
-                    onClick={() => {
-                      const related = projects.find(p => p.id !== projectId)
-                      if (related) window.location.hash = `project-${related.id}`
-                    }}
-                  />
+                {paragraph.type === 'highlight-showcase' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 sm:p-6">
+                      <VeraHighlightShowcase />
+                    </div>
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
                 )}
+
+                {paragraph.type === 'tech-stack' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 sm:p-6">
+                      <VeraTechStackDiagram />
+                    </div>
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'academic-flow' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 sm:p-6">
+                      <VeraAcademicModeFlow />
+                    </div>
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
               </div>
             ))}
           </div>
