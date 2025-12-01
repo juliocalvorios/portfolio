@@ -27,7 +27,8 @@ const projects = [
     ],
     links: {
       live: 'https://veraos.ai',
-      github: 'https://github.com/juliocalvor811-svg/veraos'
+      github: 'https://github.com/juliocalvo/veraos',
+      npm: 'https://npmjs.com/package/react-ai-highlight-parser'
     },
 
     // Full Article Data
@@ -51,7 +52,7 @@ const projects = [
       },
       {
         type: 'text',
-        content: 'Most AI chat interfaces just render text. veraOS does something different: as the AI responds, it applies semantic highlighting in real-time. Users can choose between color highlights, underlines, or both — with customizable palettes that update instantly. This wasn\'t a simple CSS trick. It required building a token-based parser that processes the AI\'s response stream, identifies highlight codes, handles nested formatting, protects code blocks from being highlighted, and cleans up malformed tags without breaking the content.'
+        content: 'Most AI chat interfaces just render text. veraOS does something different: as the AI responds, it applies semantic highlighting in real-time. Users can choose between color highlights, underlines, or both — with customizable palettes that update instantly. This wasn\'t a simple CSS trick. It required building a token-based parser that processes the AI\'s response stream, identifies highlight codes, handles nested formatting, protects code blocks from being highlighted, and cleans up malformed tags without breaking the content. The parser is available as an open source npm package: react-ai-highlight-parser.'
       },
       {
         type: 'list',
@@ -242,7 +243,7 @@ const projects = [
       },
       {
         title: 'Highlight Parser',
-        description: 'Token-based streaming parser. Handles nested tags, protects code blocks, cleans malformed markup. Multiple modes with customizable palettes.'
+        description: 'Token-based streaming parser published as npm package (react-ai-highlight-parser). Handles nested tags, protects code blocks, cleans malformed markup.'
       },
       {
         title: 'Security',
