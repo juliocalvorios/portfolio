@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Maximize2, Pause, Play } from 'lucide-react'
 import projects from '../data/projects'
 import VeraHighlightShowcase from './ui/VeraHighlightShowcase'
+import HighlightShowcaseTabs from './ui/HighlightShowcaseTabs'
+import AcademicFlowTabs from './ui/AcademicFlowTabs'
 import VeraTechStackDiagram from './ui/VeraTechStackDiagram'
-import VeraAcademicModeFlow from './ui/VeraAcademicModeFlow'
 
 // Video Player Component with lazy loading
 function VideoPlayer({ src }) {
@@ -289,9 +290,7 @@ function ProjectArticleFull({ projectId, onClose }) {
 
                 {paragraph.type === 'highlight-showcase' && (
                   <figure className="my-8 sm:my-10 md:my-12">
-                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 sm:p-6">
-                      <VeraHighlightShowcase />
-                    </div>
+                    <HighlightShowcaseTabs />
                     {paragraph.caption && (
                       <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
                         {paragraph.caption}
@@ -315,9 +314,7 @@ function ProjectArticleFull({ projectId, onClose }) {
 
                 {paragraph.type === 'academic-flow' && (
                   <figure className="my-8 sm:my-10 md:my-12">
-                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 sm:p-6">
-                      <VeraAcademicModeFlow />
-                    </div>
+                    <AcademicFlowTabs />
                     {paragraph.caption && (
                       <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
                         {paragraph.caption}
