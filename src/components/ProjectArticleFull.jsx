@@ -13,6 +13,13 @@ import YearLeverDemo from './showcases/YearLeverDemo'
 import ExportDemo from './showcases/ExportDemo'
 import WindowDemo from './showcases/WindowDemo'
 import TestRunnerDemo from './showcases/TestRunnerDemo'
+import FleeingButtonDemo from './showcases/FleeingButtonDemo'
+import CheckboxTimerDemo from './showcases/CheckboxTimerDemo'
+import PasswordRequirementsDemo from './showcases/PasswordRequirementsDemo'
+import Win95StyleDemo from './showcases/Win95StyleDemo'
+import DraggableWindowDemo from './showcases/DraggableWindowDemo'
+import StatsPanelDemo from './showcases/StatsPanelDemo'
+import MatrixHackDemo from './showcases/MatrixHackDemo'
 
 // Video Player Component with lazy loading and viewport-aware playback
 function VideoPlayer({ src }) {
@@ -439,6 +446,83 @@ function ProjectArticleFull({ projectId, onClose }) {
                 {paragraph.type === 'test-runner-demo' && (
                   <figure className="my-8 sm:my-10 md:my-12">
                     <TestRunnerDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'fleeing-button-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <FleeingButtonDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'checkbox-timer-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <CheckboxTimerDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'password-requirements-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <PasswordRequirementsDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'win95-style-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <Win95StyleDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'draggable-window-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <DraggableWindowDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'stats-panel-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <StatsPanelDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'matrix-hack-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <MatrixHackDemo />
                     {paragraph.caption && (
                       <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
                         {paragraph.caption}
