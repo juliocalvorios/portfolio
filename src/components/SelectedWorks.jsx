@@ -93,6 +93,29 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 max-w-6xl">
             {/* Preview Content - Left Column */}
             <div className="lg:col-span-8">
+              {/* Portrait Video or Image Preview */}
+              {project.portraitVideo ? (
+                <div className="mb-4 sm:mb-6 overflow-hidden rounded-lg border border-neutral-200">
+                  <video
+                    src={project.portraitVideo}
+                    className="w-full h-auto object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+              ) : project.portraitImage && (
+                <div className="mb-4 sm:mb-6 overflow-hidden rounded-lg border border-neutral-200">
+                  <img
+                    src={project.portraitImage}
+                    alt={project.name}
+                    className="w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+
               {/* Lede Preview */}
               <div className="mb-4 sm:mb-6">
                 <p className="text-sm sm:text-base lg:text-lg leading-relaxed font-serif text-neutral-700">
@@ -166,7 +189,12 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
                   TECHNOLOGIES
                 </h4>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.tech.slice(0, 4).map(tech => (
+                  {(Array.isArray(project.tech)
+                    ? project.tech
+                    : Object.entries(project.tech).flatMap(([key, val]) =>
+                        key === 'languages' ? val.map(l => l.name) : val
+                      )
+                  ).slice(0, 4).map(tech => (
                     <span
                       key={tech}
                       className="text-[9px] sm:text-[10px] tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-neutral-50 border border-neutral-200"
@@ -174,9 +202,9 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
                       {tech}
                     </span>
                   ))}
-                  {project.tech.length > 4 && (
+                  {(Array.isArray(project.tech) ? project.tech.length : Object.values(project.tech).flat().length) > 4 && (
                     <span className="text-[9px] sm:text-[10px] tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 text-neutral-400">
-                      +{project.tech.length - 4} more
+                      +{(Array.isArray(project.tech) ? project.tech.length : Object.values(project.tech).flat().length) - 4} more
                     </span>
                   )}
                 </div>
