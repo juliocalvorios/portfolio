@@ -816,114 +816,301 @@ const projects = [
   {
     id: 4,
     // Card Preview Data
-    title: 'Chat Interface: Streaming, Markdown, and Real-Time Highlights',
-    subtitle: 'What happens when you take AI chat UX seriously',
-    name: 'Chat UI',
-    category: 'INTERFACE',
-    type: 'AI Experience',
-    year: '2024',
-    content: `Most AI chat interfaces are glorified text boxes. This one handles streaming 
-      responses, full markdown rendering, syntax highlighting, file attachments, and 
-      a custom highlight system — all while feeling fast and responsive.`,
-    fullContent: `A sophisticated chat interface featuring streaming AI responses, complete 
-      markdown support with syntax highlighting, drag-and-drop file attachments, draft 
-      auto-save, and an interactive highlight system applied in real-time.`,
-    pullQuote: '"The interface is the product. Make it feel like it."',
-    tech: ['React', 'Groq API', 'Tailwind CSS', 'Custom Markdown Parser'],
+    title: 'The Impossible Form: Dark UX Patterns as Comedy',
+    subtitle: 'A form that fights back — fleeing buttons, self-unchecking checkboxes, and Windows 95 nostalgia',
+    name: 'Impossible Form',
+    category: 'CREATIVE · UX · FRONTEND',
+    type: 'Interactive Experience',
+    year: '2025',
+    content: `What if a form didn't want to be filled out? Buttons that flee your cursor,
+      checkboxes that uncheck themselves, passwords with changing requirements — all wrapped
+      in authentic Windows 95 aesthetics. Dark patterns turned up to absurdity.`,
+    fullContent: `An interactive form that actively resists completion. Features include fleeing
+      submit buttons, self-unchecking checkboxes with timers, gaslighting password fields,
+      moving age inputs, draggable Windows 95 windows, and a hidden Matrix-style hack mode.
+      Built with React Hook Form, Zod validation, and Framer Motion.`,
+    pullQuote: '"The best way to understand dark patterns is to experience them — then laugh about it."',
+    tech: {
+      languages: [
+        { name: 'TypeScript', percentage: 92 },
+        { name: 'CSS', percentage: 8 }
+      ],
+      frontend: ['Next.js 14', 'React 18', 'Framer Motion', 'React Hook Form'],
+      tools: ['Zod Validation', 'Tailwind CSS', 'Web Audio API']
+    },
     features: [
-      'Streaming Responses',
-      'Syntax Highlighting',
-      'File Attachments',
-      'Draft Auto-save',
-      'Interactive Highlights'
+      'Fleeing Submit Button',
+      'Self-Unchecking Checkboxes',
+      'Gaslighting Password Field',
+      'Windows 95 Authentic UI',
+      'Matrix Hack Easter Egg',
+      'Victory Statistics Page'
     ],
     links: {
-      live: 'https://veraos.ai',
-      github: 'https://github.com/juliocalvorios/veraos'
+      live: 'https://theimpossibleform.com',
+      github: 'https://github.com/juliocalvorios/the-impossible-form'
     },
 
+    // Card Preview Video (loops on hover)
+    portraitVideo: '/videos/The-Impossible-Form-Project/the-impossible-form.mp4',
+
     // Full Article Data
-    date: 'October 2024',
-    readTime: '7',
-    image: '/images/chat-project/streaming-demo.png',
-    imageCaption: 'The chat interface with streaming response and syntax-highlighted code.',
+    date: 'December 2025',
+    readTime: '8',
+    video: '/videos/The-Impossible-Form-Project/the-impossible-form.mp4',
+    videoCaption: 'The Impossible Form: a Windows 95 window that actively resists being filled out.',
     author: {
       name: 'Julio Calvo',
       title: 'Frontend Developer'
     },
-    duration: '8 weeks',
-    role: 'Lead Developer',
+    duration: '2 weeks',
+    role: 'Solo Developer & Designer',
 
-    lede: `ChatGPT proved that AI chat could be mainstream. But its interface is basic — responses appear as monolithic text blocks, code highlighting is inconsistent, and there's no personality. Building veraOS's chat interface meant asking: what would AI chat look like if we designed it like a premium product?`,
+    lede: `Dark UX patterns are everywhere — hidden unsubscribe buttons, confusing opt-outs, deliberately frustrating interfaces. Instead of writing another article about them, I built something different: a form that embodies every dark pattern imaginable, cranked up to absurdity. The result is equal parts frustrating and hilarious — a Windows 95 application that doesn't want you to succeed.`,
 
     bodyParagraphs: [
       {
         type: 'text',
-        content: 'Streaming was the first requirement. Watching tokens appear word-by-word feels conversational; waiting for a complete response feels like talking to a server. The implementation uses Server-Sent Events with careful handling of partial markdown — you can\'t render a code block until you know it\'s complete, but you can\'t wait for the whole message either.'
+        content: 'The concept was simple: what if every dark pattern was turned up to eleven? Not subtle manipulation, but obvious, over-the-top resistance. A submit button that literally runs away. Checkboxes that uncheck themselves after a few seconds. Password requirements that change after you\'ve typed. The goal wasn\'t to trick users — it was to make the manipulation so visible it becomes comedy.'
       },
       {
         type: 'subheading',
-        content: 'Markdown Done Right'
+        content: 'The Fleeing Button: Cursor Tracking & Escape Vectors'
       },
       {
         type: 'text',
-        content: 'The markdown renderer handles tables, nested lists, code blocks with syntax highlighting, checkboxes, and blockquotes. But it also integrates with the highlight system — colored backgrounds and underlines applied by the AI don\'t break the markdown formatting. Getting this right required building a custom parser that processes highlights at the token level, before markdown rendering.'
+        content: 'The signature feature. Move your cursor toward the submit button and it dodges away. The implementation tracks cursor position relative to the button center, calculates an escape vector pointing away from the cursor, and uses Framer Motion to animate to a new position — all while respecting window boundaries so it can\'t escape entirely. After enough failed attempts, the escape radius increases from 80px to 150px, making it progressively harder to catch.'
       },
       {
-        type: 'pullquote',
-        content: 'The interface is the product. Make it feel like it.',
-        attribution: 'Development Mantra'
-      },
-      {
-        type: 'subheading',
-        content: 'File Handling'
-      },
-      {
-        type: 'text',
-        content: 'Drag a file onto the chat and it attaches with a preview. But behind the scenes, the system validates more than just the extension. Magic byte verification confirms files are what they claim to be. Filename sanitization prevents path traversal. Size limits are enforced with clear feedback. Security isn\'t visible, but it\'s there.'
+        type: 'fleeing-button-demo',
+        caption: 'Interactive demo: Try to click the Submit button. Watch how it calculates escape vectors and increases difficulty after failed attempts.'
       },
       {
         type: 'list',
         items: [
-          'Token-by-token streaming with SSE',
-          'Full markdown: tables, code, lists, blockquotes',
-          'Syntax highlighting for 50+ languages',
-          'Drag-and-drop file attachments',
-          'Magic byte verification for security',
-          'Draft auto-save per conversation',
-          'Model selector with tier gating'
+          'Cursor position tracked via onMouseMove relative to button center',
+          'Escape vector: normalize(buttonPos - cursorPos) × escapeDistance',
+          'Boundary clamping: Math.max(0, Math.min(newX, window.innerWidth - buttonWidth))',
+          'Adaptive difficulty: escapeRadius increases from 80px → 120px → 150px after 3 and 6 attempts',
+          'Framer Motion spring animation with stiffness: 300, damping: 20'
+        ]
+      },
+      {
+        type: 'pullquote',
+        content: 'Making something intentionally frustrating taught me more about good UX than any course.',
+        attribution: 'Development Reflection'
+      },
+      {
+        type: 'subheading',
+        content: 'Self-Unchecking Checkbox: Time Pressure UX'
+      },
+      {
+        type: 'text',
+        content: 'Check the "I agree to terms" checkbox and a timer starts. A Windows 95-style progress bar counts down beneath it — when it hits zero, the checkbox unchecks itself. You have to check it and submit before time runs out. The timer starts at 10 seconds and decreases to 7, then 5 seconds after each uncheck, adding escalating time pressure.'
+      },
+      {
+        type: 'checkbox-timer-demo',
+        caption: 'Interactive demo: Click the checkbox and watch the countdown. The progress bar uses authentic Windows 95 inset styling with blue fill.'
+      },
+      {
+        type: 'text',
+        content: 'The visual feedback is key to the comedy. The Windows 95 checkbox uses the exact inset box-shadow pattern: inset -1px -1px 0 #fff, inset 1px 1px 0 #808080, inset -2px -2px 0 #c0c0c0, inset 2px 2px 0 #0a0a0a. The timer badge turns red at 3 seconds. Warning messages escalate from "Hurry!" to "Quick! Submit now!" creating genuine panic.'
+      },
+      {
+        type: 'subheading',
+        content: 'The Gaslighting Password Field'
+      },
+      {
+        type: 'text',
+        content: 'Type a password and requirements appear one by one: "Must contain uppercase." Add one. "Must contain a number." Add one. "Must contain a symbol." Add one. Then: "Must not contain the letter \'e\'." The requirements dynamically analyze your input and always find something new to complain about — even inventing absurd rules like "Must contain a prime number of characters."'
+      },
+      {
+        type: 'password-requirements-demo',
+        caption: 'Interactive demo: Type a password and watch the requirements change. The system always finds something wrong.'
+      },
+      {
+        type: 'list',
+        items: [
+          'Dynamic requirement generation based on current input analysis',
+          'Requirements pool: uppercase, lowercase, number, symbol, length, no common words',
+          'Gaslighting rules: no letter "e", must end with number, prime character count',
+          'Visual feedback: green checkmarks that turn red, requirements that "change their mind"',
+          'Eye icon with crossed-out line suggesting the password is being watched'
         ]
       },
       {
         type: 'subheading',
-        content: 'The Details'
+        content: 'Windows 95 Authenticity: Pixel-Perfect Recreation'
       },
       {
         type: 'text',
-        content: 'Drafts save automatically as you type, keyed per conversation. Switch chats and your unsent message waits for you. Copy buttons on code blocks provide feedback. The input expands as you type. Keyboard shortcuts work throughout. None of these are hard individually; together they create an experience that feels polished.'
+        content: 'The entire interface is styled as a Windows 95 application — not a vague "retro" aesthetic, but pixel-perfect recreation. The exact grays (#c0c0c0 for panels, #808080 for shadows, #dfdfdf for highlights), the specific 4-layer box-shadow pattern for beveled edges, the blue title bar gradient (#000080 to #1084d0), the Tahoma system font at 11px.'
+      },
+      {
+        type: 'win95-style-demo',
+        caption: 'Interactive demo: Examine the Windows 95 styling. Hover over elements to see the exact CSS values used.'
+      },
+      {
+        type: 'list',
+        items: [
+          'Panel background: #c0c0c0 (exact Windows 95 gray)',
+          'Beveled edges: 4-layer inset box-shadow pattern for authentic 3D effect',
+          'Title bar: linear-gradient(90deg, #000080, #1084d0) with white text',
+          'Buttons: Raised effect with shadow inversion on :active state',
+          'Font: Tahoma 11px, fallback to "MS Sans Serif", Geneva, sans-serif',
+          'Resize handle: 6 diagonal lines using SVG pattern'
+        ]
+      },
+      {
+        type: 'text',
+        content: 'This attention to detail serves the comedy. The familiar interface makes the absurd behavior funnier — it looks like something trustworthy from 1995, then betrays you. It\'s the visual equivalent of a deadpan delivery.'
+      },
+      {
+        type: 'subheading',
+        content: 'Draggable Windows: Desktop Simulation'
+      },
+      {
+        type: 'text',
+        content: 'Both the main form window and the Stats panel are draggable, just like real Windows 95. Click the title bar and drag anywhere on screen. The implementation uses mousedown/mousemove/mouseup events with position tracking, clamped to screen boundaries. Framer Motion\'s animate prop with x/y values (not CSS transform) ensures smooth 60fps movement.'
+      },
+      {
+        type: 'draggable-window-demo',
+        caption: 'Interactive demo: Drag the windows around. Note how they respect screen boundaries and stack like real Windows.'
+      },
+      {
+        type: 'subheading',
+        content: 'The Stats Panel: Frustration Metrics'
+      },
+      {
+        type: 'text',
+        content: 'A separate draggable window tracks your suffering in real-time. Failed button clicks, checkbox unchecks, password rejections, total time elapsed — all displayed as Windows 95 counters. The "Defense Level" indicator shows how much the form has adapted to resist you. This gamification of frustration makes users want to keep trying just to see the numbers go up.'
+      },
+      {
+        type: 'stats-panel-demo',
+        caption: 'The Stats panel updates in real-time. Watch your frustration metrics climb as you struggle.'
+      },
+      {
+        type: 'subheading',
+        content: 'Matrix Hack: The Hidden Bypass'
+      },
+      {
+        type: 'text',
+        content: 'For users who discover the "C:\\>_" button (styled as a subtle DOS prompt) or type "hack" anywhere on the page, there\'s an escape hatch. A Matrix-style green rain animation fills the screen while a progress bar "hacks" through the defenses. After 3 seconds, the form auto-submits with all fields filled, bypassing every obstacle.'
+      },
+      {
+        type: 'matrix-hack-demo',
+        caption: 'The Matrix hack sequence. Green rain animation with glitch effects and auto-completion.'
+      },
+      {
+        type: 'list',
+        items: [
+          'Trigger: Click C:\\>_ button OR type "hack" anywhere on page',
+          'Visual: Matrix rain using Canvas with falling characters (カタカナ + ASCII)',
+          'Glitch effect: Button text randomizes through symbols before revealing "HACKED"',
+          'Progress bar: Fills over 3 seconds with "Bypassing defenses..." text',
+          'Completion: All form fields auto-filled, victory page redirect'
+        ]
+      },
+      {
+        type: 'text',
+        content: 'The hack mode transforms the experience from frustration to triumph. Users don\'t just fill out a form — they defeat it. This narrative payoff makes the struggle worthwhile and gives users something to share ("I hacked the impossible form!").'
+      },
+      {
+        type: 'subheading',
+        content: 'Victory Page: Statistics & Celebration'
+      },
+      {
+        type: 'text',
+        content: 'Successfully submitting (legitimately or via hack) shows a Windows 95-styled victory screen with your struggle statistics: time elapsed, button chase attempts, checkbox resets, defense level reached. A downloadable "certificate" image and social share options let users brag about their achievement.'
+      },
+      {
+        type: 'victory-page-demo',
+        caption: 'The victory page with Windows 95 styling. Your suffering, quantified and celebrated.'
+      },
+      {
+        type: 'subheading',
+        content: 'Technical Architecture'
+      },
+      {
+        type: 'text',
+        content: 'Under the hood, it\'s a properly architected React application. React Hook Form manages form state with Zod schemas for validation — the irony of using professional form tools to build an unusable form wasn\'t lost on me. Custom hooks encapsulate the defensive behaviors, making them reusable and testable.'
+      },
+      {
+        type: 'tech-stack',
+        caption: 'Architecture diagram: See how the defensive hooks, form state, and animation systems connect.'
+      },
+      {
+        type: 'list',
+        items: [
+          'Next.js 14 with App Router and TypeScript strict mode',
+          'React Hook Form for form state management with Zod validation schemas',
+          'Framer Motion for all animations: fleeing, scaling, dragging, Matrix rain',
+          'Custom hooks: useFormDefenses (difficulty scaling), useFormDamage (stats tracking)',
+          'useEasterEggs hook for Konami code and keyword detection',
+          'useSoundEffects for retro audio feedback (optional)',
+          'CSS-in-JS via Tailwind with inline styles for Windows 95 specifics',
+          'LocalStorage for persisting victory statistics across sessions'
+        ]
+      },
+      {
+        type: 'subheading',
+        content: 'The Favicon: Angry Window Face'
+      },
+      {
+        type: 'text',
+        content: 'Even the favicon tells the story. A 32x32 SVG of a Windows 95 window with an angry face — furrowed brows above the eyes, a frowning mouth. It\'s the first hint that this form has personality, visible in the browser tab before users even interact.'
+      },
+      {
+        type: 'favicon-demo',
+        caption: 'The custom favicon: a Windows 95 window that\'s angry at you. SVG for crisp rendering at any size.'
+      },
+      {
+        type: 'pullquote',
+        content: 'Every dark pattern I implemented made me think about its real-world equivalent. Building bad UX requires deeply understanding good UX.',
+        attribution: 'Project Reflection'
+      },
+      {
+        type: 'subheading',
+        content: 'Why This Project Matters'
+      },
+      {
+        type: 'text',
+        content: 'The Impossible Form started as a joke and became a genuine learning experience. Dark patterns are usually invisible — that\'s what makes them effective and insidious. By making them absurdly visible, the project becomes educational. Users leave understanding exactly what manipulative UX feels like, which makes them better at recognizing subtle versions in the wild.'
+      },
+      {
+        type: 'text',
+        content: 'Technically, the project demonstrates frontend range: complex state management, physics-based animations, pixel-perfect styling recreation, Easter egg systems, and proper React architecture applied to something genuinely fun. That\'s the kind of work I want to do — technically solid, creatively unexpected, and worth sharing.'
       }
     ],
 
     technicalDetails: [
       {
-        title: 'Streaming Pipeline',
-        description: 'Server-Sent Events with partial markdown state management. Renders progressively without breaking formatting.'
+        title: 'Form Architecture',
+        description: 'React Hook Form with Zod validation schemas. Custom hooks for defensive behaviors (useFormDefenses tracks attempts and scales difficulty, useFormDamage aggregates frustration metrics). Type-safe throughout with TypeScript strict mode.'
       },
       {
-        title: 'Markdown Parser',
-        description: 'Custom tokenizer and AST parser. Integrates with highlight system at token level. Handles all common markdown features.'
+        title: 'Animation System',
+        description: 'Framer Motion for all interactions. Fleeing button uses cursor tracking with escape vector calculation and spring physics (stiffness: 300, damping: 20). Draggable windows use x/y animate props for 60fps movement.'
       },
       {
-        title: 'File Validation',
-        description: 'MIME type checking plus magic byte verification. Filename sanitization. Size limits with user feedback.'
+        title: 'Windows 95 Styling',
+        description: 'Pixel-perfect recreation using CSS box-shadows for beveled edges (4-layer inset pattern). Exact system colors (#c0c0c0, #808080, #dfdfdf). Tahoma 11px font. Title bar gradients. Custom SVG favicon with angry face.'
+      },
+      {
+        title: 'Easter Eggs',
+        description: 'useEasterEggs hook detects Konami code and keyword triggers. Matrix rain uses Canvas 2D context with falling katakana characters. Glitch animation randomizes button text through symbol arrays.'
       },
       {
         title: 'State Management',
-        description: 'Draft persistence per conversation. Optimistic message updates. Error recovery with user notification.'
+        description: 'React hooks exclusively — no external state libraries. Form state via React Hook Form. Defensive state via custom hooks with useCallback for performance. LocalStorage persistence for victory stats.'
+      },
+      {
+        title: 'Sound System',
+        description: 'Optional retro sound effects via Web Audio API. Click sounds, error buzzes, victory fanfare. useSoundEffects hook with volume control and mute toggle.'
       }
     ],
 
-    conclusion: 'AI chat interfaces have room to grow. Most still feel like demos — functional but not refined. This interface demonstrates what\'s possible when you treat the chat experience as a product worth polishing. Streaming that feels natural, markdown that renders correctly, and dozens of small details that add up to something that feels professional.'
+    conclusion: 'The Impossible Form proves that portfolio projects can be technically impressive and genuinely entertaining. It demonstrates React, TypeScript, animation systems, state management, and CSS craftsmanship — all while making people laugh and teaching them about dark patterns. Sometimes the best way to show what you can build is to build something no one asked for but everyone enjoys.'
   },
   {
     id: 5,
