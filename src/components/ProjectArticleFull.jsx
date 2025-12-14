@@ -10,6 +10,7 @@ import TechStackBar from './ui/TechStackBar'
 import VintageSwitchDemo from './showcases/VintageSwitchDemo'
 import NixieTubeDemo from './showcases/NixieTubeDemo'
 import YearLeverDemo from './showcases/YearLeverDemo'
+import VintageControlPanelDemo from './showcases/VintageControlPanelDemo'
 import ExportDemo from './showcases/ExportDemo'
 import WindowDemo from './showcases/WindowDemo'
 import TestRunnerDemo from './showcases/TestRunnerDemo'
@@ -20,6 +21,9 @@ import Win95StyleDemo from './showcases/Win95StyleDemo'
 import DraggableWindowDemo from './showcases/DraggableWindowDemo'
 import StatsPanelDemo from './showcases/StatsPanelDemo'
 import MatrixHackDemo from './showcases/MatrixHackDemo'
+import OntarioFlagCollageDemo from './showcases/OntarioFlagCollageDemo'
+import Win95DualDemo from './showcases/Win95DualDemo'
+import VictoryPageDemo from './showcases/VictoryPageDemo'
 
 // Video Player Component with lazy loading and viewport-aware playback
 function VideoPlayer({ src }) {
@@ -186,11 +190,6 @@ function ProjectArticleFull({ projectId, onClose }) {
               <p className="text-[10px] sm:text-xs text-neutral-500">Reporting from Toronto</p>
             </div>
           </div>
-          {/* How this was built */}
-          <p className="text-[10px] sm:text-xs text-neutral-500 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-neutral-100">
-            <span className="font-semibold text-neutral-600">How this was built:</span>{' '}
-            {project.duration} of development as {project.role.toLowerCase()}, using {Array.isArray(project.tech) ? project.tech.slice(0, 3).join(', ') : Object.entries(project.tech).flatMap(([key, val]) => key === 'languages' ? val.map(l => l.name) : val).slice(0, 3).join(', ')}.
-          </p>
         </div>
       </div>
 
@@ -421,6 +420,17 @@ function ProjectArticleFull({ projectId, onClose }) {
                   </figure>
                 )}
 
+                {paragraph.type === 'vintage-control-panel-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <VintageControlPanelDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
                 {paragraph.type === 'export-demo' && (
                   <figure className="my-8 sm:my-10 md:my-12">
                     <ExportDemo />
@@ -529,6 +539,56 @@ function ProjectArticleFull({ projectId, onClose }) {
                       </figcaption>
                     )}
                   </figure>
+                )}
+
+                {paragraph.type === 'ontario-flag-collage-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <OntarioFlagCollageDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'victory-page-demo' && (
+                  <figure className="my-8 sm:my-10 md:my-12">
+                    <VictoryPageDemo />
+                    {paragraph.caption && (
+                      <figcaption className="text-[10px] sm:text-xs md:text-sm text-neutral-500 mt-2 text-center">
+                        {paragraph.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+
+                {paragraph.type === 'dual-demo' && (
+                  <Win95DualDemo
+                    leftDemo={
+                      paragraph.leftType === 'fleeing-button-demo' ? <FleeingButtonDemo /> :
+                      paragraph.leftType === 'checkbox-timer-demo' ? <CheckboxTimerDemo /> :
+                      paragraph.leftType === 'password-requirements-demo' ? <PasswordRequirementsDemo /> :
+                      paragraph.leftType === 'win95-style-demo' ? <Win95StyleDemo /> :
+                      paragraph.leftType === 'draggable-window-demo' ? <DraggableWindowDemo /> :
+                      paragraph.leftType === 'stats-panel-demo' ? <StatsPanelDemo /> :
+                      paragraph.leftType === 'matrix-hack-demo' ? <MatrixHackDemo /> :
+                      null
+                    }
+                    rightDemo={
+                      paragraph.rightType === 'fleeing-button-demo' ? <FleeingButtonDemo /> :
+                      paragraph.rightType === 'checkbox-timer-demo' ? <CheckboxTimerDemo /> :
+                      paragraph.rightType === 'password-requirements-demo' ? <PasswordRequirementsDemo /> :
+                      paragraph.rightType === 'win95-style-demo' ? <Win95StyleDemo /> :
+                      paragraph.rightType === 'draggable-window-demo' ? <DraggableWindowDemo /> :
+                      paragraph.rightType === 'stats-panel-demo' ? <StatsPanelDemo /> :
+                      paragraph.rightType === 'matrix-hack-demo' ? <MatrixHackDemo /> :
+                      null
+                    }
+                    leftTitle={paragraph.leftTitle}
+                    rightTitle={paragraph.rightTitle}
+                    caption={paragraph.caption}
+                  />
                 )}
 
               </div>

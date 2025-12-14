@@ -1,274 +1,326 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const HACKED_VALUES = {
+  name: 'John Hacker',
+  email: 'bypass@system.net',
+  password: 'Hack3d!2024',
+  age: '27',
+}
 
-/**
- * Interactive demo of the Matrix hack easter egg from The Impossible Form
- * Shows the green rain animation and simulated "hacking" progress
- */
-export function MatrixHackDemo() {
-  const canvasRef = useRef(null)
-  const [isHacking, setIsHacking] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [completed, setCompleted] = useState(false)
-  const animationRef = useRef(null)
+function TypedText({ text, onComplete, speed = 50 }) {
+  const [displayed, setDisplayed] = useState('')
+  const [showCursor, setShowCursor] = useState(true)
 
-  // Matrix rain effect
   useEffect(() => {
-    if (!isHacking || !canvasRef.current) return
-
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    const width = canvas.width = canvas.offsetWidth
-    const height = canvas.height = canvas.offsetHeight
-
-    const columns = Math.floor(width / 14)
-    const drops = new Array(columns).fill(1)
-
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
-      ctx.fillRect(0, 0, width, height)
-
-      ctx.fillStyle = '#0F0'
-      ctx.font = '14px monospace'
-
-      for (let i = 0; i < drops.length; i++) {
-        const char = CHARS[Math.floor(Math.random() * CHARS.length)]
-        ctx.fillText(char, i * 14, drops[i] * 14)
-
-        if (drops[i] * 14 > height && Math.random() > 0.975) {
-          drops[i] = 0
-        }
-        drops[i]++
-      }
-
-      animationRef.current = requestAnimationFrame(draw)
-    }
-
-    draw()
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [isHacking])
-
-  // Progress simulation
-  useEffect(() => {
-    if (!isHacking) return
-
+    let index = 0
     const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval)
-          setTimeout(() => {
-            setIsHacking(false)
-            setCompleted(true)
-          }, 500)
-          return 100
-        }
-        return prev + Math.random() * 5 + 2
-      })
-    }, 100)
+      if (index < text.length) {
+        setDisplayed(text.slice(0, index + 1))
+        index++
+      } else {
+        clearInterval(interval)
+        setShowCursor(false)
+        onComplete?.()
+      }
+    }, speed)
 
     return () => clearInterval(interval)
+  }, [text, speed, onComplete])
+
+  return (
+    <span className="text-[#00FF00]">
+      {displayed}
+      {showCursor && <span className="animate-pulse">_</span>}
+    </span>
+  )
+}
+
+/**
+ * Interactive demo of the Matrix hack from The Impossible Form
+ * Shows the DOS-style terminal window with typing effect
+ */
+export function MatrixHackDemo() {
+  const [isHacking, setIsHacking] = useState(false)
+  const [hackPhase, setHackPhase] = useState('idle') // idle, init, typing, complete
+  const [typingField, setTypingField] = useState('name')
+  const [glitchText, setGlitchText] = useState('C:\\>_')
+  const [isGlitching, setIsGlitching] = useState(false)
+
+  // Glitch effect for button
+  useEffect(() => {
+    if (!isHacking) {
+      const glitchChars = '!@#$%^&*<>?/\\|'
+
+      const doGlitch = () => {
+        setIsGlitching(true)
+        let count = 0
+        const glitchInterval = setInterval(() => {
+          const randomText = Array.from({ length: 5 }, () =>
+            glitchChars[Math.floor(Math.random() * glitchChars.length)]
+          ).join('')
+          setGlitchText(randomText)
+          count++
+
+          if (count > 8) {
+            clearInterval(glitchInterval)
+            setGlitchText('C:\\>_')
+            setIsGlitching(false)
+          }
+        }, 80)
+      }
+
+      const timeout = setTimeout(doGlitch, 2000)
+      const interval = setInterval(doGlitch, 8000)
+
+      return () => {
+        clearTimeout(timeout)
+        clearInterval(interval)
+      }
+    }
   }, [isHacking])
 
   const handleHack = useCallback(() => {
     setIsHacking(true)
-    setProgress(0)
-    setCompleted(false)
+    setHackPhase('init')
+    setTypingField('name')
+
+    // Progress through phases
+    setTimeout(() => setHackPhase('typing'), 2000)
+  }, [])
+
+  const handleFieldComplete = useCallback((field) => {
+    const nextField = {
+      name: 'email',
+      email: 'password',
+      password: 'age',
+      age: 'done',
+    }
+
+    setTimeout(() => {
+      const next = nextField[field]
+      setTypingField(next)
+
+      if (next === 'done') {
+        setHackPhase('complete')
+      }
+    }, 200)
   }, [])
 
   const handleReset = () => {
     setIsHacking(false)
-    setProgress(0)
-    setCompleted(false)
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current)
-    }
-  }
-
-  const getStatusText = () => {
-    if (progress < 20) return 'Initializing bypass...'
-    if (progress < 40) return 'Decrypting form defenses...'
-    if (progress < 60) return 'Overriding button flee response...'
-    if (progress < 80) return 'Disabling checkbox timer...'
-    if (progress < 100) return 'Finalizing hack...'
-    return 'ACCESS GRANTED'
+    setHackPhase('idle')
+    setTypingField('name')
   }
 
   return (
-    <div className="flex flex-col items-center gap-6 py-8">
+    <div className="flex flex-col items-center gap-3 py-4">
       {/* Demo container */}
-      <div
-        className="relative w-full max-w-md h-[300px] overflow-hidden rounded-lg"
-        style={{
-          backgroundColor: '#000',
-          boxShadow: '0 0 20px rgba(0, 255, 0, 0.3)'
-        }}
-      >
-        {/* Matrix rain canvas */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full"
-          style={{ opacity: isHacking ? 1 : 0.3 }}
-        />
+      <div className="relative w-full max-w-lg">
+        <AnimatePresence mode="wait">
+          {!isHacking ? (
+            <motion.div
+              key="button"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center gap-2 py-2"
+            >
+              <p className="text-[11px] text-neutral-500" style={{ fontFamily: 'Tahoma, sans-serif' }}>
+                Click the glitching button to trigger the hack sequence.
+              </p>
 
-        {/* Content overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-          <AnimatePresence mode="wait">
-            {!isHacking && !completed && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center"
+              {/* Hack button - Win95 style */}
+              <motion.button
+                onClick={handleHack}
+                animate={{
+                  scale: isGlitching ? [1, 1.1, 0.95, 1.05, 1] : 1,
+                  x: isGlitching ? [0, -2, 3, -1, 0] : 0,
+                }}
+                transition={{ duration: 0.4 }}
+                style={{ fontFamily: 'Tahoma, sans-serif' }}
               >
-                <p className="text-[#0F0] font-mono text-sm mb-4 opacity-70">
-                  Secret bypass detected...
-                </p>
-                <button
-                  onClick={handleHack}
-                  className="px-6 py-3 bg-transparent border-2 border-[#0F0] text-[#0F0] font-mono text-sm hover:bg-[#0F0] hover:text-black transition-colors"
+                <motion.div
+                  className="px-3 py-1"
+                  animate={{
+                    backgroundColor: isGlitching ? ['#c0c0c0', '#00FF00', '#c0c0c0', '#00FF00', '#c0c0c0'] : '#c0c0c0',
+                  }}
+                  transition={{ duration: 0.4 }}
+                  style={{
+                    boxShadow: 'inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf'
+                  }}
                 >
-                  C:\&gt;_ INITIATE HACK
-                </button>
-              </motion.div>
-            )}
-
-            {isHacking && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center w-full max-w-xs"
-              >
-                {/* Status text */}
-                <motion.p
-                  key={getStatusText()}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-[#0F0] font-mono text-xs mb-4"
-                >
-                  {getStatusText()}
-                </motion.p>
-
-                {/* Progress bar */}
-                <div
-                  className="h-4 w-full border border-[#0F0] mb-2"
-                  style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-                >
-                  <motion.div
-                    className="h-full"
-                    style={{ backgroundColor: '#0F0' }}
-                    animate={{ width: `${Math.min(progress, 100)}%` }}
-                    transition={{ duration: 0.1 }}
-                  />
+                  <span
+                    className="text-[11px] font-mono"
+                    style={{
+                      color: isGlitching ? '#00FF00' : '#000000',
+                      textShadow: isGlitching ? '0 0 5px #00FF00' : 'none',
+                    }}
+                  >
+                    {glitchText}
+                  </span>
+                </motion.div>
+              </motion.button>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="terminal"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* DOS-style window */}
+              <div className="bg-[#000080] border-2 border-[#aaaaaa]">
+                {/* Title bar */}
+                <div className="bg-[#aaaaaa] px-2 py-[2px] flex justify-between items-center">
+                  <span className="text-[11px] text-black font-bold" style={{ fontFamily: 'Tahoma, sans-serif' }}>
+                    C:\WINDOWS\system32\cmd.exe
+                  </span>
+                  <div className="flex gap-[2px]">
+                    <button
+                      className="w-[16px] h-[14px] bg-[#c0c0c0] text-[10px] font-bold"
+                      style={{
+                        boxShadow: 'inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff'
+                      }}
+                    >
+                      _
+                    </button>
+                    <button
+                      className="w-[16px] h-[14px] bg-[#c0c0c0] text-[10px] font-bold"
+                      style={{
+                        boxShadow: 'inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff'
+                      }}
+                    >
+                      ×
+                    </button>
+                  </div>
                 </div>
 
-                <p className="text-[#0F0] font-mono text-xs">
-                  {Math.min(Math.round(progress), 100)}%
-                </p>
-
-                {/* Glitch text */}
-                <motion.p
-                  className="text-[#0F0] font-mono text-[10px] mt-4 opacity-50"
-                  animate={{
-                    opacity: [0.3, 0.7, 0.3],
-                    x: [0, -2, 2, 0]
-                  }}
-                  transition={{ duration: 0.2, repeat: Infinity }}
+                {/* Terminal content */}
+                <div
+                  className="bg-black p-3 text-[11px] text-[#c0c0c0] min-h-[220px]"
+                  style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                 >
-                  {'>>>'} BYPASSING FORM DEFENSES {'<<<'}
-                </motion.p>
-              </motion.div>
-            )}
+                  <div className="mb-2">Microsoft Windows [Version 4.10.1998]</div>
+                  <div className="mb-2">(C) Copyright Microsoft Corp 1981-1998.</div>
+                  <div className="mb-4">
+                    C:\WINDOWS\system32&gt; <span className="text-[#00FF00]">hack.exe --bypass-form</span>
+                  </div>
 
-            {completed && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center"
-              >
-                <motion.p
-                  className="text-[#0F0] font-mono text-2xl font-bold mb-2"
-                  animate={{
-                    textShadow: [
-                      '0 0 10px #0F0',
-                      '0 0 20px #0F0',
-                      '0 0 10px #0F0'
-                    ]
-                  }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                >
-                  HACKED
-                </motion.p>
-                <p className="text-[#0F0] font-mono text-xs mb-4 opacity-70">
-                  All form defenses bypassed.
-                </p>
+                  {hackPhase === 'init' && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                      <div className="text-[#FFFF00]">[*] Initializing bypass protocol...</div>
+                      <div className="text-[#00FF00]">[*] Scanning form defenses...</div>
+                      <motion.div
+                        animate={{ opacity: [0, 1] }}
+                        transition={{ repeat: Infinity, duration: 0.5 }}
+                        className="text-[#00FF00]"
+                      >
+                        [*] Injecting payload..._
+                      </motion.div>
+                    </motion.div>
+                  )}
+
+                  {(hackPhase === 'typing' || hackPhase === 'complete') && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                      <div className="text-[#00FF00] mb-2">[+] BYPASS SUCCESSFUL!</div>
+                      <div className="text-[#FFFF00] mb-3">[*] Injecting form data...</div>
+
+                      <div className="space-y-1 ml-2">
+                        <div className="flex">
+                          <span className="text-[#808080] w-20">name:</span>
+                          {typingField === 'name' ? (
+                            <TypedText text={HACKED_VALUES.name} onComplete={() => handleFieldComplete('name')} />
+                          ) : ['email', 'password', 'age', 'done'].includes(typingField) ? (
+                            <span className="text-[#00FF00]">{HACKED_VALUES.name}</span>
+                          ) : (
+                            <span className="text-[#808080]">...</span>
+                          )}
+                        </div>
+
+                        <div className="flex">
+                          <span className="text-[#808080] w-20">email:</span>
+                          {typingField === 'email' ? (
+                            <TypedText text={HACKED_VALUES.email} onComplete={() => handleFieldComplete('email')} />
+                          ) : ['password', 'age', 'done'].includes(typingField) ? (
+                            <span className="text-[#00FF00]">{HACKED_VALUES.email}</span>
+                          ) : (
+                            <span className="text-[#808080]">...</span>
+                          )}
+                        </div>
+
+                        <div className="flex">
+                          <span className="text-[#808080] w-20">password:</span>
+                          {typingField === 'password' ? (
+                            <TypedText text={HACKED_VALUES.password} onComplete={() => handleFieldComplete('password')} />
+                          ) : ['age', 'done'].includes(typingField) ? (
+                            <span className="text-[#00FF00]">{HACKED_VALUES.password}</span>
+                          ) : (
+                            <span className="text-[#808080]">...</span>
+                          )}
+                        </div>
+
+                        <div className="flex">
+                          <span className="text-[#808080] w-20">age:</span>
+                          {typingField === 'age' ? (
+                            <TypedText text={HACKED_VALUES.age} onComplete={() => handleFieldComplete('age')} />
+                          ) : typingField === 'done' ? (
+                            <span className="text-[#00FF00]">{HACKED_VALUES.age}</span>
+                          ) : (
+                            <span className="text-[#808080]">...</span>
+                          )}
+                        </div>
+                      </div>
+
+                      {hackPhase === 'complete' && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="mt-4"
+                        >
+                          <div className="text-[#00FF00]">[+] All fields injected!</div>
+                          <div className="text-[#FFFF00]">[*] Disabling form defenses...</div>
+                          <motion.div
+                            animate={{ opacity: [0, 1] }}
+                            transition={{ repeat: 3, duration: 0.3 }}
+                            className="text-[#FF0000] font-bold mt-2"
+                          >
+                            ACCESS GRANTED
+                          </motion.div>
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+
+              {/* Reset button */}
+              {hackPhase === 'complete' && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="space-y-1 text-[#0F0] font-mono text-[10px] opacity-50"
+                  transition={{ delay: 1 }}
+                  className="mt-4 flex justify-center"
                 >
-                  <p>✓ Button flee disabled</p>
-                  <p>✓ Checkbox timer frozen</p>
-                  <p>✓ Password requirements cleared</p>
-                  <p>✓ Form auto-submitted</p>
+                  <button
+                    onClick={handleReset}
+                    className="px-4 py-1 text-[11px] text-black"
+                    style={{
+                      fontFamily: 'Tahoma, sans-serif',
+                      backgroundColor: '#c0c0c0',
+                      boxShadow: 'inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf'
+                    }}
+                  >
+                    Reset Demo
+                  </button>
                 </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Scanlines overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)'
-          }}
-        />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
-      {/* Controls */}
-      <div className="flex gap-3">
-        {!isHacking && (
-          <button
-            onClick={handleHack}
-            className="px-4 py-1 text-[11px] text-black"
-            style={{
-              fontFamily: 'Tahoma, sans-serif',
-              backgroundColor: '#c0c0c0',
-              boxShadow: 'inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf'
-            }}
-          >
-            {completed ? 'Hack Again' : 'Start Hack'}
-          </button>
-        )}
-        {(completed || isHacking) && (
-          <button
-            onClick={handleReset}
-            className="px-4 py-1 text-[11px] text-black"
-            style={{
-              fontFamily: 'Tahoma, sans-serif',
-              backgroundColor: '#c0c0c0',
-              boxShadow: 'inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf'
-            }}
-          >
-            Reset
-          </button>
-        )}
-      </div>
-
-      <p className="text-xs text-neutral-500 italic">
-        The secret hack mode bypasses all form defenses with a Matrix-style animation.
-      </p>
     </div>
   )
 }

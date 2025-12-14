@@ -227,12 +227,12 @@ function NewspaperCTA({ onContactClick }) {
               {/* Mini Stats */}
               <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-neutral-200">
                 <div className="text-center">
-                  <p className="text-lg sm:text-xl font-bold font-serif">137</p>
-                  <p className="text-[8px] sm:text-[9px] text-neutral-500">WIDGETS BUILT</p>
+                  <p className="text-lg sm:text-xl font-bold font-serif">4</p>
+                  <p className="text-[8px] sm:text-[9px] text-neutral-500">PROJECTS</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-lg sm:text-xl font-bold font-serif">12</p>
-                  <p className="text-[8px] sm:text-[9px] text-neutral-500">MONTHS EXP</p>
+                  <p className="text-lg sm:text-xl font-bold font-serif">1</p>
+                  <p className="text-[8px] sm:text-[9px] text-neutral-500">NPM PACKAGE</p>
                 </div>
               </div>
             </div>
@@ -243,8 +243,7 @@ function NewspaperCTA({ onContactClick }) {
                 Location: Toronto
               </h4>
               <div className="text-[10px] sm:text-xs leading-relaxed text-neutral-600">
-                <p>Humber College graduate ready to contribute to meaningful products.</p>
-                <p className="mt-1">Seeking: Frontend Developer or UI/UX Designer role.</p>
+                <p>Humber Polytechnic graduate ready to contribute to meaningful products.</p>
               </div>
 
               {/* CTA Button */}
@@ -256,7 +255,7 @@ function NewspaperCTA({ onContactClick }) {
               </button>
 
               <p className="text-[8px] sm:text-[9px] text-neutral-400 text-center mt-2 italic">
-                "Ships code, not excuses"
+                "Available for immediate hire"
               </p>
             </div>
           </div>

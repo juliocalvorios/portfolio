@@ -194,7 +194,7 @@ export function StatsPanelDemo() {
           }}
         >
           <div
-            className="h-[18px] px-[3px] py-[3px] mb-1"
+            className="h-[18px] px-[3px] flex items-center mb-1"
             style={{ background: 'linear-gradient(90deg, #000080, #1084d0)' }}
           >
             <span className="text-white text-[11px] font-bold" style={{ fontFamily: 'Tahoma, sans-serif' }}>
@@ -203,13 +203,13 @@ export function StatsPanelDemo() {
           </div>
 
           <div
-            className="p-3 space-y-3"
+            className="p-3 space-y-2"
             style={{
               backgroundColor: '#c0c0c0'
             }}
           >
-            <p className="text-[10px] text-black mb-2" style={{ fontFamily: 'Tahoma, sans-serif' }}>
-              Click buttons to simulate form events:
+            <p className="text-[10px] text-black" style={{ fontFamily: 'Tahoma, sans-serif' }}>
+              Click to simulate form events:
             </p>
 
             {[
@@ -220,7 +220,7 @@ export function StatsPanelDemo() {
               <button
                 key={i}
                 onClick={btn.onClick}
-                className="w-full px-3 py-2 text-[11px] text-black"
+                className="w-full px-3 py-1.5 text-[11px] text-black"
                 style={{
                   fontFamily: 'Tahoma, sans-serif',
                   backgroundColor: '#c0c0c0',
@@ -231,10 +231,10 @@ export function StatsPanelDemo() {
               </button>
             ))}
 
-            <div className="border-t border-[#808080] pt-3">
+            <div className="border-t border-[#808080] pt-2 mt-2">
               <button
                 onClick={handleReset}
-                className="w-full px-3 py-2 text-[11px] text-black"
+                className="w-full px-3 py-1.5 text-[11px] text-black"
                 style={{
                   fontFamily: 'Tahoma, sans-serif',
                   backgroundColor: '#c0c0c0',

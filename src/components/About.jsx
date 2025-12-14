@@ -28,8 +28,8 @@ function About() {
 
           <div className="text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
-            <p className="text-neutral-500 italic font-serif mt-1 text-xs sm:text-sm md:text-base">
-              A profile in determination and self-directed learning
+            <p className="text-neutral-500 font-serif mt-1 text-xs sm:text-sm md:text-base tracking-wide">
+              Frontend Developer · Toronto
             </p>
           </div>
         </div>
@@ -38,17 +38,48 @@ function About() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
         {/* Portrait Column */}
         <div className="lg:col-span-4">
-          <div className="bg-neutral-100 border border-neutral-200 aspect-square sm:aspect-[3/4] flex items-center justify-center mb-2 sm:mb-3">
-            <div className="text-center">
-              <div className="text-4xl sm:text-5xl md:text-6xl text-neutral-300 mb-1.5 sm:mb-2">👤</div>
-              <p className="text-[8px] sm:text-[9px] md:text-[10px] tracking-wider sm:tracking-widest text-neutral-400">
-                PORTRAIT
-              </p>
-            </div>
+          <div className="bg-neutral-100 border border-neutral-200 aspect-square sm:aspect-[3/4] flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
+            <img 
+              src="/images/photo-profile-juliocalvo.JPG" 
+              alt="Julio Calvo"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <p className="text-[9px] sm:text-[10px] text-neutral-500 italic text-center">
-            Julio Calvo in his Toronto workspace, 2025.
-          </p>
+
+          {/* Contact Icons */}
+          <div className="flex justify-center gap-4 mt-3">
+            <a 
+              href="mailto:juliocalvorios@gmail.com"
+              className="text-neutral-400 hover:text-neutral-700 transition-colors"
+              title="Email"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+            </a>
+            <a 
+              href="https://linkedin.com/in/juliocalvorios"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-neutral-700 transition-colors"
+              title="LinkedIn"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a 
+              href="https://github.com/juliocalvor811-svg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-neutral-700 transition-colors"
+              title="GitHub"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
 
           <Ornament className="my-4 sm:my-6" />
 
@@ -56,95 +87,50 @@ function About() {
           <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
             <InfoRow label="Location" value="Toronto, Ontario" />
             <InfoRow label="Origin" value="Zaragoza, Spain" />
-            <InfoRow label="Focus" value="Frontend & UI/UX" />
-            <InfoRow label="Status" value="Available for work" highlight />
+            <InfoRow label="Focus" value="Frontend" />
+            <InfoRow label="Work Auth" value="Full-time, any CA employer" />
           </div>
         </div>
 
         {/* Main Content */}
         <div className="lg:col-span-8">
-          {/* Article Title */}
-          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-serif mb-1.5 sm:mb-2 text-balance">
-            The Developer Behind the Code
-          </h3>
-          <p className="text-sm sm:text-base lg:text-lg text-neutral-600 italic font-serif mb-3 sm:mb-4 lg:mb-6">
-            From a small village in Spain to the tech scene of Toronto
-          </p>
-
-          {/* Article Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
-            <div className="font-serif text-xs sm:text-sm leading-relaxed space-y-2.5 sm:space-y-3 md:space-y-4">
-              <p>
-                <span className="text-2xl sm:text-3xl md:text-4xl font-bold float-left mr-1.5 sm:mr-2 leading-none mt-0.5 sm:mt-1">
-                  J
-                </span>
-                ulio Calvo's journey into software development defies conventional
-                wisdom. Without a computer science degree or bootcamp certificate,
-                he built veraOS—a comprehensive productivity platform with 137
-                functional widgets—through pure determination and strategic use
-                of modern tools.
-              </p>
-              <p>
-                Originally from a small village of 100 inhabitants near Zaragoza,
-                Spain, Calvo made the leap to Toronto to pursue his ambitions in
-                tech. After completing his Multimedia Design program at Humber
-                College, he dove headfirst into frontend development.
-              </p>
-              <p className="hidden md:block">
-                "I realized that waiting for the perfect moment or the perfect
-                credentials was just another form of procrastination," he explains.
-                "So I started building. Every day. No excuses."
-              </p>
-            </div>
-
-            <div>
-              {/* Pull Quote */}
-              <blockquote className="border-l-2 sm:border-l-4 border-navy pl-3 sm:pl-4 mb-3 sm:mb-4 md:mb-6">
-                <p className="text-base sm:text-lg md:text-xl italic font-serif">
-                  "I believe in building, not waiting. Every widget is a small
-                  rebellion against the idea that you need permission to create."
-                </p>
-              </blockquote>
-
-              <div className="font-serif text-xs sm:text-sm leading-relaxed space-y-2.5 sm:space-y-3 md:space-y-4">
-                <p>
-                  His approach combines obsessive attention to detail with a bias
-                  toward shipping working software. While others debate frameworks
-                  and best practices, Calvo pushes code.
-                </p>
-                <p className="hidden sm:block">
-                  The result speaks for itself: 137 widgets, a complete academic
-                  mode with spaced repetition, an AI-powered chat interface, and
-                  a modular design system—all built in 12 months.
-                </p>
-              </div>
-            </div>
+          {/* Article Content - Single column, simple */}
+          <div className="font-serif text-sm sm:text-base leading-relaxed space-y-4 sm:space-y-5">
+            <p>
+              <span className="text-3xl sm:text-4xl font-bold float-left mr-2 leading-none mt-1">
+                I
+              </span>
+              'm Julio. I'm from Zaragoza, Spain, and I've been living in Toronto for the past couple of years. Before getting into development, I studied Commerce and Marketing back in Spain. Then I moved here and did Multimedia Design at Humber Polytechnic.
+            </p>
+            <p>
+              Most of what I know comes from building veraOS.
+            </p>
           </div>
 
-          {/* Skills Section */}
+          {/* Technical Stack */}
           <ScrollReveal delay={0.1}>
             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-neutral-200">
               <h4 className="text-[10px] sm:text-xs tracking-widest font-bold mb-3 sm:mb-4">
-                TECHNICAL PROFICIENCY
+                TECHNICAL STACK
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                <SkillCategory
-                  title="Frontend Development"
+                <SkillList
+                  title="Core"
                   skills={[
-                    { name: 'React.js', level: 'Advanced' },
-                    { name: 'JavaScript / ES6+', level: 'Advanced' },
-                    { name: 'Tailwind CSS', level: 'Advanced' },
-                    { name: 'HTML5 / CSS3', level: 'Advanced' },
+                    'React / Next.js',
+                    'TypeScript / JavaScript',
+                    'Tailwind CSS',
+                    'HTML / CSS',
                   ]}
                 />
-                <SkillCategory
-                  title="Tools & Platforms"
+                <SkillList
+                  title="Tools & Frameworks"
                   skills={[
-                    { name: 'Figma', level: 'Proficient' },
-                    { name: 'Git / GitHub', level: 'Proficient' },
-                    { name: 'Supabase', level: 'Proficient' },
-                    { name: 'Vite', level: 'Proficient' },
+                    'Supabase',
+                    'Framer Motion',
+                    'Three.js',
+                    'Jest + Playwright',
                   ]}
                 />
               </div>
@@ -155,62 +141,40 @@ function About() {
           <ScrollReveal delay={0.2}>
             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-neutral-200">
               <h4 className="text-[10px] sm:text-xs tracking-widest font-bold mb-3 sm:mb-4">
-                EDUCATION & BACKGROUND
+                EDUCATION
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="bg-neutral-50 border border-neutral-200 p-4 sm:p-5">
                   <p className="text-[9px] sm:text-xs tracking-widest text-neutral-500 mb-1 sm:mb-2">
-                    FORMAL EDUCATION
+                    TORONTO
                   </p>
-                  <p className="font-bold font-serif text-sm sm:text-base">Humber College</p>
+                  <p className="font-bold font-serif text-sm sm:text-base">Humber Polytechnic</p>
                   <p className="text-xs sm:text-sm text-neutral-600">
                     Multimedia Design & Development
                   </p>
                   <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-                    Toronto, Ontario · 2023-2024
+                    2024 - 2025
                   </p>
                 </div>
 
                 <div className="bg-neutral-50 border border-neutral-200 p-4 sm:p-5">
                   <p className="text-[9px] sm:text-xs tracking-widest text-neutral-500 mb-1 sm:mb-2">
-                    SELF-DIRECTED LEARNING
+                    SPAIN
                   </p>
-                  <p className="font-bold font-serif text-sm sm:text-base">veraOS Project</p>
+                  <p className="font-bold font-serif text-sm sm:text-base">Colegio Montessori</p>
                   <p className="text-xs sm:text-sm text-neutral-600">
-                    12 months intensive development
+                    Degree in Commerce & Marketing
                   </p>
                   <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-                    137 widgets · React · Full-stack
+                    2019 - 2023
                   </p>
                 </div>
               </div>
             </div>
           </ScrollReveal>
 
-          {/* What I'm Looking For */}
-          <ScrollReveal delay={0.3}>
-            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-neutral-200">
-              <h4 className="text-[10px] sm:text-xs tracking-widest font-bold mb-3 sm:mb-4">
-                WHAT I'M LOOKING FOR
-              </h4>
-
-              <div className="bg-neutral-900 text-white p-4 sm:p-6">
-                <p className="font-serif leading-relaxed text-sm sm:text-base">
-                  I'm seeking a <strong>Frontend Developer</strong> or{' '}
-                  <strong>UI/UX Designer</strong> role in Toronto where I can
-                  contribute to meaningful products, continue growing as a
-                  developer, and work alongside people who care about craft.
-                </p>
-                <p className="font-serif leading-relaxed mt-3 sm:mt-4 text-neutral-300 text-sm sm:text-base">
-                  I thrive in environments that value shipping over perfection,
-                  learning by doing, and building things that actually matter.
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          </div>
+        </div>
       </div>
     </div>
   )
@@ -237,7 +201,7 @@ function InfoRow({ label, value, highlight = false }) {
   )
 }
 
-function SkillCategory({ title, skills }) {
+function SkillList({ title, skills }) {
   return (
     <div className="bg-neutral-50 border border-neutral-200 p-4 sm:p-5">
       <p className="text-[9px] sm:text-xs tracking-widest text-neutral-500 mb-2 sm:mb-3">
@@ -245,10 +209,9 @@ function SkillCategory({ title, skills }) {
       </p>
       <div className="space-y-1.5 sm:space-y-2">
         {skills.map(skill => (
-          <div key={skill.name} className="flex justify-between text-xs sm:text-sm">
-            <span className="font-serif">{skill.name}</span>
-            <span className="text-neutral-500">{skill.level}</span>
-          </div>
+          <p key={skill} className="text-xs sm:text-sm font-serif">
+            {skill}
+          </p>
         ))}
       </div>
     </div>

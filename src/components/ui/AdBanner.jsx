@@ -21,7 +21,7 @@ export function TopBanner() {
               HIRE THIS DEVELOPER
             </span>
             <span className="text-[9px] sm:text-[10px] text-neutral-400 hidden sm:inline">
-              — Available for Frontend & UI roles in Toronto
+              — Available for Frontend roles in Toronto
             </span>
             <span className="text-[10px] sm:text-xs text-neutral-500 group-hover:text-neutral-700 transition-colors">
               →
@@ -180,8 +180,8 @@ export function ClassifiedsAds() {
     },
     {
       category: 'FOR HIRE',
-      title: 'UI/UX Designer',
-      text: 'Figma expert. Clean interfaces. Portfolio available.'
+      title: 'Frontend Developer',
+      text: 'React expert. Clean interfaces. Portfolio available.'
     },
     {
       category: 'PROJECTS',
