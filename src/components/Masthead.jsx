@@ -11,7 +11,7 @@ const sections = [
 
 // Title text for letter-by-letter animation
 const TITLE_TEXT = 'THE JULIO CALVO TIMES'
-const SUBTITLE_TEXT = '"All the Code That\'s Fit to Ship"'
+const SUBTITLE_TEXT = 'Frontend Developer · Toronto, Canada'
 
 function Masthead({ activeSection, onSectionChange, onPrintEdition }) {
   const { playClick, playHover } = useSounds()
@@ -34,11 +34,11 @@ function Masthead({ activeSection, onSectionChange, onPrintEdition }) {
   }).toUpperCase()
 
   // Calculate volume and issue number based on date
-  // Volume = years since 2024 (starting at 1)
-  // Issue = days since Jan 1, 2024
-  const startDate = new Date('2024-01-01')
+  // Volume = years since 2025 (starting at 1)
+  // Issue = days since Jan 1, 2025
+  const startDate = new Date('2025-01-01')
   const daysSinceStart = Math.floor((now - startDate) / (1000 * 60 * 60 * 24))
-  const volume = now.getFullYear() - 2023 // Vol. I in 2024, Vol. II in 2025, etc.
+  const volume = now.getFullYear() - 2024 // Vol. I in 2025, Vol. II in 2026, etc.
   const issueNumber = daysSinceStart + 1
 
   // Convert volume to Roman numerals
@@ -63,7 +63,7 @@ function Masthead({ activeSection, onSectionChange, onPrintEdition }) {
   return (
     <header className="px-3 sm:px-6 md:px-8 pt-3 sm:pt-6 pb-3 sm:pb-4 border-b-2 border-neutral-600">
       {/* Top meta line */}
-      <div className="flex justify-between items-center text-[8px] sm:text-[10px] tracking-wider sm:tracking-widest text-neutral-500 mb-2 sm:mb-4">
+      <div className="flex justify-between items-center text-[8px] sm:text-[10px] tracking-wider sm:tracking-widest text-neutral-500 mb-1 sm:mb-2">
         <span className="hidden sm:inline">VOL. {volumeRoman} · NO. {issueNumber.toLocaleString()}</span>
         <span className="sm:hidden text-[7px]">VOL. {volumeRoman}</span>
         <span className="hidden lg:inline absolute left-1/2 -translate-x-1/2">LATE EDITION</span>
@@ -163,7 +163,7 @@ function Masthead({ activeSection, onSectionChange, onPrintEdition }) {
       <Ornament />
 
       {/* Navigation */}
-      <nav className="flex justify-center flex-wrap items-center gap-1 sm:gap-3 md:gap-6 mt-3 sm:mt-4 pt-3 border-t border-neutral-200">
+      <nav className="flex justify-center flex-wrap items-center gap-1 sm:gap-3 md:gap-6 mt-1 sm:mt-2">
         {sections.map(section => (
           <button
             key={section.id}
