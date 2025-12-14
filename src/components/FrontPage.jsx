@@ -1,12 +1,12 @@
-import { useState, lazy, Suspense } from 'react'
+import { useState, lazy, Suspense, useRef, useEffect } from 'react'
 import projects from '../data/projects'
-import Ornament from './ui/Ornament'
 import SectionRule from './ui/SectionRule'
 import TiltCard from './ui/TiltCard'
 import InkRipple from './ui/InkRipple'
 import ScrollReveal from './ui/ScrollReveal'
 import { LiveIndicator } from './ui/LiveIndicator'
 import { useSounds } from './ui/SoundManager'
+import SidebarWidget from './ui/SidebarWidget'
 
 // Lazy load VeraCircle (Three.js is heavy)
 const VeraCircle = lazy(() => import('./ui/VeraCircle'))
@@ -87,16 +87,9 @@ function FrontPage({ onProjectClick }) {
             </div>
 
             <div>
-              {/* Pull Quote */}
-              <blockquote className="border-l-2 sm:border-l-4 border-navy pl-3 sm:pl-4 my-3 sm:my-4">
-                <p className="text-base sm:text-lg md:text-xl italic font-serif">
-                  {leadStory.pullQuote}
-                </p>
-              </blockquote>
-              
               {/* Vera Circle */}
               <div
-                className="mt-3 sm:mt-4 cursor-pointer flex justify-center"
+                className="cursor-pointer flex justify-center"
                 onClick={() => { playClick(); onProjectClick && onProjectClick(leadStory) }}
                 onMouseEnter={playHover}
               >
@@ -117,48 +110,12 @@ function FrontPage({ onProjectClick }) {
 
         {/* Sidebar */}
         <aside className="lg:col-span-4 lg:border-l border-neutral-300 lg:pl-4 xl:pl-6 mt-4 lg:mt-0">
-          <div className="border-b-2 border-neutral-800 pb-2 mb-3 sm:mb-4">
-            <h3 className="text-[10px] sm:text-xs tracking-wider sm:tracking-widest font-bold">QUICK FACTS</h3>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6 stagger-children">
-            <Stat number="137" label="WIDGETS SHIPPED" />
-            <Stat number="12" label="MONTHS DEV" />
-            <Stat number="0→1" label="SELF-TAUGHT" />
-          </div>
-
-          <Ornament className="my-6 hidden lg:flex" />
-
-          {/* Article Index - Hidden on mobile */}
-          <div className="hidden lg:block">
-            <h3 className="text-xs tracking-widest font-bold mb-3">
-              IN THIS EDITION
-            </h3>
-            <nav className="space-y-2">
-              {projects.map((project, i) => (
-                <a
-                  key={project.id}
-                  href={`#project-${project.id}`}
-                  className="flex gap-3 group"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    playClick()
-                    onProjectClick && onProjectClick(project)
-                  }}
-                  onMouseEnter={playHover}
-                >
-                  <span className="text-neutral-400 font-mono text-xs">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-sm text-neutral-600 font-serif group-hover:text-neutral-900 transition-colors">
-                    {truncateTitle(project.title, 5)}
-                  </span>
-                </a>
-              ))}
-            </nav>
-          </div>
-
+          <SidebarWidget
+            projects={projects}
+            onProjectClick={onProjectClick}
+            playClick={playClick}
+            playHover={playHover}
+          />
         </aside>
         </div>
       </ScrollReveal>
@@ -185,12 +142,40 @@ function FrontPage({ onProjectClick }) {
   )
 }
 
-function Stat({ number, label }) {
+function truncateTitle(title, wordCount) {
+  const words = title.split(' ')
+  if (words.length <= wordCount) return title
+  return words.slice(0, wordCount).join(' ') + '...'
+}
+
+// Video thumbnail that loops first 10 seconds
+function ThumbnailVideo({ src, className }) {
+  const videoRef = useRef(null)
+  const maxDuration = 10 // seconds
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleTimeUpdate = () => {
+      if (video.currentTime >= maxDuration) {
+        video.currentTime = 0
+      }
+    }
+
+    video.addEventListener('timeupdate', handleTimeUpdate)
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate)
+  }, [])
+
   return (
-    <div className="pb-2 sm:pb-3 lg:pb-4 border-b border-neutral-200">
-      <p className="text-xl sm:text-2xl lg:text-3xl font-bold font-serif">{number}</p>
-      <p className="text-[8px] sm:text-[9px] lg:text-[10px] text-neutral-500 tracking-wider">{label}</p>
-    </div>
+    <video
+      ref={videoRef}
+      src={src}
+      className={className}
+      autoPlay
+      muted
+      playsInline
+    />
   )
 }
 
@@ -204,11 +189,25 @@ function ArticleCard({ project, index, isHovered, onMouseEnter, onMouseLeave, on
           onMouseLeave={onMouseLeave}
           onClick={onClick}
         >
-          {/* Thumbnail */}
-          <div className="bg-neutral-100 border border-neutral-200 aspect-[4/3] flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
-            <span className="text-3xl sm:text-4xl md:text-5xl text-neutral-300 font-serif group-hover:scale-110 transition-transform duration-300">
-              {project.name[0]}
-            </span>
+          {/* Thumbnail - Video (10s loop), Portrait Image, or Letter */}
+          <div className="bg-neutral-100 border border-neutral-200 aspect-[4/3] flex items-center justify-center mb-2 sm:mb-3 overflow-hidden relative">
+            {project.video ? (
+              <ThumbnailVideo
+                src={project.video}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            ) : project.portraitImage ? (
+              <img
+                src={project.portraitImage}
+                alt={project.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            ) : (
+              <span className="text-3xl sm:text-4xl md:text-5xl text-neutral-300 font-serif group-hover:scale-110 transition-transform duration-300">
+                {project.name[0]}
+              </span>
+            )}
           </div>
 
           {/* Meta */}
@@ -229,12 +228,6 @@ function ArticleCard({ project, index, isHovered, onMouseEnter, onMouseLeave, on
       </InkRipple>
     </TiltCard>
   )
-}
-
-function truncateTitle(title, wordCount) {
-  const words = title.split(' ')
-  if (words.length <= wordCount) return title
-  return words.slice(0, wordCount).join(' ') + '...'
 }
 
 export default FrontPage
