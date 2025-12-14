@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 // === SIMPLEX NOISE IMPLEMENTATION ===
@@ -96,6 +96,18 @@ export default function VeraCircle({ width = 280, height = 280 }) {
     const cameraRef = useRef(null)
     const animationRef = useRef(null)
     const particlesRef = useRef(null)
+    const isVisibleRef = useRef(true)
+
+    // Pause animation when not visible
+    useEffect(() => {
+        if (!mountRef.current) return
+        const observer = new IntersectionObserver(
+            ([entry]) => { isVisibleRef.current = entry.isIntersecting },
+            { threshold: 0.1 }
+        )
+        observer.observe(mountRef.current)
+        return () => observer.disconnect()
+    }, [])
 
     useEffect(() => {
         if (!mountRef.current) return
@@ -205,6 +217,10 @@ export default function VeraCircle({ width = 280, height = 280 }) {
 
         const animate = () => {
             animationRef.current = requestAnimationFrame(animate)
+
+            // Skip heavy calculations when not visible
+            if (!isVisibleRef.current) return
+
             const time = clock.getElapsedTime() * 0.5
             const positions = particles.geometry.attributes.position.array
             const colors = particles.geometry.attributes.color.array
