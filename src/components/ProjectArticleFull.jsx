@@ -105,6 +105,8 @@ function VideoPlayer({ src }) {
           style={{ marginBottom: '-0.5%' }}
           loop
           playsInline
+          preload="none"
+          loading="lazy"
         />
       ) : (
         <div className="aspect-video flex items-center justify-center">

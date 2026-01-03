@@ -46,6 +46,8 @@ function VideoPlayer({ src }) {
         loop
         muted
         playsInline
+        preload="none"
+        loading="lazy"
         onLoadedData={() => setIsLoaded(true)}
       />
       <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

@@ -103,6 +103,8 @@ function ProjectCard({ project, index, isExpanded, onToggleExpand, onReadFull })
                     loop
                     muted
                     playsInline
+                    preload="none"
+                    loading="lazy"
                   />
                 </div>
               ) : project.portraitImage && (

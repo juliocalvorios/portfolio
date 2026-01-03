@@ -64,7 +64,8 @@ function WidgetCard({ widget, index, isVisible }) {
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
+                loading="lazy"
               />
               {/* Play overlay */}
               <div className={`

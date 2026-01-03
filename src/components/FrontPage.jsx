@@ -175,6 +175,8 @@ function ThumbnailVideo({ src, className }) {
       autoPlay
       muted
       playsInline
+      preload="none"
+      loading="lazy"
     />
   )
 }

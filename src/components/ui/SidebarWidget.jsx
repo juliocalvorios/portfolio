@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { CloudSun, Moon, GitCommit, ArrowUpRight } from 'lucide-react'
+
+// Lazy load fireworks component - only loads when user clicks celebrate
+const SimpleFireworks = lazy(() => import('./SimpleFireworks'))
 
 const GITHUB_USERNAME = 'juliocalvorios'
 
@@ -21,6 +24,7 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [showConfetti, setShowConfetti] = useState(false)
 
   // Fetch GitHub commits from multiple repos (with localStorage cache)
   useEffect(() => {
@@ -144,7 +148,7 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
           IN THIS EDITION
         </h3>
       </div>
-      
+
       <nav className="p-3 space-y-2 border-b border-neutral-200">
         {projects.map((project, i) => (
           <a
@@ -226,7 +230,7 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
       </div>
 
       {/* Weather Footer */}
-      <div className="px-3 py-2 bg-neutral-50/50">
+      <div className="px-3 py-2 bg-neutral-50/50 border-t border-neutral-200">
         <div className="flex items-center justify-between text-[9px] text-neutral-500">
           <div className="flex items-center gap-1.5">
             {isDay ? (
@@ -242,6 +246,35 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
           </div>
         </div>
       </div>
+
+      {/* 2026 Notice */}
+      <button
+        onClick={() => {
+          playClick()
+          setShowConfetti(true)
+        }}
+        onMouseEnter={playHover}
+        className="w-full border-t border-neutral-200 px-3 py-2 bg-neutral-50/30 hover:bg-neutral-100 transition-all group cursor-pointer relative overflow-hidden"
+      >
+        {/* Fireworks effect - lazy loaded on first use */}
+        {showConfetti && (
+          <Suspense fallback={null}>
+            <SimpleFireworks
+              isActive={showConfetti}
+              onComplete={() => setShowConfetti(false)}
+            />
+          </Suspense>
+        )}
+
+        <p className="text-[9px] tracking-wider text-center font-medium transition-all relative z-10">
+          <span className="text-neutral-500 group-hover:opacity-0 group-hover:hidden transition-all">
+            WISHING YOU A PROSPEROUS 2026
+          </span>
+          <span className="hidden group-hover:inline text-neutral-700 font-bold tracking-widest">
+            CELEBRATE
+          </span>
+        </p>
+      </button>
     </div>
   )
 }

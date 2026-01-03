@@ -270,6 +270,8 @@ export default function VeraAcademicModeFlow() {
               src="/videos/embeddings.mp4"
               muted
               playsInline
+              preload="none"
+              loading="lazy"
               onEnded={handleVideoEnded}
               className="w-full h-auto bg-neutral-100"
             />
