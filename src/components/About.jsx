@@ -162,9 +162,9 @@ function About() {
                   <p className="text-[9px] sm:text-xs tracking-widest text-neutral-500 mb-1 sm:mb-2">
                     SPAIN
                   </p>
-                  <p className="font-bold font-serif text-sm sm:text-base">Colegio Montessori</p>
+                  <p className="font-bold font-serif text-sm sm:text-base">Montessori School</p>
                   <p className="text-xs sm:text-sm text-neutral-600">
-                    Degree in Commerce & Marketing
+                    Commerce & Marketing
                   </p>
                   <p className="text-xs sm:text-sm text-neutral-500 mt-1">
                     2019 - 2023

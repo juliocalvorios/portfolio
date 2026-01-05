@@ -38,10 +38,10 @@ const STACK = [
 ]
 
 const METRICS = [
-  { label: 'Lines of Code', value: '100K+' },
   { label: 'React Components', value: '200+' },
   { label: 'Edge Functions', value: '20+' },
   { label: 'AI Providers', value: '6' },
+  { label: 'Widgets', value: '10+' },
 ]
 
 export default function VeraTechStackDiagram() {

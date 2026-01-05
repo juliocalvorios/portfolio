@@ -1,6 +1,6 @@
 # The Calvo Chronicle
 
-Personal portfolio website designed as a vintage newspaper. A creative approach to showcase frontend development and UI/UX design skills.
+Personal portfolio website designed as a vintage newspaper. A creative approach to showcase frontend engineering skills.
 
 ![Portfolio Preview](/public/og-image.png)
 
@@ -97,7 +97,7 @@ Contact section styled as vintage classifieds:
 ## 👤 Author
 
 **Julio Calvo**
-- Frontend Engineer & UI Designer
+- Frontend Engineer
 - Based in Toronto, Canada
 - Email: julio@veraos.ai
 - GitHub: [@juliocalvor811-svg](https://github.com/juliocalvor811-svg)

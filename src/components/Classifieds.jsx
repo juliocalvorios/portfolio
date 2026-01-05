@@ -52,7 +52,7 @@ function Classifieds() {
             href="mailto:juliocalvorios@gmail.com?subject=Job Opportunity - Frontend Engineer"
             className="block mt-4 sm:mt-6 px-4 py-3 min-h-[44px] flex items-center justify-center bg-neutral-900 text-white text-[9px] sm:text-[10px] md:text-xs tracking-wider sm:tracking-widest text-center hover:bg-neutral-700 transition-colors"
           >
-            SEND INQUIRY →
+            SEND INQUIRY
           </a>
           </div>
         </ScrollReveal>

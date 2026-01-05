@@ -8,11 +8,11 @@ const projects = [
     category: 'FULLSTACK · AI INTEGRATION',
     type: 'Full-Stack Product',
     year: '2025',
-    content: `Full-stack productivity platform with drag-and-drop widgets, AI chat with semantic highlighting, 
-      library system with folders, and academic tools. 6 months, 100K+ lines.`,
-    fullContent: `Full-stack productivity platform: drag-and-drop widget dashboard, AI chat with semantic highlighting, 
-      library system with folders and search, academic tools with spaced repetition. 6 months, 100K+ lines, solo developer.`,
-    pullQuote: '"The best way to learn frontend is to build something too ambitious and figure it out."',
+    content: `Full-stack productivity platform with drag-and-drop widgets, AI chat with semantic highlighting,
+      library system with folders, and academic tools. 6 months of work.`,
+    fullContent: `Full-stack productivity platform: drag-and-drop widget dashboard, AI chat with semantic highlighting,
+      library system with folders and search, academic tools with spaced repetition. 6 months, solo developer.`,
+    pullQuote: '"Six months building this taught me more about React than any course could."',
     tech: {
       languages: [
         { name: 'JavaScript', percentage: 80.7 },
@@ -24,12 +24,12 @@ const projects = [
       ai: ['6 LLM Providers', 'Embeddings Server']
     },
     features: [
-      '100K+ lines codebase',
       'Interactive Highlight System',
       'Drag-and-Drop Widgets',
       'Chat Library with Folders',
       'Real-time Streaming',
-      'Flashcards with Spaced Repetition'
+      'Flashcards with Spaced Repetition',
+      'Multi-provider AI Integration'
     ],
     links: {
       live: 'https://veraos.ai',
@@ -52,7 +52,7 @@ const projects = [
     duration: '6 months',
     role: 'Solo Developer & Designer',
 
-    lede: `Full-stack productivity platform with drag-and-drop widgets, AI chat with semantic highlighting, library system with folders, and academic tools. 6 months, 100K+ lines, solo developer.`,
+    lede: `Full-stack productivity platform with drag-and-drop widgets, AI chat with semantic highlighting, library system with folders, and academic tools. 6 months, solo developer.`,
 
     bodyParagraphs: [
       {
@@ -282,7 +282,7 @@ const projects = [
     fullContent: `An interactive web experience built with Next.js 14 and TypeScript that visualizes
       the evolution of Ontario's flag from 1763 to present day. The focus was on code quality:
       strict TypeScript, comprehensive testing, and clean architecture.`,
-    pullQuote: '"73 unit tests and 5 E2E tests. Because code that works once should work every time."',
+    pullQuote: '"Built with TypeScript strict mode and 73 unit tests."',
     tech: {
       languages: [
         { name: 'TypeScript', percentage: 85 },
@@ -301,7 +301,7 @@ const projects = [
     ],
     links: {
       live: 'https://ontario-flag.juliocalvo.dev',
-      github: 'https://github.com/juliocalvorios/ontario-flag-time-machine'
+      github: 'https://github.com/juliocalvorios/Ontario-Flag-Project'
     },
 
     // Card Preview Video
@@ -457,7 +457,7 @@ const projects = [
     ],
     links: {
       live: 'https://through-the-glass.juliocalvo.dev',
-      github: 'https://github.com/juliocalvorios/through-the-glass'
+      github: 'https://github.com/juliocalvorios/Through-The-Glass-Project'
     },
 
     // Card Preview Video
@@ -557,7 +557,7 @@ const projects = [
       submit buttons, self-unchecking checkboxes with timers, gaslighting password fields,
       moving age inputs, draggable Windows 95 windows, and a hidden Matrix-style hack mode.
       Built with React Hook Form, Zod validation, and Framer Motion.`,
-    pullQuote: '"The best way to understand dark patterns is to experience them — then laugh about it."',
+    pullQuote: '"Dark patterns are everywhere. This project makes them obvious by turning them into comedy."',
     tech: {
       languages: [
         { name: 'TypeScript', percentage: 97 },
@@ -576,7 +576,7 @@ const projects = [
     ],
     links: {
       live: 'https://theimpossibleform.com',
-      github: 'https://github.com/juliocalvorios/the-impossible-form'
+      github: 'https://github.com/juliocalvorios/The-Impossible-Form'
     },
 
     // Card Preview Video (loops on hover)

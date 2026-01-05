@@ -230,33 +230,23 @@ function NewspaperCTA({ onContactClick }) {
             {/* Left Column */}
             <div className="border-r-0 sm:border-r border-neutral-200 pr-0 sm:pr-4">
               <h4 className="font-bold text-xs sm:text-sm border-b border-neutral-200 pb-1 mb-2">
-                Skills in High Demand
+                Specialization
               </h4>
               <div className="text-[10px] sm:text-xs leading-relaxed text-neutral-600 space-y-1">
-                <p>React.js, TypeScript, Tailwind CSS.</p>
-                <p>Responsive design. Production-ready code.</p>
-              </div>
-
-              {/* Mini Stats */}
-              <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-neutral-200">
-                <div className="text-center">
-                  <p className="text-lg sm:text-xl font-bold font-serif">4</p>
-                  <p className="text-[8px] sm:text-[9px] text-neutral-500">PROJECTS</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-lg sm:text-xl font-bold font-serif">1</p>
-                  <p className="text-[8px] sm:text-[9px] text-neutral-500">NPM PACKAGE</p>
-                </div>
+                <p>React • TypeScript • Three.js</p>
+                <p>Full-stack development</p>
+                <p>Production systems</p>
               </div>
             </div>
 
             {/* Right Column */}
             <div>
               <h4 className="font-bold text-xs sm:text-sm border-b border-neutral-200 pb-1 mb-2">
-                Location: Toronto
+                Availability
               </h4>
-              <div className="text-[10px] sm:text-xs leading-relaxed text-neutral-600">
-                <p>Humber Polytechnic graduate.</p>
+              <div className="text-[10px] sm:text-xs leading-relaxed text-neutral-600 space-y-1">
+                <p>Location: Toronto</p>
+                <p>Work Auth: Full-time, any CA employer</p>
               </div>
 
               {/* CTA Button */}
@@ -268,7 +258,7 @@ function NewspaperCTA({ onContactClick }) {
               </button>
 
               <p className="text-[8px] sm:text-[9px] text-neutral-400 text-center mt-2 italic">
-                juliocalvo.dev
+                juliocalvorios@gmail.com
               </p>
             </div>
           </div>
