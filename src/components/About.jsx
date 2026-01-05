@@ -29,7 +29,7 @@ function About() {
           <div className="text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
             <p className="text-neutral-500 font-serif mt-1 text-xs sm:text-sm md:text-base tracking-wide">
-              Frontend Engineer · Toronto
+              Product-Focused Frontend Engineer · Toronto
             </p>
           </div>
         </div>
