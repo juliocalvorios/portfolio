@@ -62,7 +62,7 @@ src/
 ### Front Page
 The main landing page featuring:
 - Lead story with featured project
-- Quick facts sidebar (137 widgets, 12 months, self-taught)
+- Quick facts sidebar (10 widgets, 6 months development)
 - Secondary stories grid
 
 ### Selected Works
