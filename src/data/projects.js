@@ -456,7 +456,7 @@ const projects = [
       'Discoverable Bookshelf'
     ],
     links: {
-      live: 'https://github.com/juliocalvorios/Through-The-Glass-Project',
+      live: 'https://through-the-glass-project.vercel.app',
       github: 'https://github.com/juliocalvorios/Through-The-Glass-Project'
     },
 
