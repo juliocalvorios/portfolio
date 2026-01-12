@@ -300,7 +300,7 @@ const projects = [
       'Canvas API Export'
     ],
     links: {
-      live: 'https://ontario-flag.juliocalvo.dev',
+      live: 'https://ontario-flag-project.vercel.app',
       github: 'https://github.com/juliocalvorios/Ontario-Flag-Project'
     },
 
@@ -456,7 +456,7 @@ const projects = [
       'Discoverable Bookshelf'
     ],
     links: {
-      live: 'https://through-the-glass.juliocalvo.dev',
+      live: 'https://github.com/juliocalvorios/Through-The-Glass-Project',
       github: 'https://github.com/juliocalvorios/Through-The-Glass-Project'
     },
 
