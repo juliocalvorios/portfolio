@@ -86,7 +86,7 @@ function About() {
           {/* Quick Info */}
           <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
             <InfoRow label="Location" value="Toronto, Ontario" />
-            <InfoRow label="Origin" value="Zaragoza, Spain" />
+            <InfoRow label="Origin" value="Spain" />
             <InfoRow label="Focus" value="Frontend" />
             <InfoRow label="Work Auth" value="Full-time, any CA employer" />
           </div>
@@ -95,15 +95,24 @@ function About() {
         {/* Main Content */}
         <div className="lg:col-span-8">
           {/* Article Content - Single column, simple */}
-          <div className="font-serif text-sm sm:text-base leading-relaxed space-y-4 sm:space-y-5">
+          <div className="font-serif text-sm sm:text-base leading-relaxed space-y-4">
             <p>
-              <span className="text-3xl sm:text-4xl font-bold float-left mr-2 leading-none mt-1">
+              <span className="text-3xl sm:text-4xl font-bold float-left mr-1.5 leading-none mt-1">
                 I
               </span>
-              'm Julio. I'm from Zaragoza, Spain, and I've been living in Toronto for the past couple of years. Before getting into development, I studied Commerce and Marketing back in Spain. Then I moved here and did Multimedia Design at Humber Polytechnic.
+              ’m a Frontend Engineer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing from Spain, I view interfaces as the intersection where business goals, design, and engineering meet.
             </p>
+            
             <p>
-              I learned React deeply by building veraOS.
+              I approach frontend development with a system architecture mindset. This is best exemplified by veraOS, a productivity platform I engineered using React, TypeScript, and Supabase. From implementing O(n) drag-and-drop to end-to-end encryption and semantic search, I focused on maintainability and performance, structuring the codebase to support a production-grade experience.
+            </p>
+            
+            <p>
+              I enjoy getting to the bottom of complex problems. I strive to understand the underlying logic to write code that is clear, predictable, and maintainable. I’m looking to join a collaborative team where I can contribute meaningful work on the frontend, while refining my craft through code reviews and real-world challenges.
+            </p>
+            
+            <p>
+              Outside of code, I enjoy cooking, cinema, and cycling, pursuits that reward patience and consistency.
             </p>
           </div>
 
