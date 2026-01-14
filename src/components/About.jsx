@@ -98,21 +98,21 @@ function About() {
           <div className="font-serif text-sm sm:text-base leading-relaxed space-y-4">
             <p>
               <span className="text-3xl sm:text-4xl font-bold float-left mr-1.5 leading-none mt-1">
-                I
+                J
               </span>
-              ’m a Frontend Engineer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing from Spain, I view interfaces as the intersection where business goals, design, and engineering meet.
+              ulio Calvo is a Frontend Engineer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
             </p>
             
             <p>
-              I approach frontend development with a system architecture mindset. This is best exemplified by veraOS, a productivity platform I engineered using React, TypeScript, and Supabase. From implementing O(n) drag-and-drop to end-to-end encryption and semantic search, I focused on maintainability and performance, structuring the codebase to support a production-grade experience.
+              He approaches frontend development with a system architecture mindset. This is best exemplified by veraOS, a productivity platform he engineered using React, TypeScript, and Supabase. From implementing O(n) drag-and-drop to end-to-end encryption and semantic search, he focused on maintainability and performance, structuring the codebase to support a production-grade experience.
             </p>
             
             <p>
-              I enjoy getting to the bottom of complex problems. I strive to understand the underlying logic to write code that is clear, predictable, and maintainable. I’m looking to join a collaborative team where I can contribute meaningful work on the frontend, while refining my craft through code reviews and real-world challenges.
+              Calvo enjoys getting to the bottom of complex problems. He strives to understand the underlying logic to write code that is clear, predictable, and maintainable. He is currently looking to join a collaborative team where he can contribute meaningful work on the frontend, while refining his craft through code reviews and real-world challenges.
             </p>
             
             <p>
-              Outside of code, I enjoy cooking, cinema, and cycling, pursuits that reward patience and consistency.
+              Outside of code, he enjoys cooking, cinema, and cycling, pursuits that reward patience and consistency.
             </p>
           </div>
 
