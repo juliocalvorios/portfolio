@@ -84,8 +84,16 @@ export default function PrintEdition({ isOpen, onClose }) {
   if (!isOpen) return null
 
   const handleDownload = () => {
-    // TODO: Generate and download PDF
-    alert('PDF download coming soon!')
+    // PDF download disabled for now
+    // When ready, place your PDF in /public/resume.pdf and uncomment:
+    // const link = document.createElement('a')
+    // link.href = '/resume.pdf'
+    // link.download = 'Julio_Calvo_Resume.pdf'
+    // document.body.appendChild(link)
+    // link.click()
+    // document.body.removeChild(link)
+
+    console.log('PDF download: ready to implement when PDF is uploaded to /public/resume.pdf')
   }
 
   // Format today's date
@@ -150,65 +158,101 @@ export default function PrintEdition({ isOpen, onClose }) {
           <div className="paper-content">
             {/* Masthead */}
             <div className="paper-masthead">
-              <div className="paper-edition">Vol. {toRoman(volume)} · No. {daysSinceStart + 1} · Late Edition</div>
-              <h1 className="paper-title">THE JULIO CALVO TIMES</h1>
-              <div className="paper-tagline">"All the Code That's Fit to Ship"</div>
-              <div className="paper-meta">
-                <span>TORONTO, CANADA</span>
-                <span>{dateFormatted}</span>
+              <h1 className="paper-name">Julio Calvo</h1>
+              <div className="paper-title-role">Frontend Engineer · Toronto, ON</div>
+              <div className="paper-contact">
+                <span>juliocalvorios.com</span>
+                <span className="paper-contact-sep">·</span>
+                <span>+1 437-254-9832</span>
+                <span className="paper-contact-sep">·</span>
+                <span>juliocalvorios@gmail.com</span>
+              </div>
+              <div className="paper-contact">
+                <span>github.com/juliocalvorios</span>
+                <span className="paper-contact-sep">·</span>
+                <span>linkedin.com/in/juliocalvorios</span>
               </div>
             </div>
 
             {/* Divider */}
             <div className="paper-divider">
               <div className="paper-divider-line"></div>
-              <div className="paper-divider-ornament">✦</div>
-              <div className="paper-divider-line"></div>
             </div>
 
-            {/* Main headline */}
-            <div className="paper-headline">
-              <h2>Frontend Engineer Seeks New Challenge in Toronto's Tech Scene</h2>
-              <p className="paper-lead">
-                Spanish-born creative combines design sensibility with technical skill,
-                bringing pixel-perfect interfaces and user-focused solutions to the table.
+            {/* Technologies */}
+            <div className="paper-section">
+              <h3 className="paper-section-title">Technologies</h3>
+              <p className="paper-text-compact">
+                React · TypeScript · Next.js · Tailwind CSS · Supabase · Jest · Playwright · Three.js · Zod · React Hook Form
               </p>
             </div>
 
-            {/* Two columns */}
-            <div className="paper-columns">
-              <div className="paper-column">
-                <h3>Technical Skills</h3>
-                <ul>
-                  <li>React.js & JavaScript</li>
-                  <li>Tailwind CSS & CSS3</li>
-                  <li>Figma & UI Design</li>
-                  <li>Git & Version Control</li>
-                </ul>
+            {/* Main Project */}
+            <div className="paper-section">
+              <h3 className="paper-section-title">Main Project</h3>
+              <div className="paper-project-header">
+                <strong>veraOS</strong>
+                <span className="paper-project-url">veraos.ai</span>
               </div>
-              <div className="paper-column">
-                <h3>Education</h3>
-                <p>
-                  <strong>Humber Polytechnic</strong><br/>
-                  Multimedia Design & Dev.
-                </p>
-                <p style={{marginTop: '8px'}}>
-                  <strong>Spain</strong><br/>
-                  Commerce & Digital Marketing
+              <ul className="paper-list">
+                <li>Built 10 interactive widget types with drag-and-drop using O(n) collision detection via spatial indexing</li>
+                <li>Implemented AES-256-GCM encryption with server-side keys via Supabase Vault, zero client exposure</li>
+                <li>Designed chat library system with nested folders, drag-and-drop organization, and optimistic updates with rollback</li>
+                <li>Built flashcard system with FSRS-4.5 spaced repetition algorithm and 8 card types</li>
+                <li>Architected lazy-loading system with code splitting (5.3MB split into 50+ chunks that load on-demand)</li>
+                <li>Offloaded embeddings processing to server-side (25MB → 0MB client download)</li>
+                <li>Integrated 6 LLM providers with streaming semantic highlighting and automatic fallbacks</li>
+              </ul>
+            </div>
+
+            {/* Additional Projects */}
+            <div className="paper-section">
+              <h3 className="paper-section-title">Additional Projects</h3>
+              <div className="paper-project-item">
+                <strong>Ontario Flag Time Machine</strong> — 73 unit tests + 5 E2E, TypeScript strict, branded types
+                <span className="paper-project-url-inline">ontario-flag-project.vercel.app</span>
+              </div>
+              <div className="paper-project-item">
+                <strong>The Impossible Form</strong> — React Hook Form + Zod, pixel-perfect Windows 95 UI
+                <span className="paper-project-url-inline">the-impossible-form.vercel.app</span>
+              </div>
+              <div className="paper-project-item">
+                <strong>Through the Glass</strong> — Three.js particles, GLSL shaders, real-time weather API
+                <span className="paper-project-url-inline">through-the-glass-project.vercel.app</span>
+              </div>
+            </div>
+
+            {/* Open Source */}
+            <div className="paper-section">
+              <h3 className="paper-section-title">Open Source</h3>
+              <div className="paper-opensource-box">
+                <div className="paper-project-header">
+                  <strong>react-ai-highlight-parser</strong>
+                  <span className="paper-project-url">npmjs.com/package/react-ai-highlight-parser</span>
+                </div>
+                <p className="paper-opensource-desc">
+                  Streaming text parser with O(n) tokenization, 60 semantic highlight combinations
                 </p>
               </div>
             </div>
 
-            {/* Quote */}
-            <div className="paper-quote">
-              <p>"I believe in building, not waiting. Every project is a chance to create something meaningful."</p>
-              <cite>Julio Calvo, Frontend Engineer</cite>
+            {/* Education */}
+            <div className="paper-section">
+              <h3 className="paper-section-title">Education</h3>
+              <div className="paper-education-item">
+                <div><strong>Humber Polytechnic, Toronto</strong> — Multimedia Design & Development</div>
+                <div className="paper-education-year">2024–2025</div>
+              </div>
+              <div className="paper-education-item">
+                <div><strong>Montessori School, Spain</strong> — Commerce & Marketing</div>
+                <div className="paper-education-year">2019–2023</div>
+              </div>
             </div>
 
             {/* Footer */}
             <div className="paper-footer">
               <div className="paper-footer-left">EST. 2024</div>
-              <div className="paper-footer-center">juliocalvo.dev</div>
+              <div className="paper-footer-center">juliocalvorios.com</div>
               <div className="paper-footer-right">PRINT EDITION</div>
             </div>
           </div>
