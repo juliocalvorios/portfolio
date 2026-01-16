@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import Ornament from './ui/Ornament'
 import ScrollReveal from './ui/ScrollReveal'
-import { Gamepad2 } from 'lucide-react'
+import { Gamepad2, Plus, Minus } from 'lucide-react'
 import MiniGames from './About/MiniGames'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function About() {
   const [showMiniGames, setShowMiniGames] = useState(false)
+  const [showMoreOffClock, setShowMoreOffClock] = useState(false)
+  const [hoverOffClock, setHoverOffClock] = useState(false)
 
   // Show Mini Games instead of About content
   if (showMiniGames) {
@@ -111,9 +114,68 @@ function About() {
               Calvo enjoys getting to the bottom of complex problems. He strives to understand the underlying logic to write code that is clear, predictable, and maintainable. He is currently looking to join a collaborative team where he can contribute meaningful work on the frontend, while refining his craft through code reviews and real-world challenges.
             </p>
             
-            <p>
-              Outside of code, he enjoys cooking, cinema, and cycling, pursuits that reward patience and consistency.
-            </p>
+            <div>
+              <p
+                className="cursor-pointer"
+                onClick={() => setShowMoreOffClock(!showMoreOffClock)}
+                onMouseEnter={() => setHoverOffClock(true)}
+                onMouseLeave={() => setHoverOffClock(false)}
+              >
+                <span className="hover:text-neutral-500 transition-colors">
+                  Outside of code, he enjoys cooking, cinema, and cycling, pursuits that reward patience and consistency.
+                </span>
+              </p>
+
+              <AnimatePresence>
+                {(hoverOffClock && !showMoreOffClock) && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-[10px] tracking-widest font-bold mt-2 text-neutral-400">
+                      MORE OFF THE CLOCK
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {showMoreOffClock && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pt-6 mt-4">
+                      <div className="flex flex-col lg:flex-row gap-6 items-start">
+                        <div className="lg:w-1/3 flex-shrink-0">
+                          <div className="aspect-square bg-neutral-100 border border-neutral-200 overflow-hidden">
+                            <img
+                              src="/images/cooking-photo.jpg"
+                              alt="Julio cooking"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-[10px] tracking-widest font-bold mb-3 text-neutral-400">
+                            MORE OFF THE CLOCK
+                          </h4>
+                          <p className="font-serif text-sm sm:text-base leading-relaxed text-neutral-700">
+                            Building products is like cooking. You need the right ingredients (stack), precise timing (performance), and presentation matters (UI).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Technical Stack */}
