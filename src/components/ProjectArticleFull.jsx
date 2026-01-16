@@ -101,7 +101,7 @@ function VideoPlayer({ src }) {
         <video
           ref={videoRef}
           src={src}
-          className="w-full h-auto bg-neutral-100 -mt-[0.5%]"
+          className="w-full h-auto bg-neutral-100 -mt-[0.5%] rounded-lg"
           style={{ marginBottom: '-0.5%' }}
           loop
           playsInline
