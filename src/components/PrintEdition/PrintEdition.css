@@ -165,7 +165,7 @@
 
 /* Masthead - Resume Header */
 .paper-masthead {
-  text-align: center;
+  text-align: left;
   margin-bottom: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid #1a1a1a;
@@ -309,7 +309,7 @@
   justify-content: space-between;
   font-size: 9px;
   line-height: 1.6;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-family: system-ui, sans-serif;
 }
 
