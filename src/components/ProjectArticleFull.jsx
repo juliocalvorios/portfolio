@@ -84,9 +84,16 @@ function VideoPlayer({ src }) {
 
   const handleFullscreen = () => {
     if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
+      // iOS/Safari mobile
+      if (videoRef.current.webkitEnterFullscreen) {
+        videoRef.current.webkitEnterFullscreen()
+      }
+      // Modern browsers
+      else if (videoRef.current.requestFullscreen) {
         videoRef.current.requestFullscreen()
-      } else if (videoRef.current.webkitRequestFullscreen) {
+      }
+      // Older webkit
+      else if (videoRef.current.webkitRequestFullscreen) {
         videoRef.current.webkitRequestFullscreen()
       }
     }
@@ -114,7 +121,7 @@ function VideoPlayer({ src }) {
         </div>
       )}
       {isLoaded && (
-        <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 sm:transition-opacity sm:opacity-0 max-sm:opacity-100">
           <button
             onClick={togglePlay}
             className="w-8 h-8 bg-black/60 hover:bg-black/80 text-white rounded-lg flex items-center justify-center cursor-pointer"
