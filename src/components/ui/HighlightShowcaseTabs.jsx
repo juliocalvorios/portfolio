@@ -39,11 +39,11 @@ function VideoPlayer({ src }) {
   }
 
   return (
-    <div className="relative group overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+    <div className="relative group rounded-lg border border-neutral-200 bg-neutral-100 overflow-hidden">
       <video
         ref={videoRef}
         src={src}
-        className="w-full h-auto bg-neutral-100"
+        className="w-full h-auto bg-neutral-100 block"
         loop
         muted
         playsInline

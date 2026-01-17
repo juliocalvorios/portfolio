@@ -149,7 +149,7 @@ export default function PrintEdition({ isOpen, onClose }) {
         <div className={`matrix-paper ${isPrinting ? 'printing' : ''}`}>
           {/* Left perforated edge */}
           <div className="paper-edge paper-edge-left">
-            {[...Array(24)].map((_, i) => (
+            {[...Array(27)].map((_, i) => (
               <div key={i} className="paper-hole" />
             ))}
           </div>
@@ -248,18 +248,11 @@ export default function PrintEdition({ isOpen, onClose }) {
                 <div className="paper-education-year">2019–2023</div>
               </div>
             </div>
-
-            {/* Footer */}
-            <div className="paper-footer">
-              <div className="paper-footer-left">EST. 2024</div>
-              <div className="paper-footer-center">juliocalvorios.com</div>
-              <div className="paper-footer-right">PRINT EDITION</div>
-            </div>
           </div>
 
           {/* Right perforated edge */}
           <div className="paper-edge paper-edge-right">
-            {[...Array(24)].map((_, i) => (
+            {[...Array(27)].map((_, i) => (
               <div key={i} className="paper-hole" />
             ))}
           </div>

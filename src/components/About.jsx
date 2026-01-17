@@ -167,7 +167,7 @@ function About() {
                             MORE OFF THE CLOCK
                           </h4>
                           <p className="font-serif text-sm sm:text-base leading-relaxed text-neutral-700">
-                            Building products is like cooking. You need the right ingredients (stack), precise timing (performance), and presentation matters (UI).
+                            Writing code is like cooking. You need the right ingredients (stack), precise timing (performance), and presentation matters (UI).
                           </p>
                         </div>
                       </div>

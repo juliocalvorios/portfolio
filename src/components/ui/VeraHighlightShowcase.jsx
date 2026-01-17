@@ -50,17 +50,123 @@ const MODES = [
   { m: 'highlights', p: 'natural' }, { m: 'underline', p: 'natural' }, { m: 'both', p: 'natural' },
 ]
 
-// Parser
-function parse(text, mode, pal) {
+// Count visible characters (excluding tags)
+function getVisibleLength(text) {
+  if (!text) return 0
+  let visibleCount = 0
+  let i = 0
+  let inTag = false
+
+  while (i < text.length) {
+    if (text[i] === '[') {
+      inTag = true
+    } else if (text[i] === ']') {
+      inTag = false
+      i++
+      continue
+    }
+
+    if (!inTag) {
+      visibleCount++
+    }
+    i++
+  }
+
+  return visibleCount
+}
+
+// Truncate text (with tags) to show only N visible characters
+function truncateToVisible(text, maxVisible) {
+  if (!text || maxVisible === null) return text
+
+  let visibleCount = 0
+  let i = 0
+  let inTag = false
+
+  while (i < text.length && visibleCount < maxVisible) {
+    if (text[i] === '[') {
+      inTag = true
+    } else if (text[i] === ']') {
+      inTag = false
+      i++
+      continue
+    }
+
+    if (!inTag) {
+      visibleCount++
+    }
+    i++
+  }
+
+  let truncated = text.substring(0, i)
+
+  // Remove orphaned/incomplete tags at the end
+  // Remove any opening tag without closing: [Y] or [/Y] that's not complete
+  const codes = ['Y', 'B', 'O', 'G', 'R', 'P', 'L', 'GR', 'H', 'BR']
+  codes.forEach(code => {
+    // Remove incomplete opening tags: [Y without ]
+    truncated = truncated.replace(new RegExp(`\\[${code}$`), '')
+    // Remove incomplete closing tags: [/Y without ]
+    truncated = truncated.replace(new RegExp(`\\[\\/${code}$`), '')
+    // Remove orphaned opening bracket
+    truncated = truncated.replace(/\[$/, '')
+  })
+
+  return truncated
+}
+
+// Clean orphaned tags from text
+function cleanOrphanedTags(text) {
+  if (!text) return text
+
+  let cleaned = text
+  const codes = ['Y', 'B', 'O', 'G', 'R', 'P', 'L', 'GR', 'H', 'BR']
+
+  codes.forEach(code => {
+    // First, protect valid pairs
+    const validPairRegex = new RegExp(`\\[${code}\\]([^\\[]*)\\[\\/${code}\\]`, 'g')
+    const validPairs = []
+
+    let tempText = cleaned.replace(validPairRegex, (match) => {
+      const idx = validPairs.length
+      validPairs.push(match)
+      return `___VALID_${code}_${idx}___`
+    })
+
+    // Remove all orphaned tags
+    tempText = tempText.replace(new RegExp(`\\[${code}\\]`, 'g'), '')
+    tempText = tempText.replace(new RegExp(`\\[\\/${code}\\]`, 'g'), '')
+
+    // Restore valid pairs
+    validPairs.forEach((pair, idx) => {
+      tempText = tempText.replace(`___VALID_${code}_${idx}___`, pair)
+    })
+
+    cleaned = tempText
+  })
+
+  return cleaned
+}
+
+// Parser - converts text with tags to React elements with styles
+function parse(text, mode, pal, maxVisible = null) {
   if (!text) return null
+
+  // Truncate to visible length if specified
+  let processText = maxVisible !== null ? truncateToVisible(text, maxVisible) : text
+
+  // Clean orphaned tags (tags without matching pairs)
+  processText = cleanOrphanedTags(processText)
+
   const c = PALETTES[pal]
   const out = []
   let k = 0, last = 0
   const re = /\[([YBOGRLP]|GR|H|BR)\]([\s\S]*?)\[\/\1\]/g
   let m
-  while ((m = re.exec(text)) !== null) {
+
+  while ((m = re.exec(processText)) !== null) {
     if (m.index > last) {
-      const seg = text.slice(last, m.index)
+      const seg = processText.slice(last, m.index)
       seg.split('\n').forEach((line, i, arr) => {
         if (line) out.push(<span key={k++}>{line}</span>)
         if (i < arr.length - 1) out.push(<br key={k++} />)
@@ -73,13 +179,15 @@ function parse(text, mode, pal) {
     out.push(<span key={k++} style={s}>{content}</span>)
     last = re.lastIndex
   }
-  if (last < text.length) {
-    const seg = text.slice(last)
+
+  if (last < processText.length) {
+    const seg = processText.slice(last)
     seg.split('\n').forEach((line, i, arr) => {
       if (line) out.push(<span key={k++}>{line}</span>)
       if (i < arr.length - 1) out.push(<br key={k++} />)
     })
   }
+
   return out
 }
 
@@ -131,9 +239,14 @@ function Bars({ color }) {
 
 // Assistant message - exact vera: text-base text-gray-700 leading-relaxed
 function Assistant({ text, mode, pal, show, typing }) {
-  const [displayed, setDisplayed] = useState('')
+  const [visibleChars, setVisibleChars] = useState(0)
   const intervalRef = useRef(null)
-  const indexRef = useRef(0)
+  const totalVisibleRef = useRef(0)
+
+  useEffect(() => {
+    // Calculate total visible characters once
+    totalVisibleRef.current = getVisibleLength(text)
+  }, [text])
 
   useEffect(() => {
     // Clear previous
@@ -141,36 +254,27 @@ function Assistant({ text, mode, pal, show, typing }) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
     }
-    
+
     if (!show || typing || !text) {
-      setDisplayed('')
-      indexRef.current = 0
+      setVisibleChars(0)
       return
     }
 
+    const totalVisible = totalVisibleRef.current
+
     // Exact vera timing: 40ms interval, ~15 chars per chunk
     intervalRef.current = setInterval(() => {
-      if (indexRef.current >= text.length) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-        return
-      }
-      
-      // Advance word by word, max 15 chars
-      let end = indexRef.current + 1
-      while (end < text.length && 
-             text[end] !== ' ' && 
-             text[end] !== '\n' && 
-             end - indexRef.current < 15) {
-        end++
-      }
-      // Include space/newline
-      if (end < text.length && (text[end] === ' ' || text[end] === '\n')) {
-        end++
-      }
-      
-      indexRef.current = end
-      setDisplayed(text.substring(0, end))
+      setVisibleChars(prev => {
+        if (prev >= totalVisible) {
+          clearInterval(intervalRef.current)
+          intervalRef.current = null
+          return totalVisible
+        }
+
+        // Advance by ~15 chars (adjusted for smoother animation)
+        const next = Math.min(prev + 15, totalVisible)
+        return next
+      })
     }, 40)
 
     return () => {
@@ -181,15 +285,15 @@ function Assistant({ text, mode, pal, show, typing }) {
     }
   }, [show, typing, text])
 
-  const animating = show && !typing && displayed.length < (text?.length || 0)
+  const animating = show && !typing && visibleChars < totalVisibleRef.current
 
   return (
-    <div 
+    <div
       className="px-4"
-      style={{ 
-        opacity: show ? 1 : 0, 
-        transform: show ? 'none' : 'translateY(6px)', 
-        transition: 'all 0.25s ease-out' 
+      style={{
+        opacity: show ? 1 : 0,
+        transform: show ? 'none' : 'translateY(6px)',
+        transition: 'all 0.25s ease-out'
       }}
     >
       <div className="text-[15px] text-gray-700" style={{ lineHeight: 1.1 }}>
@@ -197,7 +301,8 @@ function Assistant({ text, mode, pal, show, typing }) {
           <Bars color={AVATAR.color} />
         ) : (
           <>
-            {parse(displayed, mode, pal)}
+            {/* Parse with progressive reveal - highlights appear as text types */}
+            {parse(text, mode, pal, animating ? visibleChars : null)}
             {animating && <Bars color={AVATAR.color} />}
           </>
         )}
@@ -282,7 +387,7 @@ export default function VeraHighlightShowcase() {
 
       {/* Chat container */}
       <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-        <div className="py-4" style={{ backgroundColor: '#FAFAFA', minHeight: 220 }}>
+        <div className="py-4 relative" style={{ backgroundColor: '#FAFAFA', height: 220, overflow: 'auto' }}>
           <User text={conv.user} show={ph >= 1} />
           <Assistant text={conv.text} mode={mode.m} pal={mode.p} show={ph >= 2} typing={ph === 2} />
         </div>

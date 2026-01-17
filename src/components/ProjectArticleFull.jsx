@@ -100,16 +100,15 @@ function VideoPlayer({ src }) {
   }
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="relative group overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100"
+      className="relative group bg-neutral-100"
     >
       {isLoaded ? (
         <video
           ref={videoRef}
           src={src}
-          className="w-full h-auto bg-neutral-100 -mt-[0.5%] rounded-lg"
-          style={{ marginBottom: '-0.5%' }}
+          className="w-full h-auto bg-neutral-100 block"
           loop
           playsInline
           preload="none"
@@ -204,7 +203,7 @@ function ProjectArticleFull({ projectId, onClose }) {
 
       {/* Hero Image or Video */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-6 sm:mb-8 md:mb-12">
-        <div className="relative border border-neutral-200 overflow-hidden">
+        <div className="relative rounded-lg border border-neutral-200 overflow-hidden">
           {project.video ? (
             <VideoPlayer src={project.video} />
           ) : project.image ? (

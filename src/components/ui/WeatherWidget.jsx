@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { CloudSun, Cloud, Sun, CloudRain, CloudSnow, Moon } from 'lucide-react'
+import { useWeather } from '../../hooks/useWeather'
 
 /**
  * Minimal Weather Footer
@@ -7,6 +8,7 @@ import { CloudSun, Cloud, Sun, CloudRain, CloudSnow, Moon } from 'lucide-react'
  */
 function WeatherWidget({ className = '' }) {
   const [currentTime, setCurrentTime] = useState(new Date())
+  const weather = useWeather()
 
   // Update time every minute
   useEffect(() => {
@@ -20,12 +22,39 @@ function WeatherWidget({ className = '' }) {
   const minutes = currentTime.getMinutes()
   const formattedTime = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
 
-  // Simple weather icon based on time (placeholder - could be real API)
+  // Weather icon based on real conditions and time
   const getWeatherIcon = () => {
-    if (hour >= 6 && hour < 20) {
+    const isDaytime = hour >= 6 && hour < 20
+
+    if (weather.loading) {
+      return <CloudSun className="w-3.5 h-3.5 animate-pulse" />
+    }
+
+    const condition = weather.condition?.toLowerCase()
+
+    if (!isDaytime) {
+      return <Moon className="w-3.5 h-3.5" />
+    }
+
+    if (condition?.includes('clear')) {
+      return <Sun className="w-3.5 h-3.5" />
+    } else if (condition?.includes('rain') || condition?.includes('drizzle')) {
+      return <CloudRain className="w-3.5 h-3.5" />
+    } else if (condition?.includes('snow')) {
+      return <CloudSnow className="w-3.5 h-3.5" />
+    } else if (condition?.includes('cloud')) {
       return <CloudSun className="w-3.5 h-3.5" />
     }
-    return <Moon className="w-3.5 h-3.5" />
+
+    return <CloudSun className="w-3.5 h-3.5" />
+  }
+
+  // Capitalize first letter of each word in description
+  const formatDescription = (desc) => {
+    if (!desc) return ''
+    return desc.split(' ').map(word =>
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ')
   }
 
   return (
@@ -33,8 +62,12 @@ function WeatherWidget({ className = '' }) {
       <div className="flex items-center justify-between text-[9px] text-neutral-500">
         <div className="flex items-center gap-1.5">
           {getWeatherIcon()}
-          <span className="font-medium">-4°C</span>
-          <span className="text-neutral-400">Partly Cloudy</span>
+          <span className="font-medium">
+            {weather.loading ? '...' : `${weather.temp}°C`}
+          </span>
+          <span className="text-neutral-400">
+            {weather.loading ? 'Loading...' : formatDescription(weather.description)}
+          </span>
         </div>
         <div className="flex items-center gap-1.5 text-neutral-400">
           <span>{formattedTime} EST</span>

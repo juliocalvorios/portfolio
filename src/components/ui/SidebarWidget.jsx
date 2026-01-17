@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
-import { CloudSun, Moon, GitCommit, ArrowUpRight } from 'lucide-react'
+import { CloudSun, Moon, GitCommit, ArrowUpRight, Sun, CloudRain, CloudSnow } from 'lucide-react'
+import { useWeather } from '../../hooks/useWeather'
 
 // Lazy load fireworks component - only loads when user clicks celebrate
 const SimpleFireworks = lazy(() => import('./SimpleFireworks'))
@@ -25,6 +26,7 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
   const [error, setError] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [showConfetti, setShowConfetti] = useState(false)
+  const weather = useWeather()
 
   // Fetch GitHub commits from multiple repos (with localStorage cache)
   useEffect(() => {
@@ -140,6 +142,31 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
   const formattedTime = `${hour12}:${minutes.toString().padStart(2, '0')} ${ampm}`
   const isDay = hour >= 6 && hour < 20
 
+  // Weather icon based on real conditions and time
+  const getWeatherIcon = () => {
+    if (weather.loading) {
+      return <CloudSun className="w-3 h-3 animate-pulse" />
+    }
+
+    const condition = weather.condition?.toLowerCase()
+
+    if (!isDay) {
+      return <Moon className="w-3 h-3" />
+    }
+
+    if (condition?.includes('clear')) {
+      return <Sun className="w-3 h-3" />
+    } else if (condition?.includes('rain') || condition?.includes('drizzle')) {
+      return <CloudRain className="w-3 h-3" />
+    } else if (condition?.includes('snow')) {
+      return <CloudSnow className="w-3 h-3" />
+    } else if (condition?.includes('cloud')) {
+      return <CloudSun className="w-3 h-3" />
+    }
+
+    return <CloudSun className="w-3 h-3" />
+  }
+
   return (
     <div className="border border-neutral-200 bg-paper">
       {/* Section A: Article Index */}
@@ -233,12 +260,10 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
       <div className="px-3 py-2 bg-neutral-50/50 border-t border-neutral-200">
         <div className="flex items-center justify-between text-[9px] text-neutral-500">
           <div className="flex items-center gap-1.5">
-            {isDay ? (
-              <CloudSun className="w-3 h-3" />
-            ) : (
-              <Moon className="w-3 h-3" />
-            )}
-            <span className="font-medium">-4°C</span>
+            {getWeatherIcon()}
+            <span className="font-medium">
+              {weather.loading ? '...' : `${weather.temp}°C`}
+            </span>
             <span className="text-neutral-400">Toronto</span>
           </div>
           <div className="text-neutral-400">
