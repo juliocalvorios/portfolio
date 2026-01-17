@@ -23,13 +23,27 @@ This portfolio reimagines the traditional developer portfolio as a vintage newsp
 
 ## 🚀 Getting Started
 
+### Setup
+
+1. **Install dependencies**
 ```bash
-# Install dependencies
 npm install
+```
 
-# Start development server
+2. **Setup .env file**
+```bash
+cp .env.example .env
+# then add your openweather api key
+```
+
+3. **Run development server**
+```bash
 npm run dev
+```
 
+### Build Commands
+
+```bash
 # Build for production
 npm run build
 
