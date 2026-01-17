@@ -42,8 +42,6 @@ export function useWeather() {
 
         const data = await response.json()
 
-        console.log('Weather API response:', data) // Debug log
-
         const weatherData = {
           temp: Math.round(data.main.temp),
           description: data.weather[0].description,
@@ -60,8 +58,6 @@ export function useWeather() {
 
         setWeather(weatherData)
       } catch (error) {
-        console.error('Weather fetch error:', error)
-        console.error('Using fallback weather data')
         setWeather({
           temp: -4,
           description: 'Partly Cloudy',
