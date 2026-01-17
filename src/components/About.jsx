@@ -42,8 +42,8 @@ function About() {
         {/* Portrait Column */}
         <div className="lg:col-span-4">
           <div className="bg-neutral-100 border border-neutral-200 aspect-square sm:aspect-[3/4] flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
-            <img 
-              src="/images/photo-profile-juliocalvo.JPG" 
+            <img
+              src="/images/JulioCalvoprofile.JPG"
               alt="Julio Calvo"
               className="w-full h-full object-cover"
             />

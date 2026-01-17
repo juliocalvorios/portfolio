@@ -189,7 +189,7 @@ function ProjectArticleFull({ projectId, onClose }) {
         <div className="pb-4 sm:pb-6 md:pb-8 border-b border-neutral-200">
           <div className="flex items-center gap-2.5 sm:gap-3">
             <img
-              src="/images/photo-profile-juliocalvo.JPG"
+              src="/images/JulioCalvoArticles.JPG"
               alt="Julio Calvo"
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
             />

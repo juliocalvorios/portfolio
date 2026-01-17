@@ -7,6 +7,7 @@ import StickyNav from './components/ui/StickyNav'
 import { SoundProvider } from './components/ui/SoundManager'
 import NewspaperCTA from './components/ui/NewspaperCTA'
 import PrintEdition from './components/PrintEdition'
+import { design1, design2, design3, design4, design5 } from './utils/consoleDesigns'
 
 /**
  * Fixed Reading Progress Bar
@@ -110,6 +111,16 @@ function App() {
   const [activeSection, setActiveSection] = useState('front')
   const [selectedProject, setSelectedProject] = useState(null)
   const [showPrintEdition, setShowPrintEdition] = useState(false)
+
+  // Print console newspaper on mount
+  useEffect(() => {
+    // UNCOMMENT THE ONE YOU WANT:
+    design1()  // Classic Masthead (recommended)
+    // design2()  // Border Box
+    // design3()  // Single Line Banner
+    // design4()  // Minimal Divider
+    // design5()  // Ultra Minimal
+  }, [])
 
   // Subtle parallax effect
   useEffect(() => {
