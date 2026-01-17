@@ -92,8 +92,6 @@ export default function PrintEdition({ isOpen, onClose }) {
     // document.body.appendChild(link)
     // link.click()
     // document.body.removeChild(link)
-
-    console.log('PDF download: ready to implement when PDF is uploaded to /public/resume.pdf')
   }
 
   // Format today's date
