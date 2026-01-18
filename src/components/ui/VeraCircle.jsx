@@ -215,6 +215,12 @@ export default function VeraCircle({ width = 280, height = 280 }) {
         // === ANIMATION ===
         const stateColor = new THREE.Color(CIRCLE_COLOR)
 
+        // Detect mobile for performance optimization
+        const isMobile = window.innerWidth < 768
+        const noiseUpdateFrequency = isMobile ? 2 : 1
+        let frameCount = 0
+        let cachedNoiseValues = new Map()
+
         const animate = () => {
             animationRef.current = requestAnimationFrame(animate)
 
@@ -224,12 +230,22 @@ export default function VeraCircle({ width = 280, height = 280 }) {
             const time = clock.getElapsedTime() * 0.5
             const positions = particles.geometry.attributes.position.array
             const colors = particles.geometry.attributes.color.array
+            const shouldUpdateNoise = frameCount % noiseUpdateFrequency === 0
 
             for (let i = 0; i < PARTICLE_COUNT; i++) {
                 const i3 = i * 3
                 const basePosition = new THREE.Vector2(basePositions[i3], basePositions[i3 + 1])
-                const noiseX = noise.noise3d(basePosition.x * 0.01, basePosition.y * 0.01, time * 0.3) * 20
-                const noiseY = noise.noise3d(basePosition.y * 0.01, basePosition.x * 0.01, time * 0.3) * 20
+
+                let noiseX, noiseY
+                if (shouldUpdateNoise) {
+                    noiseX = noise.noise3d(basePosition.x * 0.01, basePosition.y * 0.01, time * 0.3) * 20
+                    noiseY = noise.noise3d(basePosition.y * 0.01, basePosition.x * 0.01, time * 0.3) * 20
+                    cachedNoiseValues.set(i, { noiseX, noiseY })
+                } else {
+                    const cached = cachedNoiseValues.get(i) || { noiseX: 0, noiseY: 0 }
+                    noiseX = cached.noiseX
+                    noiseY = cached.noiseY
+                }
 
                 const targetPos = new THREE.Vector2(basePosition.x + noiseX, basePosition.y + noiseY)
                 const distanceToInteraction = targetPos.distanceTo(interactionPoint)
@@ -262,6 +278,8 @@ export default function VeraCircle({ width = 280, height = 280 }) {
             particles.geometry.attributes.position.needsUpdate = true
             particles.geometry.attributes.color.needsUpdate = true
             renderer.render(scene, camera)
+
+            frameCount++
         }
 
         animate()
