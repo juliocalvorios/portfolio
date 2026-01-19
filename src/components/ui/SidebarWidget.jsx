@@ -180,7 +180,7 @@ function SidebarWidget({ projects, onProjectClick, playClick, playHover }) {
         {projects.map((project, i) => (
           <a
             key={project.id}
-            href={`#project-${project.id}`}
+            href={`#${project.slug}`}
             className="flex items-baseline gap-3 group"
             onClick={(e) => {
               e.preventDefault()

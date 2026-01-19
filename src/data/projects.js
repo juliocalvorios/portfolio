@@ -1,6 +1,7 @@
 const projects = [
   {
     id: 1,
+    slug: 'veraos',
     // Card Preview Data
     title: 'veraOS: Building a Full-Stack Productivity Platform from Scratch',
     subtitle: 'Drag-and-drop widgets, interactive highlights, real-time chat, and a library system - all integrated with AI',
@@ -270,6 +271,7 @@ const projects = [
   },
   {
     id: 2,
+    slug: 'ontario-flag',
     // Card Preview Data
     title: 'Ontario Flag Time Machine - Next.js & Testing',
     subtitle: 'An interactive visualization built with TypeScript strict mode and 73 unit tests',
@@ -424,6 +426,7 @@ const projects = [
   },
   {
     id: 3,
+    slug: 'through-the-glass',
     // Card Preview Data
     title: 'A Window That Knows Your Weather: Three.js + APIs',
     subtitle: 'Three.js particle effects synced to your real location via Weather and Geolocation APIs',
@@ -543,6 +546,7 @@ const projects = [
   },
   {
     id: 4,
+    slug: 'impossible-form',
     // Card Preview Data
     title: 'The Impossible Form: A Windows 95 Nightmare',
     subtitle: 'A form that fights back: fleeing buttons, self-unchecking checkboxes, and Windows 95 nostalgia',

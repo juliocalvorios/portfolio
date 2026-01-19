@@ -143,10 +143,19 @@ function VideoPlayer({ src }) {
 
 function ProjectArticleFull({ projectId, onClose }) {
   const project = projects.find(p => p.id === projectId)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [projectId])
+
+  const handleCopyLink = () => {
+    const url = `${window.location.origin}${window.location.pathname}#${project.slug}`
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
 
   if (!project) return null
 
@@ -690,20 +699,15 @@ function ProjectArticleFull({ projectId, onClose }) {
               </a>
             </div>
 
-            {/* Share Section */}
+            {/* Copy Link Section */}
             <div className="bg-neutral-50 border border-neutral-200 p-4 sm:p-5">
-              <h3 className="text-[10px] sm:text-xs tracking-wider sm:tracking-widest font-bold mb-3 sm:mb-4">SHARE THIS ARTICLE</h3>
-              <div className="flex gap-2">
-                <button className="flex-1 px-2 sm:px-3 py-2.5 sm:py-2 min-h-[44px] border border-neutral-300 text-[10px] sm:text-xs hover:bg-neutral-100 transition-colors">
-                  Twitter
-                </button>
-                <button className="flex-1 px-2 sm:px-3 py-2.5 sm:py-2 min-h-[44px] border border-neutral-300 text-[10px] sm:text-xs hover:bg-neutral-100 transition-colors">
-                  LinkedIn
-                </button>
-                <button className="flex-1 px-2 sm:px-3 py-2.5 sm:py-2 min-h-[44px] border border-neutral-300 text-[10px] sm:text-xs hover:bg-neutral-100 transition-colors">
-                  Copy
-                </button>
-              </div>
+              <h3 className="text-[10px] sm:text-xs tracking-wider sm:tracking-widest font-bold mb-3 sm:mb-4">ARTICLE LINK</h3>
+              <button
+                onClick={handleCopyLink}
+                className="w-full px-4 py-2.5 sm:py-2 min-h-[44px] border border-neutral-300 text-[10px] sm:text-xs hover:bg-neutral-100 transition-colors"
+              >
+                {copied ? '✓ Copied!' : 'Copy Link'}
+              </button>
             </div>
 
             {/* Related Projects */}
@@ -716,7 +720,7 @@ function ProjectArticleFull({ projectId, onClose }) {
                   .map(relatedProject => (
                     <button
                       key={relatedProject.id}
-                      onClick={() => window.location.hash = `project-${relatedProject.id}`}
+                      onClick={() => window.location.hash = relatedProject.slug}
                       className="block w-full text-left group py-2 min-h-[44px]"
                     >
                       <p className="text-[9px] sm:text-[10px] tracking-wider text-neutral-400 mb-0.5 sm:mb-1">

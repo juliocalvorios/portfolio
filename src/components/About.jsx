@@ -103,7 +103,7 @@ function About() {
               <span className="text-3xl sm:text-4xl font-bold float-left mr-1.5 leading-none mt-1">
                 J
               </span>
-              ulio Calvo is a Frontend Engineer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
+              ulio Calvo is a Frontend Engineer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing Management from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
             </p>
             
             <p>
@@ -222,7 +222,7 @@ function About() {
                   </p>
                   <p className="font-bold font-serif text-sm sm:text-base">Humber Polytechnic</p>
                   <p className="text-xs sm:text-sm text-neutral-600">
-                    Multimedia Design & Development
+                    Diploma in Multimedia Design & Development
                   </p>
                   <p className="text-xs sm:text-sm text-neutral-500 mt-1">
                     2024 - 2025
@@ -233,9 +233,9 @@ function About() {
                   <p className="text-[9px] sm:text-xs tracking-widest text-neutral-500 mb-1 sm:mb-2">
                     SPAIN
                   </p>
-                  <p className="font-bold font-serif text-sm sm:text-base">Montessori School</p>
+                  <p className="font-bold font-serif text-sm sm:text-base">Montessori College</p>
                   <p className="text-xs sm:text-sm text-neutral-600">
-                    Commerce & Marketing
+                    Commerce & Marketing Management
                   </p>
                   <p className="text-xs sm:text-sm text-neutral-500 mt-1">
                     2019 - 2023

@@ -84,6 +84,7 @@ export default function PrintEdition({ isOpen, onClose }) {
   if (!isOpen) return null
 
   const handleDownload = () => {
+<<<<<<< HEAD
     // PDF download disabled for now
     // When ready, place your PDF in /public/resume.pdf and uncomment:
     // const link = document.createElement('a')
@@ -92,6 +93,14 @@ export default function PrintEdition({ isOpen, onClose }) {
     // document.body.appendChild(link)
     // link.click()
     // document.body.removeChild(link)
+=======
+    const link = document.createElement('a')
+    link.href = '/Julio-Calvo-Frontend-Engineer.pdf'
+    link.download = 'Julio-Calvo-Frontend-Engineer.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+>>>>>>> 4e4ddc5 (feat: implement semantic URL routing and improve share functionality)
   }
 
   // Format today's date
@@ -196,7 +205,7 @@ export default function PrintEdition({ isOpen, onClose }) {
                 <li>Built 10 interactive widget types with drag-and-drop using O(n) collision detection via spatial indexing</li>
                 <li>Implemented AES-256-GCM encryption with server-side keys via Supabase Vault, zero client exposure</li>
                 <li>Designed chat library system with nested folders, drag-and-drop organization, and optimistic updates with rollback</li>
-                <li>Built flashcard system with FSRS-4.5 spaced repetition algorithm and 8 card types</li>
+                <li>Developed flashcard system with FSRS-4.5 spaced repetition algorithm and 8 card types</li>
                 <li>Architected lazy-loading system with code splitting (5.3MB split into 50+ chunks that load on-demand)</li>
                 <li>Offloaded embeddings processing to server-side (25MB → 0MB client download)</li>
                 <li>Integrated 6 LLM providers with streaming semantic highlighting and automatic fallbacks</li>
@@ -238,11 +247,11 @@ export default function PrintEdition({ isOpen, onClose }) {
             <div className="paper-section">
               <h3 className="paper-section-title">Education</h3>
               <div className="paper-education-item">
-                <div><strong>Humber Polytechnic, Toronto</strong> — Multimedia Design & Development</div>
+                <div><strong>Humber Polytechnic, Toronto</strong> — Diploma in Multimedia Design & Development</div>
                 <div className="paper-education-year">2024–2025</div>
               </div>
               <div className="paper-education-item">
-                <div><strong>Montessori School, Spain</strong> — Commerce & Marketing</div>
+                <div><strong>Montessori College, Spain</strong> — Commerce & Marketing Management</div>
                 <div className="paper-education-year">2019–2023</div>
               </div>
             </div>

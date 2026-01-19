@@ -122,6 +122,47 @@ function App() {
     // design5()  // Ultra Minimal
   }, [])
 
+  // Handle hash routing on initial load and hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1) // Remove the # symbol
+
+      if (!hash) return
+
+      // Handle section navigation
+      const sections = ['front', 'works', 'the-author', 'classifieds']
+      if (sections.includes(hash)) {
+        const sectionMap = {
+          'front': 'front',
+          'works': 'works',
+          'the-author': 'about',
+          'classifieds': 'contact'
+        }
+        setActiveSection(sectionMap[hash])
+        setSelectedProject(null)
+        window.scrollTo({ top: 0, behavior: 'instant' })
+        return
+      }
+
+      // Handle project navigation (any hash that's not a section)
+      import('./data/projects').then(module => {
+        const project = module.default.find(p => p.slug === hash)
+        if (project) {
+          setSelectedProject(project)
+          setActiveSection('works')
+          window.scrollTo({ top: 0, behavior: 'instant' })
+        }
+      })
+    }
+
+    // Run on mount to handle direct navigation to hash URL
+    handleHashChange()
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
   // Subtle parallax effect
   useEffect(() => {
     const handleScroll = () => {
@@ -146,12 +187,22 @@ function App() {
   const handleProjectClick = (project) => {
     setSelectedProject(project)
     setActiveSection('works')
+    window.location.hash = project.slug
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleSectionChange = (section) => {
     setActiveSection(section)
     setSelectedProject(null)
+
+    // Update hash for section navigation
+    const hashMap = {
+      'front': 'front',
+      'works': 'works',
+      'about': 'the-author',
+      'contact': 'classifieds'
+    }
+    window.location.hash = hashMap[section] || section
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
