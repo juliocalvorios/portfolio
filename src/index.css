@@ -264,12 +264,34 @@ button:focus-visible {
    PRINT STYLES
    ================================ */
 @media print {
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
   body {
     background: white;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
-  
+
   nav, footer, button {
     display: none !important;
+  }
+
+  /* Resume specific print styles */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Fondo blanco para impresión del resume */
+  .bg-gray-300 {
+    background: white !important;
+  }
+
+  /* Quitar padding extra en resume */
+  .resume-container {
+    padding: 0 !important;
   }
 }
 
