@@ -200,7 +200,7 @@ function ProjectArticleFull({ projectId, onClose }) {
             <img
               src="/images/JulioCalvoArticles.JPG"
               alt="Julio Calvo"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover object-top sm:object-center"
             />
             <div>
               <p className="font-semibold text-xs sm:text-sm">By Julio Calvo</p>
