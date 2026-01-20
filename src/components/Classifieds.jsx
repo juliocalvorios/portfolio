@@ -75,10 +75,10 @@ function Classifieds() {
               sublabel="Professional history"
               href="https://linkedin.com/in/juliocalvorios"
             />
-            <LinkItem 
+            <LinkItem
               label="Resume / CV"
               sublabel="Download PDF"
-              href="/resume.pdf"
+              href="/Julio-Calvo-Frontend-Engineer.pdf"
             />
             <LinkItem
               label="veraOS Live"
