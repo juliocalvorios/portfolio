@@ -165,7 +165,7 @@ export function SoundToggle({ className = '' }) {
   return (
     <button
       onClick={toggleMute}
-      className={`relative ${className}`}
+      className={`relative -translate-y-[1px] ${className}`}
       aria-label={isMuted ? 'Enable sound' : 'Mute sound'}
       aria-pressed={!isMuted}
       title={isMuted ? 'Turn sound on' : 'Turn sound off'}
@@ -175,8 +175,8 @@ export function SoundToggle({ className = '' }) {
         className={`
           block relative w-7 h-7 rounded-full border-2 transition-all duration-100
           ${isMuted
-            ? 'bg-neutral-200 border-neutral-300 translate-y-0'
-            : 'bg-neutral-100 border-neutral-400 translate-y-0.5'
+            ? 'bg-neutral-200 border-neutral-300'
+            : 'bg-neutral-100 border-neutral-400'
           }
         `}
         style={{
