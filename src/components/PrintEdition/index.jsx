@@ -84,23 +84,12 @@ export default function PrintEdition({ isOpen, onClose }) {
   if (!isOpen) return null
 
   const handleDownload = () => {
-<<<<<<< HEAD
-    // PDF download disabled for now
-    // When ready, place your PDF in /public/resume.pdf and uncomment:
-    // const link = document.createElement('a')
-    // link.href = '/resume.pdf'
-    // link.download = 'Julio_Calvo_Resume.pdf'
-    // document.body.appendChild(link)
-    // link.click()
-    // document.body.removeChild(link)
-=======
     const link = document.createElement('a')
     link.href = '/Julio-Calvo-Frontend-Engineer.pdf'
     link.download = 'Julio-Calvo-Frontend-Engineer.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
->>>>>>> 4e4ddc5 (feat: implement semantic URL routing and improve share functionality)
   }
 
   // Format today's date
