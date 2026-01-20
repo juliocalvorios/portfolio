@@ -156,7 +156,7 @@ function About() {
                         <div className="lg:w-1/3 flex-shrink-0">
                           <div className="aspect-square bg-neutral-100 border border-neutral-200 overflow-hidden">
                             <img
-                              src="/images/JulioCooking.jpg"
+                              src="/images/JulioCooking.JPG"
                               alt="Julio cooking"
                               className="w-full h-full object-cover"
                             />
