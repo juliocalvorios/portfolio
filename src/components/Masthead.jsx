@@ -67,8 +67,8 @@ function Masthead({ activeSection, onSectionChange, onPrintEdition }) {
         <span className="hidden sm:inline">VOL. {volumeRoman} · NO. {issueNumber.toLocaleString()}</span>
         <span className="sm:hidden text-[7px]">VOL. {volumeRoman}</span>
         <span className="hidden lg:inline absolute left-1/2 -translate-x-1/2">LATE EDITION</span>
-        <div className="flex items-start gap-2 sm:gap-3">
-          <span className="text-right text-[7px] sm:text-[10px] mt-2">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-right text-[7px] sm:text-[10px]">
             <span className="hidden md:inline">TORONTO, </span>
             {today}
           </span>

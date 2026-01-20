@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react'
 
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY
-const CITY = 'Toronto'
 const CACHE_KEY = 'weather_data'
-const CACHE_DURATION = 10 * 60 * 1000 // 10 minutes
+const CACHE_DURATION = 10 * 60 * 1000
 
-/**
- * Custom hook to fetch real-time weather data from OpenWeather API
- * Includes caching to avoid excessive API calls
- */
 export function useWeather() {
   const [weather, setWeather] = useState({
     temp: null,
@@ -21,7 +15,6 @@ export function useWeather() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Check cache first
         const cached = localStorage.getItem(CACHE_KEY)
         if (cached) {
           const { data, timestamp } = JSON.parse(cached)
@@ -31,10 +24,7 @@ export function useWeather() {
           }
         }
 
-        // Fetch fresh data
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=metric&appid=${API_KEY}`
-        )
+        const response = await fetch('/api/weather')
 
         if (!response.ok) {
           throw new Error('Failed to fetch weather data')
@@ -43,14 +33,13 @@ export function useWeather() {
         const data = await response.json()
 
         const weatherData = {
-          temp: Math.round(data.main.temp),
-          description: data.weather[0].description,
-          condition: data.weather[0].main,
+          temp: data.temp,
+          description: data.description,
+          condition: data.condition,
           loading: false,
           error: null
         }
 
-        // Cache the data
         localStorage.setItem(CACHE_KEY, JSON.stringify({
           data: weatherData,
           timestamp: Date.now()
@@ -58,6 +47,7 @@ export function useWeather() {
 
         setWeather(weatherData)
       } catch (error) {
+        console.error('Weather fetch error:', error)
         setWeather({
           temp: -4,
           description: 'Partly Cloudy',
