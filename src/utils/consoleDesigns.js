@@ -1,9 +1,3 @@
-/**
- * Console Newspaper Designs
- * Replicate the portfolio's newspaper aesthetic
- */
-
-// Helper function to convert to Roman numerals
 function toRoman(num) {
   const romanNumerals = [
     ['M', 1000], ['CM', 900], ['D', 500], ['CD', 400],
@@ -20,13 +14,9 @@ function toRoman(num) {
   return result
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VARIACIÓN 1: "Newspaper Edition" (CON DISEÑO BEIGE + SERIF)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function design1() {
   console.clear()
 
-  // Calculate volume and issue like your real masthead
   const now = new Date()
   const startDate = new Date('2025-01-01')
   const daysSinceStart = Math.floor((now - startDate) / (1000 * 60 * 60 * 24))
@@ -41,37 +31,22 @@ export function design1() {
     day: 'numeric'
   }).toUpperCase()
 
-  // Estilos que replican tu periódico
   const styles = {
-    // Fondo beige papel + texto negro tinta
     paper: 'background: #f4f1ea; color: #1a1a1a; padding: 24px; font-family: Georgia, serif; line-height: 1.6; border: 2px solid #d4d1ca;',
-
-    // Meta info (VOL. II, etc.)
     meta: 'font-size: 10px; letter-spacing: 0.15em; color: #666; font-weight: bold; text-transform: uppercase;',
-
-    // Título principal
     title: 'font-family: "Playfair Display", Georgia, serif; font-size: 32px; font-weight: 900; letter-spacing: 0.02em; color: #000; margin: 12px 0;',
-
-    // Subtitle
     subtitle: 'font-size: 12px; letter-spacing: 0.2em; color: #666; text-transform: uppercase;',
-
-    // Divisor
     divider: 'color: #ccc; margin: 8px 0;',
-
-    // Contacto
     contact: 'font-size: 12px; color: #333; line-height: 1.8;',
-
-    // Tagline
     tagline: 'font-style: italic; font-size: 11px; color: #888;'
   }
 
-  // Header con estilos CSS
-  console.log('%c ', styles.paper) // Crea el fondo beige
+  console.log('%c ', styles.paper)
   console.log('%cVOL. ' + volumeRoman + ' · NO. ' + issueNumber.toLocaleString() + '          LATE EDITION          TORONTO, ' + today.slice(0, 20), styles.meta)
   console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.divider)
   console.log('')
   console.log('%cTHE JULIO CALVO TIMES', styles.title)
-  console.log('%cFrontend Engineer · Toronto, Canada', styles.subtitle)
+  console.log('%cFrontend Developer · Toronto, Canada', styles.subtitle)
   console.log('')
   console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.divider)
   console.log('')
@@ -82,19 +57,16 @@ export function design1() {
   console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.divider)
   console.log('')
   console.log('%c"All the Code That\'s Fit to Ship"', styles.tagline)
-  console.log('%c ', styles.paper) // Cierra el fondo beige
+  console.log('%c ', styles.paper)
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VARIACIÓN 1b: "Classic Simple" (tu versión original guardada)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function design1Classic() {
   console.clear()
   console.log(`
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         THE JULIO CALVO TIMES
-        Frontend Engineer · Toronto
+        Frontend Developer · Toronto
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -105,9 +77,6 @@ export function design1Classic() {
 `)
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VARIACIÓN 2: "The Vignelli" (Estilo Suizo - inspirado en Gemini)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function design2() {
   console.clear()
 
@@ -135,9 +104,6 @@ export function design2() {
   console.log('%c🔗 github.com/juliocalvorios', styles.contact)
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VARIACIÓN 3: "The Guardian" (Centrado Elegante - inspirado en Gemini)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function design3() {
   console.clear()
 
@@ -146,7 +112,6 @@ export function design3() {
   })
 
   const now = new Date()
-  const startDate = new Date('2025-01-01')
   const volume = now.getFullYear() - 2024
   const volumeRoman = toRoman(volume)
 
@@ -162,14 +127,11 @@ export function design3() {
   console.log('%cThe Julio Calvo Times', styles.title)
   console.log('%c"Architecture over ornamentation."', styles.tagline)
   console.log('')
-  console.log('%cVOL. ' + volumeRoman + '     FRONTEND ENGINEER     ' + date.toUpperCase(), styles.divider)
+  console.log('%cVOL. ' + volumeRoman + '     FRONTEND DEVELOPER     ' + date.toUpperCase(), styles.divider)
   console.log('')
   console.log('%c📧 juliocalvorios@gmail.com  ·  🔗 github.com/juliocalvorios', styles.meta)
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VARIACIÓN 4: "The Typewriter" (Brutalismo Monoespaciado - inspirado en Gemini)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function design4() {
   console.clear()
 
@@ -196,16 +158,13 @@ export function design4() {
   console.log('%c🔗 github.com/juliocalvorios', styles.contact)
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VARIACIÓN 5: "Ultra Minimal"
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function design5() {
   console.clear()
   console.log(`
 
 
   THE JULIO CALVO TIMES
-  Frontend Engineer · Toronto
+  Frontend Developer · Toronto
 
   juliocalvorios@gmail.com
   github.com/juliocalvorios

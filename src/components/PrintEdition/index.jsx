@@ -85,8 +85,8 @@ export default function PrintEdition({ isOpen, onClose }) {
 
   const handleDownload = () => {
     const link = document.createElement('a')
-    link.href = '/Julio-Calvo-Frontend-Engineer.pdf'
-    link.download = 'Julio-Calvo-Frontend-Engineer.pdf'
+    link.href = '/Julio-Calvo-Frontend-Developer.pdf'
+    link.download = 'Julio-Calvo-Frontend-Developer.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -155,7 +155,7 @@ export default function PrintEdition({ isOpen, onClose }) {
             {/* Masthead */}
             <div className="paper-masthead">
               <h1 className="paper-name">Julio Calvo</h1>
-              <div className="paper-title-role">Frontend Engineer · Toronto, ON</div>
+              <div className="paper-title-role">Frontend Developer · Toronto, ON</div>
               <div className="paper-contact">
                 <span>juliocalvorios.com</span>
                 <span className="paper-contact-sep">·</span>

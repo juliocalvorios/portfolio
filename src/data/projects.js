@@ -48,7 +48,7 @@ const projects = [
     videoCaption: 'The veraOS dashboard with customizable widgets and AI chat integration.',
     author: {
       name: 'Julio Calvo',
-      title: 'Frontend Engineer'
+      title: 'Frontend Developer'
     },
     duration: '6 months',
     role: 'Solo Developer & Designer',
@@ -316,7 +316,7 @@ const projects = [
     videoCaption: 'The Ontario Flag Time Machine: 260 years of history, 73 tests.',
     author: {
       name: 'Julio Calvo',
-      title: 'Frontend Engineer'
+      title: 'Frontend Developer'
     },
     duration: '2 weeks',
     role: 'Solo Developer & Designer',
@@ -473,7 +473,7 @@ const projects = [
     videoCaption: 'The Nordic cabin window with snow falling outside and warm interior lighting.',
     author: {
       name: 'Julio Calvo',
-      title: 'Frontend Engineer'
+      title: 'Frontend Developer'
     },
     duration: '3 weeks',
     role: 'Solo Developer & Designer',
@@ -593,7 +593,7 @@ const projects = [
     videoCaption: 'The Impossible Form: a Windows 95 window that actively resists being filled out.',
     author: {
       name: 'Julio Calvo',
-      title: 'Frontend Engineer'
+      title: 'Frontend Developer'
     },
     duration: '2 weeks',
     role: 'Solo Developer & Designer',

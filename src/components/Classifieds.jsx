@@ -22,7 +22,7 @@ function Classifieds() {
           </h3>
           
           <div className="text-center mb-3 sm:mb-4 font-serif">
-            <p className="text-base sm:text-lg font-bold">FRONTEND ENGINEER</p>
+            <p className="text-base sm:text-lg font-bold">FRONTEND DEVELOPER</p>
           </div>
           
           <Ornament className="my-3 sm:my-4" />
@@ -49,7 +49,7 @@ function Classifieds() {
           </div>
           
           <a
-            href="mailto:juliocalvorios@gmail.com?subject=Job Opportunity - Frontend Engineer"
+            href="mailto:juliocalvorios@gmail.com?subject=Job Opportunity - Frontend Developer"
             className="block mt-4 sm:mt-6 px-4 py-3 min-h-[44px] flex items-center justify-center bg-neutral-900 text-white text-[9px] sm:text-[10px] md:text-xs tracking-wider sm:tracking-widest text-center hover:bg-neutral-700 transition-colors"
           >
             SEND INQUIRY
@@ -78,7 +78,7 @@ function Classifieds() {
             <LinkItem
               label="Resume / CV"
               sublabel="Download PDF"
-              href="/Julio-Calvo-Frontend-Engineer.pdf"
+              href="/Julio-Calvo-Frontend-Developer.pdf"
             />
             <LinkItem
               label="veraOS Live"

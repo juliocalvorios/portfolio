@@ -220,7 +220,7 @@ function NewspaperCTA({ onContactClick }) {
               className="text-xl sm:text-3xl md:text-4xl font-black leading-tight"
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
-              <span className="block">Frontend Engineer</span>
+              <span className="block">Frontend Developer</span>
               <span className="block">Based in Toronto</span>
             </h3>
           </div>

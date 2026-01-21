@@ -32,7 +32,7 @@ function About() {
           <div className="text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
             <p className="text-neutral-500 font-serif mt-1 text-xs sm:text-sm md:text-base tracking-wide">
-              Product-Focused Frontend Engineer · Toronto
+              Frontend Developer · Toronto
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@ function About() {
               <span className="text-3xl sm:text-4xl font-bold float-left mr-1.5 leading-none mt-1">
                 J
               </span>
-              ulio Calvo is a Frontend Engineer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing Management from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
+              ulio Calvo is a Frontend Developer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing Management from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
             </p>
             
             <p>

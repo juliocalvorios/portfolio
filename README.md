@@ -26,17 +26,20 @@ This portfolio reimagines the traditional developer portfolio as a vintage newsp
 ### Setup
 
 1. **Install dependencies**
+
 ```bash
 npm install
 ```
 
 2. **Setup .env file**
+
 ```bash
 cp .env.example .env
 # then add your openweather api key
 ```
 
 3. **Run development server**
+
 ```bash
 npm run dev
 ```
@@ -74,27 +77,35 @@ src/
 ## 📰 Sections
 
 ### Front Page
+
 The main landing page featuring:
+
 - Lead story with featured project
 - Quick facts sidebar (10 widgets, 6 months development)
 - Secondary stories grid
 
 ### Selected Works
+
 Accordion-style project showcase with:
+
 - Expandable case studies
 - Tech stack details
 - Key features
 - Live demo and source code links
 
 ### The Developer
+
 About section featuring:
+
 - Personal background and journey
 - Technical skills
 - Education and experience
 - What I'm looking for
 
 ### Classifieds
+
 Contact section styled as vintage classifieds:
+
 - Employment status
 - Contact information
 - Social links
@@ -111,15 +122,14 @@ Contact section styled as vintage classifieds:
 ## 👤 Author
 
 **Julio Calvo**
-- Frontend Engineer
+
+- Frontend Developer
 - Based in Toronto, Canada
-- Email: julio@veraos.ai
-- GitHub: [@juliocalvor811-svg](https://github.com/juliocalvor811-svg)
+- Email: juliocalvorios@gmail.com
+- GitHub: [@juliocalvorios](https://github.com/juliocalvorios)
 
 ## 📄 License
 
 This project is open source and available for inspiration. Feel free to use the design concept for your own portfolio.
 
 ---
-
-*"All the code that's fit to ship."*
