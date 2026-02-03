@@ -48,7 +48,7 @@ const projects = [
     videoCaption: 'The veraOS dashboard with customizable widgets and AI chat integration.',
     author: {
       name: 'Julio Calvo',
-      title: 'Frontend Developer'
+      title: 'Creative Developer'
     },
     duration: '6 months',
     role: 'Solo Developer & Designer',
@@ -593,7 +593,7 @@ const projects = [
     videoCaption: 'The Impossible Form: a Windows 95 window that actively resists being filled out.',
     author: {
       name: 'Julio Calvo',
-      title: 'Frontend Developer'
+      title: 'Creative Developer'
     },
     duration: '2 weeks',
     role: 'Solo Developer & Designer',

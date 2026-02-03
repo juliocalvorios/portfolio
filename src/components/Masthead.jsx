@@ -11,7 +11,7 @@ const sections = [
 
 // Title text for letter-by-letter animation
 const TITLE_TEXT = 'THE JULIO CALVO TIMES'
-const SUBTITLE_TEXT = 'Frontend Developer · Toronto, Canada'
+const SUBTITLE_TEXT = 'Creative Developer · Digital Commerce & Marketing Operations · Toronto, Canada'
 
 function Masthead({ activeSection, onSectionChange, onPrintEdition }) {
   const { playClick, playHover } = useSounds()

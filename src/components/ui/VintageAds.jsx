@@ -43,7 +43,7 @@ export function WantedAd({ className = '' }) {
           Wanted for
         </p>
         <p className="text-xs font-bold font-serif group-hover:text-red-800 transition-colors duration-300 mb-1.5">
-          Frontend Bugs
+          Development Bugs
         </p>
 
         {/* Charges */}

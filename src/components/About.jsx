@@ -32,7 +32,7 @@ function About() {
           <div className="text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif">The Developer</h2>
             <p className="text-neutral-500 font-serif mt-1 text-xs sm:text-sm md:text-base tracking-wide">
-              Frontend Developer · Toronto
+              Creative Developer | Digital Commerce & Marketing Operations · Toronto
             </p>
           </div>
         </div>
@@ -90,7 +90,7 @@ function About() {
           <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
             <InfoRow label="Location" value="Toronto, Ontario" />
             <InfoRow label="Origin" value="Spain" />
-            <InfoRow label="Focus" value="Frontend" />
+            <InfoRow label="Focus" value="Creative Development · Digital Commerce &Marketing Operations" />
             <InfoRow label="Work Auth" value="Full-time, any CA employer" />
           </div>
         </div>
@@ -103,11 +103,11 @@ function About() {
               <span className="text-3xl sm:text-4xl font-bold float-left mr-1.5 leading-none mt-1">
                 J
               </span>
-              ulio Calvo is a Frontend Developer based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing Management from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
+              ulio Calvo is a Creative Developer and Digital Commerce & Marketing Operations based in Toronto, recently graduated from the Multimedia Design & Development program at Humber Polytechnic. With a background in Commerce & Marketing Management from Spain, he views interfaces as the intersection where business goals, design, and engineering meet.
             </p>
             
             <p>
-              He approaches frontend development with a system architecture mindset. This is best exemplified by veraOS, a productivity platform he engineered using React, TypeScript, and Supabase. From implementing O(n) drag-and-drop to end-to-end encryption and semantic search, he focused on maintainability and performance, structuring the codebase to support a production-grade experience.
+              He approaches creative development with a system architecture mindset. This is best exemplified by veraOS, a productivity platform he engineered using React, TypeScript, and Supabase. From implementing O(n) drag-and-drop to end-to-end encryption and semantic search, he focused on maintainability and performance, structuring the codebase to support a production-grade experience.
             </p>
             
             <p>

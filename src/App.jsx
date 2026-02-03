@@ -342,7 +342,7 @@ function Footer({ onSectionChange, onPrintEdition }) {
               {/* Marca */}
               <div>
                 <p className="text-sm tracking-[0.15em] font-bold">JULIO CALVO</p>
-                <p className="text-[9px] tracking-widest text-neutral-500">FRONTEND DEVELOPER</p>
+                <p className="text-[9px] tracking-widest text-neutral-500">CREATIVE DEVELOPER</p>
               </div>
 
               {/* Navegación */}

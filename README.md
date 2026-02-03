@@ -123,7 +123,7 @@ Contact section styled as vintage classifieds:
 
 **Julio Calvo**
 
-- Frontend Developer
+- Creative Developer | Digital Commerce & Marketing Operations
 - Based in Toronto, Canada
 - Email: juliocalvorios@gmail.com
 - GitHub: [@juliocalvorios](https://github.com/juliocalvorios)

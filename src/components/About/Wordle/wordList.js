@@ -71,7 +71,7 @@ export const WORDS = [
   },
   {
     word: 'DREAM',
-    fact: 'Frontend role in Toronto. Let\'s make it happen.',
+    fact: 'Creative role in Toronto. Let\'s make it happen.',
     category: 'philosophy'
   },
   {

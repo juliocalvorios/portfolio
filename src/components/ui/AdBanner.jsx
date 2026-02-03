@@ -14,14 +14,14 @@ export function TopBanner() {
           </span>
           <div className="h-px w-8 sm:w-12 bg-neutral-300" />
           <a
-            href="mailto:julio@veraos.ai?subject=Job Opportunity - Frontend Developer"
+            href="mailto:julio@veraos.ai?subject=Job Opportunity - Creative Developer"
             className="group flex items-center gap-2 sm:gap-3"
           >
             <span className="text-[10px] sm:text-xs md:text-sm font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">
               HIRE THIS DEVELOPER
             </span>
             <span className="text-[9px] sm:text-[10px] text-neutral-400 hidden sm:inline">
-              — Available for Frontend roles in Toronto
+              — Available for Creative Development and Commerce & Marketing roles in Toronto
             </span>
             <span className="text-[10px] sm:text-xs text-neutral-500 group-hover:text-neutral-700 transition-colors">
               →
@@ -106,7 +106,7 @@ export function SidebarAd({ type = 'hiring' }) {
   const ads = {
     hiring: {
       badge: 'NOW HIRING',
-      title: 'Frontend Developer',
+      title: 'Creative Developer',
       subtitle: 'Your company here?',
       description: 'I build fast, accessible, beautiful interfaces.',
       cta: 'Contact',
@@ -180,7 +180,7 @@ export function ClassifiedsAds() {
     },
     {
       category: 'FOR HIRE',
-      title: 'Frontend Developer',
+      title: 'Creative Developer',
       text: 'React expert. Clean interfaces. Portfolio available.'
     },
     {
