@@ -58,7 +58,7 @@ export default function PasswordGate({ children }) {
         {/* Masthead */}
         <div className="text-center mb-8">
           <div className="text-[10px] tracking-[0.3em] text-neutral-500 mb-2">
-            EST. 2025 · TORONTO
+            EST. 2026 · TORONTO
           </div>
           <h1 className="font-serif text-4xl font-black tracking-tight leading-none text-ink mb-1">
             THE DAILY CALVO
